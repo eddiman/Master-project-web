@@ -6,6 +6,7 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 node_modules/
+node_modules/*
 .idea
 
 # Sensitive or high-churn files:
