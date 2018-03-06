@@ -1,0 +1,11 @@
+
+    @media (min-width: 768px) {
+        ${({sm}) => sm && getWidthString(sm)  };
+        ${({offsetSm}) => offsetSm && getMarginString(offsetSm) };
+    }
+
+        @media (min-width: 992px) {
+        ${({md}) => md && getWidthString(md)};
+        ${({offsetMd}) => offsetMd && getMarginString(offsetMd) };
+
+    }

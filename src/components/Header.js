@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import theme, {constants} from './theme/theme';
+import theme, {constants} from '../theme/theme';
 
 
 const StatusBar = Styled.div`

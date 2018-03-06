@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Header from './Header.js';
-import Card from './Card.js';
+import Header from './components/Header.js';
 import  { ThemeProvider } from 'styled-components';
-import {Row, Column} from './theme/theme';
+import {Row} from './components/Row';
 import colors from './theme/colors';
-
+import AllSessions from './components/AllSessions'
+import Main from './components/Main'
 
 
 class App extends Component {
@@ -17,15 +17,8 @@ class App extends Component {
                 <div className="App">
                     <Header/>
                     <Row className="row">
-                        <Column offset="1" xs="12" sm="2" md="3" lg="12">
-                            <Card />
-                        </Column>
-                        <Column xs="12" sm="2" md="3" lg="12">
-                            <Card />
-                        </Column>
+                        <Main/>
                     </Row>
-
-
 
                 </div>
             </ThemeProvider>
