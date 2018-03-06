@@ -1,14 +1,14 @@
 import React from 'react';
 import Styled from 'styled-components';
-import theme, {constants} from './theme/theme';
+import theme, {constants, Column} from './theme/theme';
 
 const CardOuter = Styled.div`
     background-color: ${theme.appWhite};
     border-radius: ${constants.cardBorderRadius};
     box-shadow: ${constants.boxShadowsValues};
     height: 400px;
-    width: 600px;
-    margin: 64px;
+    width: 100%;
+    
 `;
 
 const DarkBar = Styled.div`
@@ -26,16 +26,17 @@ const TitleBar = Styled.div`
 
 `;
 
-
 class Card extends React.Component {
 
     render(){
         return(
-            <CardOuter>
-                <DarkBar/>
-                <TitleBar/>
 
-            </CardOuter>
+                <CardOuter>
+
+                    <DarkBar/>
+                    <TitleBar/>
+
+                </CardOuter>
         )
     }
 }

@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import Header from './Header.js';
 import Card from './Card.js';
-import { ThemeProvider } from 'styled-components';
-import colors from './theme/colors'
+import  { ThemeProvider } from 'styled-components';
+import {Row, Column} from './theme/theme';
+import colors from './theme/colors';
 
 
 
 class App extends Component {
 
-  render() {
-    return (
-        <ThemeProvider theme={colors}>
+    render() {
+        return (
+            <ThemeProvider theme={colors}>
 
-      <div className="App">
+                <div className="App">
+                    <Header/>
+                    <Row className="row">
+                        <Column offset="1" xs="12" sm="2" md="3" lg="12">
+                            <Card />
+                        </Column>
+                        <Column xs="12" sm="2" md="3" lg="12">
+                            <Card />
+                        </Column>
+                    </Row>
 
-          <Header/>
-        <Card/>
 
-      </div>
-        </ThemeProvider>
-    );
-  }
+
+                </div>
+            </ThemeProvider>
+        );
+    }
 }
 
 export default App;
