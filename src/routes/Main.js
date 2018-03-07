@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import AllSessions from "./AllSessions";
-import Session from "./Session";
+import SessionRoute from "./SessionRoute";
+import Home from './Home';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -11,8 +12,8 @@ import Session from "./Session";
 const Main = () => (
     <main>
         <Switch>
-            <Route path='/' component={AllSessions}/>
-            <Route path='/session/:Id' component={Session}/>
+            <Route exact path='/' component={Home}/>
+            <Route path='/session/' component={SessionRoute}/>
         </Switch>
     </main>
 )
