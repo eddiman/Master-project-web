@@ -1,7 +1,7 @@
 import React from 'react'
 import {CardOuter, DarkBar, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
-import SessionList from "./SessionList";
+import SessionList from "../components/SessionList";
 
 class AllSessions extends React.Component {
 

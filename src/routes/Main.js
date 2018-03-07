@@ -1,8 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import AllSessions from "./AllSessions";
 import SessionRoute from "./SessionRoute";
-import Home from './Home';
+import Home from '../containers/Home';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -16,6 +15,6 @@ const Main = () => (
             <Route path='/session/' component={SessionRoute}/>
         </Switch>
     </main>
-)
+);
 
 export default Main

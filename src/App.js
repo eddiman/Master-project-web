@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './App.scss';
+import './styles/App.scss';
 import Header from './components/Header.js';
 import  { ThemeProvider } from 'styled-components';
 import {Row} from './components/Row';
 import colors from './theme/colors';
-import AllSessions from './components/AllSessions'
-import Main from './components/Main'
+import AllSessions from './containers/AllSessions'
+import Main from './routes/Main'
 
 
 class App extends Component {

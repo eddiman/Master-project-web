@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Session from './Session'
-import AllSessions from './AllSessions'
+import Session from '../containers/Session'
+import AllSessions from '../containers/AllSessions'
 
 // The Roster component matches one of two different routes
 // depending on the full pathname
