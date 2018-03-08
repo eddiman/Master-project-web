@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles/App.scss';
+import '../node_modules/react-vis/dist/style.css'
 import Header from './components/Header.js';
 import  { ThemeProvider } from 'styled-components';
 import {Row} from './components/Row';

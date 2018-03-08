@@ -19,8 +19,16 @@ export const DarkBar = Styled.div`
 `;
 export const TitleBar = Styled.div`
     width: 100%;
-    height: 32px;
+    height: 48px;
     background-color: ${theme.colorPrimary};
     box-shadow: ${constants.boxShadowsValues};
+    border-radius: 3px 3px 0 0;
 
+        h2 {
+        margin: 0;
+        color:white;
+        padding:1% 0 0 3%;
+        font-size: 1.3em;
+        }
+        
 `;

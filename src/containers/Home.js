@@ -9,14 +9,10 @@ class Home extends React.Component {
         return(
             <Column offsetLg="2"  xs ="12"  lg="8">
                 <CardOuter>
-                    <DarkBar/>
-                    <TitleBar/>
-                    <h1>Home</h1>
+                    <TitleBar></TitleBar>
                     <h2><Link to='/session'>Click here to start</Link></h2>
                 </CardOuter>
             </Column>
-
-
 
         )
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import {Column} from '../components/Column';
+import {Row} from '../components/Row';
 
 class SessionList extends React.Component {
 
@@ -12,7 +13,7 @@ class SessionList extends React.Component {
         }
     }
     componentDidMount(){
-    this.fetchData();
+        this.fetchData();
     }
 
     fetchData(){
@@ -44,8 +45,13 @@ class SessionList extends React.Component {
             .catch(error => console.log('parsing failed', error))
     }
 
+
+
     render(){
         const {isLoading, sessions} = this.state;
+
+
+
         console.log(sessions);
         return(
 
@@ -57,10 +63,17 @@ class SessionList extends React.Component {
 
                     !isLoading && sessions.length > 0 ? sessions.map(session => {
                         const {id, createdAt, updatedAt, name, user, startTime, endTime} = session;
-                        return <h4 key={id}>
-                            <Link to={`/session/${id}`}>{name}</Link>
-
-                        </h4>
+                        const SessionComp = () => (
+                            <Link to={`/session/${id}`}>
+                            <Row>
+                                <Column xs="12" lg="12" key={id}>
+                                    Session: {name}, User: {user} Date: {createdAt}
+                                    <hr/>
+                                </Column>
+                            </Row>
+                            </Link>
+                        );
+                        return <SessionComp/>
                     }) : null
                 }
             </div>
