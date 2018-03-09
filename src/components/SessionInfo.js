@@ -16,7 +16,6 @@ class SessionInfo extends React.Component {
 
     render(){
         const session = this.props.sessionObj;
-        console.log(session);
         const {ID, CreatedAt, UpdatedAt, Name, User, StartTime, EndTime} = session;
 
         return(

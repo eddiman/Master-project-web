@@ -19,6 +19,7 @@ function getMarginString(offset) {
 
 export const Column = styled.div`
     float: left;
+    margin:8px;
     
     @media (max-width: 996px) {
         ${({xs}) => (xs ? getWidthString(xs) : `width: calc(100% - ${constants.standardMargin} - ${constants.standardMargin} )`)};

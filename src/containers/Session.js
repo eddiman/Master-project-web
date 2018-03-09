@@ -44,7 +44,8 @@ class Session extends React.Component {
     render(){
         const {isLoading, session} = this.state;
         const {Name} = session;
-        console.log(session);
+        const width = () => {document.getElementById('plot').offsetWidth};
+
 
         return(
             <div>
@@ -58,7 +59,7 @@ class Session extends React.Component {
                 <Column offsetLg="0"  xs ="12"  lg="2">
                     <CardOuter>
                         <TitleBar><h2>{"Data" }</h2> </TitleBar>
-                        <SessionInfo sessionObj={!isLoading ? session : "bam" }/>
+                        <SessionInfo sessionObj={!isLoading ? session : "bam" } />
                     </CardOuter>
                 </Column>
 
