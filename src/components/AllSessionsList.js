@@ -2,6 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {Column} from '../components/Column';
 import {Row} from '../components/Row';
+import styled from 'styled-components';
+import loadingIcon from '../res/img/gear-loading.png'
+
+
+const LoadingIcon = styled.img`
+    animation: App-logo-spin infinite 10s linear;
+    margin: 32px;
+    height: 60px;
+    opacity: 0.3;
+    @keyframes App-logo-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+    }
+
+`;
 
 class SessionList extends React.Component {
 
@@ -65,16 +80,23 @@ class SessionList extends React.Component {
                         const {id, createdAt, updatedAt, name, user, startTime, endTime} = session;
                         const SessionComp = () => (
                             <Link to={`/session/${id}`}>
-                            <Row>
-                                <Column xs="12" lg="12" key={id}>
-                                    Session: {name}, User: {user} Date: {createdAt}
-                                    <hr/>
-                                </Column>
-                            </Row>
+                                <Row>
+                                    <Column xs="12" lg="12" key={id}>
+                                        Session: {name}, User: {user} Date: {createdAt}
+                                        <hr/>
+                                    </Column>
+                                </Row>
                             </Link>
                         );
                         return <SessionComp/>
-                    }) : null
+                    }) :
+                        <Row>
+                            <Column offsetLg="5" xs="12" lg="6">
+
+                                <LoadingIcon src={loadingIcon}/>
+                                <h3>Loading...</h3>
+                            </Column>
+                        </Row>
                 }
             </div>
 

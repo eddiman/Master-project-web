@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import SessionRoute from "./SessionRoute";
+import OpenSessionRoute from "./OpenSessionRoute";
 import Home from '../containers/Home';
+import CreateSessionRoute from "../routes/CreateSessionRoute";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -12,7 +13,8 @@ const Main = () => (
     <main>
         <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/session/' component={SessionRoute}/>
+            <Route path='/session/' component={OpenSessionRoute}/>
+            <Route path='/create-session' component={CreateSessionRoute}/>
         </Switch>
     </main>
 );

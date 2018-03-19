@@ -35,7 +35,7 @@ class Home extends React.Component {
                                         </CardOuter>
 
                                         <CardOuter>
-                                            <Link to='/'>
+                                            <Link to='/create-session'>
                                                 <h1>
                                                     Create a session...
                                                 </h1>

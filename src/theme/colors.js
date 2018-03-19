@@ -1,10 +1,10 @@
 const colors = {
-    colorPrimary:  '#f7b80d',
-    colorPrimaryDark:  '#c89d12',
+    colorPrimary:  '#f7a71d',
+    colorPrimaryDark:  '#c88116',
     colorAccent: '#2e82ff',
     colorDarkerGray: '#AAAAAA',
-    appGreen: '#76A463',
-    appRed: '#ff4141',
+    appGreen: '#72c04d',
+    appRed: '#ff6f5e',
     appWhite: '#FFF'
 };
 
