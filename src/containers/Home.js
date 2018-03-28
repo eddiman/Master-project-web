@@ -13,7 +13,12 @@ class Home extends React.Component {
 
         const HeaderImg = Styled.img`
         height: 150px;
-        margin-left:10%
+        margin-left:10%;
+    `;
+
+        const CardTitle = Styled.h1`
+        margin: 0;
+        text-indent: 1em;
     `;
         return(
             <Row>
@@ -28,17 +33,17 @@ class Home extends React.Component {
                                     <Column  xs ="11"  lg="12">
                                         <CardOuter>
                                             <Link to='/session'>
-                                                <h1>
+                                                <CardTitle>
                                                     Open session...
-                                                </h1>
+                                                </CardTitle>
                                             </Link>
                                         </CardOuter>
 
                                         <CardOuter>
                                             <Link to='/create-session'>
-                                                <h1>
+                                                <CardTitle>
                                                     Create a session...
-                                                </h1>
+                                                </CardTitle>
                                             </Link>
                                         </CardOuter>
 

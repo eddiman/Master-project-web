@@ -32,6 +32,15 @@ class SessionList extends React.Component {
     }
 
     fetchData(){
+        let formData = new FormData;
+        formData.append("Finished", "1");
+
+        const initConfig = {
+            method : 'POST',
+            body: formData
+
+
+        };
 
         this.setState({
             isLoading: true,
@@ -39,7 +48,7 @@ class SessionList extends React.Component {
         });
 
 
-        fetch('http://firetracker.freheims.xyz:8000/raw/sessions')
+        fetch('http://firetracker.freheims.xyz:8000/raw/sessions', initConfig)
             .then(response => response.json())
 
             .then(parsedJSON => parsedJSON.map(session => (

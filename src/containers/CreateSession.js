@@ -26,7 +26,7 @@ const InputField = styled.input`
         border-bottom-color: ${props => props.color};
           }
     `;
-class CreateSessionName extends React.Component {
+class CreateSession extends React.Component {
 
 
     constructor(props) {
@@ -49,6 +49,10 @@ class CreateSessionName extends React.Component {
             sessionUser: evt.target.value
         });
 
+    }
+
+    createSession(){
+        console.log("trying to create a session...");
     }
     render(){
         return(
@@ -84,7 +88,7 @@ class CreateSessionName extends React.Component {
                         <Column offsetLg="8"  xs ="12"  lg="4">
                             <Button color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
 
-                            <Button color={theme.appGreen} fontColor={theme.appWhite} text="Create session" link="/"/>
+                            <Button color={theme.appGreen} fontColor={theme.appWhite} text="Create session" link="/create-session" onClick={this.createSession()}/>
                         </Column>
                     </Row>
                 </CardOuter>
@@ -97,4 +101,4 @@ class CreateSessionName extends React.Component {
     }
 }
 
-export default CreateSessionName;
+export default CreateSession;

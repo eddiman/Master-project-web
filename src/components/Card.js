@@ -9,6 +9,7 @@ export const CardOuter = styled.div`
     width: 100%;
     padding-bottom: ${constants.standardMargin};
     transition: box-shadow .2s, transform .2s;
+    margin-top:16px;
     
     opacity: 1;
 	animation-name: fadeInOpacity;
