@@ -46,12 +46,13 @@ class Button extends React.Component {
     render() {
         const {color, darkerColor, fontColor, link, text} = this.state;
         return(
-        <Link to={link }>
+
             <ButtonStyle color={color} darkerColor={darkerColor} fontColor={fontColor}>
+                <Link to={link}>
                 {text}
+                </Link>
             </ButtonStyle>
 
-        </Link>
         )
     }
 }

@@ -3,7 +3,7 @@ import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import {Row} from '../components/Row';
 import styled from 'styled-components';
-import theme from '../theme/theme';
+import theme, {constants} from '../theme/theme';
 import Button from '../components/Button'
 
 const InputField = styled.input`
@@ -54,32 +54,32 @@ class CreateSession extends React.Component {
 
     createSession(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
-            let formData = new FormData;
+            let formData = new FormData();
 
             const session = {
-                Name: `${this.state.sessionName}`,
-                User: `${this.state.sessionUser}`,
-                StartTime: 111,
-                EndTime: 0,
-                Datapoints: [],
-                Beacons: [],
-                Finished: false,
-                Map: ""
+                'Name': `${this.state.sessionName}`,
+                'User': `${this.state.sessionUser}`,
+                'Beacons': [],
+                'Finished': false,
             };
-            console.log(JSON.stringify(session));
-            formData.append("json", JSON.stringify(session));
-            console.log(formData);
+
+            formData.append("Name", session["Name"]);
+            formData.append("User", session["User"]);
+
+
+
             const initConfig = {
-                method: 'POST',
+                method: 'post',
                 headers: {
-                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                    //'Accept': 'application/json',
+                    //'Content-Type': 'multipart/form-data'
+                    //'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: formData
             };
-
-
+        console.log(
             fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
-                .catch(error => console.log('parsing failed', error))
+                .catch(error => console.log('parsing failed', error)));
         }
     }
     render(){
@@ -116,12 +116,13 @@ class CreateSession extends React.Component {
                         <Column offsetLg="8"  xs ="12"  lg="4">
                             <Button color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
 
-                            <button color={theme.appGreen} fontColor={theme.appWhite} text="Create" link ="/create-session" onClick={evt => this.createSession(evt)}/>
+                            <button className="green-button" onClick={evt => this.createSession(evt)}>
+                                Create
+                            </button>
                         </Column>
                     </Row>
                 </CardOuter>
             </Column>
-
 
 
 

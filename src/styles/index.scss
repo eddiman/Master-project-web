@@ -32,3 +32,24 @@ input, button { border:none; }
   margin-top: 16px;
 
 }
+
+
+.green-button {
+  border-radius: 2px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
+  background-color: #72c04d;
+  max-width: 100px;
+  height: 32px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  padding: 0 1rem;
+  vertical-align: middle;
+  line-height: 32px;
+  font-weight: 400;
+  transition: box-shadow .2s, opacity .2s;
+}
+.green-button:hover {
+  box-shadow: 0 2px 31px 0 rgba(0,0,0,0.15), 0 2px 19px 0 rgba(0,0,0,0.1);
+  opacity: 0.8;
+}
