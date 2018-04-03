@@ -19,6 +19,9 @@ a {
 hr {
   opacity: 0.1; }
 
+input, button {
+  border: none; }
+
 .plotMap {
   position: relative;
   margin-top: 16px; }

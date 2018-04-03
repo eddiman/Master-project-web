@@ -47,12 +47,40 @@ class CreateSession extends React.Component {
     updateSessionUser(evt) {
         this.setState({
             sessionUser: evt.target.value
+
         });
 
     }
 
-    createSession(){
-        console.log("trying to create a session...");
+    createSession(evt){
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            let formData = new FormData;
+
+            const session = {
+                Name: `${this.state.sessionName}`,
+                User: `${this.state.sessionUser}`,
+                StartTime: 111,
+                EndTime: 0,
+                Datapoints: [],
+                Beacons: [],
+                Finished: false,
+                Map: ""
+            };
+            console.log(JSON.stringify(session));
+            formData.append("json", JSON.stringify(session));
+            console.log(formData);
+            const initConfig = {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                },
+                body: formData
+            };
+
+
+            fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
+                .catch(error => console.log('parsing failed', error))
+        }
     }
     render(){
         return(
@@ -88,7 +116,7 @@ class CreateSession extends React.Component {
                         <Column offsetLg="8"  xs ="12"  lg="4">
                             <Button color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
 
-                            <Button color={theme.appGreen} fontColor={theme.appWhite} text="Create session" link="/create-session" onClick={this.createSession()}/>
+                            <button color={theme.appGreen} fontColor={theme.appWhite} text="Create" link ="/create-session" onClick={evt => this.createSession(evt)}/>
                         </Column>
                     </Row>
                 </CardOuter>

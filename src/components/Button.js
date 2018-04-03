@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 
 
-const ButtonStyle = styled.div` 
+const ButtonStyle = styled.button` 
     border-radius: 2px;
     box-shadow: ${constants.boxShadowsValues};
     background-color: ${props => props.color};
