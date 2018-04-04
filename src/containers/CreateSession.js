@@ -5,6 +5,8 @@ import {Row} from '../components/Row';
 import styled from 'styled-components';
 import theme, {constants} from '../theme/theme';
 import Button from '../components/Button'
+import AvailBeaconsList from '../components/AvailBeaconsList'
+
 
 const InputField = styled.input`
     border-bottom: 1px solid;
@@ -33,7 +35,8 @@ class CreateSession extends React.Component {
         super(props);
         this.state = {
             sessionName : '',
-            sessionUser : ''
+            sessionUser : '',
+            availBeacons : []
         }
 
     }
@@ -51,6 +54,9 @@ class CreateSession extends React.Component {
         });
 
     }
+    //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10005&Minor=48406&Name=Ebeoo-gul' http://firetracker.freheims.xyz:8000/beacon
+    //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10010&Minor=48406&Name=Ebeoo-blaa' http://firetracker.freheims.xyz:8000/beacon
+    //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10006&Minor=48406&Name=Ebeoo-raud' http://firetracker.freheims.xyz:8000/beacon
 
     createSession(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
@@ -60,7 +66,7 @@ class CreateSession extends React.Component {
                 'Name': `${this.state.sessionName}`,
                 'User': `${this.state.sessionUser}`,
                 'Beacons': [],
-                'Finished': false,
+                'Finished': false
             };
 
             formData.append("Name", session["Name"]);
@@ -82,6 +88,8 @@ class CreateSession extends React.Component {
                 .catch(error => console.log('parsing failed', error)));
         }
     }
+
+
     render(){
         return(
             <Column offsetLg="4"  xs ="12"  lg="4">
@@ -105,7 +113,7 @@ class CreateSession extends React.Component {
 
                 <CardOuter>
                     <TitleBar><h2>Create a session - Add beacons</h2> </TitleBar>
-
+<AvailBeaconsList/>
 
                 </CardOuter>
 
