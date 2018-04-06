@@ -3,10 +3,22 @@ import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import {Row} from '../components/Row';
 import styled from 'styled-components';
-import theme, {constants} from '../theme/theme';
-import Button from '../components/Button'
+import theme from '../theme/theme';
+import LinkButton from '../components/LinkButton'
 import AvailBeaconsList from '../components/AvailBeaconsList'
+import SelectedBeaconsList from '../components/SelectedBeaconsList'
 
+const LoadingIcon = styled.img`
+    animation: App-logo-spin infinite 10s linear;
+    margin: 32px;
+    height: 60px;
+    opacity: 0.3;
+    @keyframes App-logo-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+    }
+
+`;
 
 const InputField = styled.input`
     border-bottom: 1px solid;
@@ -34,9 +46,11 @@ class CreateSession extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            createdSession: [],
             sessionName : '',
             sessionUser : '',
-            availBeacons : []
+            availBeacons : [],
+            selectedBeacons : []
         }
 
     }
@@ -63,75 +77,103 @@ class CreateSession extends React.Component {
             let formData = new FormData();
 
             const session = {
-                'Name': `${this.state.sessionName}`,
-                'User': `${this.state.sessionUser}`,
-                'Beacons': [],
-                'Finished': false
+                'Name': this.state.sessionName,
+                'User': this.state.sessionUser,
+                'Beacons': this.state.selectedBeacons,
+                'SessionId': 0,
             };
 
             formData.append("Name", session["Name"]);
             formData.append("User", session["User"]);
-
-
+            formData.append("Beacons", session["Beacons"]);
 
             const initConfig = {
                 method: 'post',
                 headers: {
-                    //'Accept': 'application/json',
-                    //'Content-Type': 'multipart/form-data'
+                   // 'Accept': 'application/json',
+                    //'Content-Type': 'text/plain'
                     //'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: formData
             };
-        console.log(
-            fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
-                .catch(error => console.log('parsing failed', error)));
+            console.log(
+                fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
+                    .catch(error => console.log('parsing failed', error)));
         }
     }
 
+    putBeaconArray() {
+        let formData = new FormData();
+
+        const session = {
+            'Name': this.state.sessionName,
+            'User': this.state.sessionUser,
+            'Beacons': this.state.selectedBeacons,
+            'SessionId': 0,
+        };
+
+        formData.append("Name", session["Name"]);
+        formData.append("User", session["User"]);
+        formData.append("Beacons", session["Beacons"]);
+
+        const initConfig = {
+            method: 'post',
+            headers: {
+                // 'Accept': 'application/json',
+                //'Content-Type': 'text/plain'
+                //'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        };
+        console.log(
+            fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
+                .catch(error => console.log('parsing failed', error)));
+
+    }
+    
+
+    selectedAvailBeaconsCallback = (dataFromChild) => {
+        this.setState({selectedBeacons : dataFromChild});
+    };
 
     render(){
         return(
-            <Column offsetLg="4"  xs ="12"  lg="4">
+            <div>
+                <Column offsetLg="4"  xs ="12"  lg="4">
 
 
-                <CardOuter>
-                    <TitleBar><h2>Create a session - Add name and user</h2> </TitleBar>
-                    <Row>
-                        <Column xs ="12"  lg="12">
-                            <h3>Session Name</h3>
-                            <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
-                            <h3>Session User</h3>
-                            <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
-                        </Column>
-                        <Column offsetLg="0"  xs ="12"  lg="4">
-                        </Column>
+                    <CardOuter>
+                        <TitleBar><h2>Create a session - Add name and user</h2> </TitleBar>
+                        <Row>
+                            <Column xs ="12"  lg="12">
+                                <h3>Session Name</h3>
+                                <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
+                                <h3>Session User</h3>
+                                <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
+                            </Column>
+                            <Column offsetLg="0"  xs ="12"  lg="4">
+                            </Column>
 
-                    </Row>
+                        </Row>
 
-                </CardOuter>
+                    </CardOuter>
 
-                <CardOuter>
-                    <TitleBar><h2>Create a session - Add beacons</h2> </TitleBar>
-<AvailBeaconsList/>
+                    <CardOuter>
+                        <TitleBar><h2>Create a session - Add beacons</h2> </TitleBar>
 
-                </CardOuter>
+                        <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
-                <CardOuter>
-                    <TitleBar><h2>Create a session - Configure map</h2> </TitleBar>
-                    <Row>
+                    </CardOuter>
+                </Column>
 
-                        <Column offsetLg="8"  xs ="12"  lg="4">
-                            <Button color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-
-                            <button className="green-button" onClick={evt => this.createSession(evt)}>
-                                Create
-                            </button>
-                        </Column>
-                    </Row>
-                </CardOuter>
-            </Column>
-
+                <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
+                <Column offsetLg="10"  xs ="12"  lg="2">
+                    <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
+                    <button className="green-button" onClick={evt => this.createSession(evt)}>
+                        Create
+                    </button>
+                </Column>
+            </div>
 
 
         )

@@ -1,5 +1,4 @@
-import
-    React from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import CreateSession from '../containers/CreateSession'
 
@@ -7,9 +6,9 @@ import CreateSession from '../containers/CreateSession'
 // depending on the full pathname
 const Roster = () => (
     <Switch>
-        <Route exact path='/create-session' component={CreateSession}/>
+        <Route exact path='/create-session/' component={CreateSession}/>
     </Switch>
-)
+);
 
 
 export default Roster

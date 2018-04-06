@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardOuter, DarkBar, TitleBar} from '../components/Card.js';
+import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "./SessionData";
@@ -44,7 +44,7 @@ class Session extends React.Component {
     render(){
         const {isLoading, session} = this.state;
         const {Name} = session;
-        const width = () => {document.getElementById('plot').offsetWidth};
+        //const width = () => {document.getElementById('plot').offsetWidth};
 
 
         return(

@@ -1,6 +1,4 @@
 import React from 'react'
-import {CardOuter, DarkBar, TitleBar} from '../components/Card.js';
-import {Column} from '../components/Column';
 import { Link } from 'react-router-dom'
 
 
@@ -16,7 +14,7 @@ class SessionInfo extends React.Component {
 
     render(){
         const session = this.props.sessionObj;
-        const {ID, CreatedAt, UpdatedAt, Name, User, StartTime, EndTime} = session;
+        const {Name, User} = session;
 
         return(
 

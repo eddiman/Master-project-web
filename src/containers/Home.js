@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardOuter, DarkBar, TitleBar} from '../components/Card.js';
+import {CardOuter} from '../components/Card.js';
 import {Column} from '../components/Column';
 import {Row} from "../components/Row";
 import { Link } from 'react-router-dom'

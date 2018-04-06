@@ -20,6 +20,7 @@ const ButtonStyle = styled.button`
     line-height: 32px;
     font-weight: 400;
     transition: box-shadow .2s, opacity .2s;
+    cursor: pointer;
         ${ButtonStyle}:hover {
         box-shadow: ${constants.boxShadowsValuesHover};
         opacity: 0.8;
@@ -29,7 +30,7 @@ const ButtonStyle = styled.button`
 
 
 
-class Button extends React.Component {
+class LinkButton extends React.Component {
 
     constructor(props) {
         super(props);
@@ -57,6 +58,6 @@ class Button extends React.Component {
     }
 }
 
-export default Button;
+export default LinkButton;
 
 

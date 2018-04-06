@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardOuter, DarkBar, TitleBar} from '../components/Card.js';
+import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import SessionList from "../components/AllSessionsList";
 
