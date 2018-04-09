@@ -80,21 +80,20 @@ class CreateSession extends React.Component {
                 'Name': this.state.sessionName,
                 'User': this.state.sessionUser,
                 'Beacons': this.state.selectedBeacons,
-                'SessionId': 0,
             };
 
-            formData.append("Name", session["Name"]);
+            /*formData.append("Name", session["Name"]);
             formData.append("User", session["User"]);
-            formData.append("Beacons", session["Beacons"]);
+            formData.append("Beacons", session["Beacons"]);*/
 
             const initConfig = {
-                method: 'post',
+                method: 'options',
                 headers: {
                    // 'Accept': 'application/json',
-                    //'Content-Type': 'text/plain'
+                    'Content-Type': 'application/json',
                     //'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: formData
+                body: JSON.stringify(session)
             };
             console.log(
                 fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
