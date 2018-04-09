@@ -4,6 +4,7 @@ import {Column} from '../components/Column';
 import {Row} from '../components/Row';
 import styled from 'styled-components';
 import theme from '../theme/theme';
+import { Link } from 'react-router-dom'
 import LinkButton from '../components/LinkButton'
 import AvailBeaconsList from '../components/AvailBeaconsList'
 import SelectedBeaconsList from '../components/SelectedBeaconsList'
@@ -74,7 +75,6 @@ class CreateSession extends React.Component {
 
     createSession(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
-            let formData = new FormData();
 
             const session = {
                 'Name': this.state.sessionName,
@@ -89,7 +89,7 @@ class CreateSession extends React.Component {
             const initConfig = {
                 method: 'options',
                 headers: {
-                   // 'Accept': 'application/json',
+                    // 'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     //'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -101,35 +101,8 @@ class CreateSession extends React.Component {
         }
     }
 
-    putBeaconArray() {
-        let formData = new FormData();
 
-        const session = {
-            'Name': this.state.sessionName,
-            'User': this.state.sessionUser,
-            'Beacons': this.state.selectedBeacons,
-            'SessionId': 0,
-        };
 
-        formData.append("Name", session["Name"]);
-        formData.append("User", session["User"]);
-        formData.append("Beacons", session["Beacons"]);
-
-        const initConfig = {
-            method: 'post',
-            headers: {
-                // 'Accept': 'application/json',
-                //'Content-Type': 'text/plain'
-                //'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData
-        };
-        console.log(
-            fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
-                .catch(error => console.log('parsing failed', error)));
-
-    }
-    
 
     selectedAvailBeaconsCallback = (dataFromChild) => {
         this.setState({selectedBeacons : dataFromChild});
@@ -168,9 +141,9 @@ class CreateSession extends React.Component {
                 <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
                 <Column offsetLg="10"  xs ="12"  lg="2">
                     <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-                    <button className="green-button" onClick={evt => this.createSession(evt)}>
-                        Create
-                    </button>
+                        <button className="green-button" onClick={evt => this.createSession(evt)}>
+                            Create
+                        </button>
                 </Column>
             </div>
 
