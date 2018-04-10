@@ -48,9 +48,6 @@ class AvailBeaconList extends React.Component {
 
             .then(parsedJSON => parsedJSON.map(beacon => (
                 {
-                    id: `${beacon.ID}`,
-                    createdAt: `${beacon.CreatedAt}`,
-                    updatedAt: `${beacon.UpdatedAt}`,
                     name: `${beacon.Name}`,
                     uuid: `${beacon.UUID}`,
                     major: `${beacon.Major}`,
