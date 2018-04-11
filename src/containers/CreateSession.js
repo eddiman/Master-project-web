@@ -69,6 +69,7 @@ class CreateSession extends React.Component {
         });
 
     }
+
     //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10005&Minor=48406&Name=Ebeoo-gul' http://firetracker.freheims.xyz:8000/beacon
     //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10010&Minor=48406&Name=Ebeoo-blaa' http://firetracker.freheims.xyz:8000/beacon
     //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10006&Minor=48406&Name=Ebeoo-raud' http://firetracker.freheims.xyz:8000/beacon
@@ -76,15 +77,20 @@ class CreateSession extends React.Component {
     createSession(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
 
+            const beaconArray = this.state.selectedBeacons;
+
+            for(let i = 0; i < beaconArray.length; i++) {
+                delete beaconArray[i].id;
+                console.log(beaconArray[i]);
+            }
+
+
             const session = {
                 'Name': this.state.sessionName,
                 'User': this.state.sessionUser,
-                'Beacons': this.state.selectedBeacons,
+                'Beacons': beaconArray
+                ,
             };
-
-            /*formData.append("Name", session["Name"]);
-            formData.append("User", session["User"]);
-            formData.append("Beacons", session["Beacons"]);*/
 
             const initConfig = {
                 method: 'options',
@@ -141,9 +147,9 @@ class CreateSession extends React.Component {
                 <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
                 <Column offsetLg="10"  xs ="12"  lg="2">
                     <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-                        <button className="green-button" onClick={evt => this.createSession(evt)}>
-                            Create
-                        </button>
+                    <button className="green-button" onClick={evt => this.createSession(evt)}>
+                        Create
+                    </button>
                 </Column>
             </div>
 

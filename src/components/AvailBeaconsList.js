@@ -48,6 +48,7 @@ class AvailBeaconList extends React.Component {
 
             .then(parsedJSON => parsedJSON.map(beacon => (
                 {
+                    id: `${beacon.ID}`,
                     name: `${beacon.Name}`,
                     uuid: `${beacon.UUID}`,
                     major: `${beacon.Major}`,
@@ -130,7 +131,7 @@ class AvailBeaconList extends React.Component {
             <div>
                 {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
-                        const {id, createdAt, updatedAt, name, uuid, major, minor} = beacon;
+                        const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
                             <Row>
                                 <Column  xs="12" lg="12" key={id} onClick={() => this.toggleCheckbox(id)}>
