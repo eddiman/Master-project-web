@@ -2,7 +2,7 @@ import React from 'react'
 import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
-import SessionData from "./SessionData";
+import SessionData from "../components/SessionData";
 
 class Session extends React.Component {
 
@@ -52,14 +52,14 @@ class Session extends React.Component {
                 <Column offsetLg="2"  xs ="12"  lg="6">
                     <CardOuter>
                         <TitleBar><h2>{!isLoading ? "Session: " + Name : "Loading session..." }</h2> </TitleBar>
-                        <SessionData sessionObj={!isLoading ? session : "bam" }/>
+                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading}/>
                     </CardOuter>
                 </Column>
 
                 <Column offsetLg="0"  xs ="12"  lg="2">
                     <CardOuter>
                         <TitleBar><h2>{"Data" }</h2> </TitleBar>
-                        <SessionInfo sessionObj={!isLoading ? session : "bam" } />
+                        <SessionInfo sessionObj={!isLoading ? session : "bam" }  />
                     </CardOuter>
                 </Column>
 

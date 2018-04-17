@@ -38,8 +38,6 @@ class SessionList extends React.Component {
         const initConfig = {
             method : 'POST',
             body: formData
-
-
         };
 
         this.setState({

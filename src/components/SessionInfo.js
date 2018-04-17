@@ -18,16 +18,16 @@ class SessionInfo extends React.Component {
 
         return(
 
-                    <div>
-                        {
-                                <div >
-                                    <p>{Name} and {User} </p>
-                                    <Link to={`/session`}>Back</Link>
+            <div>
+                {
+                    <div >
+                        <p>{Name} and {User} </p>
+                        <Link to={`/session`}>Back</Link>
 
-                                </div>
-
-                        }
                     </div>
+
+                }
+            </div>
 
 
 

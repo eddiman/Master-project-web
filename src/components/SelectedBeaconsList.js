@@ -44,6 +44,11 @@ class SelectedBeaconsList extends React.Component {
         }
     };
 
+
+
+
+
+
     render(){
         this.generateDataGrid();
         const sessionIndoorMap = map; //TODO: get image url from session
@@ -54,9 +59,7 @@ class SelectedBeaconsList extends React.Component {
             bottom:600px;
             left:40px;
             z-index: -1;
-            
 `;
-
         const SelectedBeacon = () => (
             <div className = "yellow-button">Selected</div>
         );

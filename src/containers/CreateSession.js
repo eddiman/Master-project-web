@@ -51,7 +51,9 @@ class CreateSession extends React.Component {
             sessionName : '',
             sessionUser : '',
             availBeacons : [],
-            selectedBeacons : []
+            selectedBeacons : [],
+            isMapUploaded : false,
+            mapImgUrl : ''
         }
 
     }
@@ -108,15 +110,91 @@ class CreateSession extends React.Component {
     }
 
 
+    onChangeFile(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        let file = event.target.files[0];
+        console.log(file);
+        //this.setState({mapImgFile : file}); /// if you want to upload latter
+
+        this.uploadFile(file);
+    }
+
+    uploadFile(file){
+        let formData = new FormData();
+        //const blobImg = new Blob(file, {type: "image/png"});
+        formData.append('Map', file);
+
+
+        const initConfig = {
+            method: 'options',
+            headers: {
+                // 'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+                //'Content-Type': 'application/x-www-form-urlencoded'
+                //'Content-Type': 'multipart/form-data;',
+                //'enctype' : 'multipart/form-data'
+
+            },
+            body: file
+        };
+        console.log(
+            fetch('http://firetracker.freheims.xyz:8000/map', initConfig)
+                .then(response => console.log(response))
+                .catch(error => console.log('parsing failed', error)));
+
+      /*  const xhr = new XMLHttpRequest();
+
+
+        xhr.open('OPTIONS', 'http://firetracker.freheims.xyz:8000/map', true);
+
+        xhr.send(formData);  // multipart/form-data
+
+        this.setState({
+            isMapUploaded: true
+        });
+
+        if (this.state.isMapUploaded) {
+        setTimeout(() => {
+            this.scrollToBottom();
+
+        }, 300);}*/
+
+
+    }
 
 
     selectedAvailBeaconsCallback = (dataFromChild) => {
         this.setState({selectedBeacons : dataFromChild});
     };
 
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    };
+
+
+
     render(){
+
+
+        const selectMapBeaconsDiv = () => {
+            return (
+                <div >
+                    <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
+
+                    <Column offsetLg="10"  xs ="12"  lg="2">
+                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
+                        <button className="green-button" onClick={evt => this.createSession(evt)}>
+                            Create
+                        </button>
+                    </Column>
+                </div>
+            )
+        };
+
+
         return(
-            <div>
+            <div >
                 <Column offsetLg="4"  xs ="12"  lg="4">
 
 
@@ -136,26 +214,40 @@ class CreateSession extends React.Component {
 
                     </CardOuter>
 
-                    <CardOuter>
-                        <TitleBar><h2>Create a session - Add beacons</h2> </TitleBar>
+                    <CardOuter >
+                        <TitleBar><h2 >Create a session - Add beacons</h2> </TitleBar>
 
-                        <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
+                        <AvailBeaconsList ref={(el) => { this.messagesEnd = el; }} callback={this.selectedAvailBeaconsCallback}/>
+                        <Row>
+                            <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
+                            <input id="myInput"
+                                   type="file"
+                                   ref={(ref) => this.upload = ref}
+                                   style={{display: 'none'}}
+                                   onChange={this.onChangeFile.bind(this)}
+                            />
+
+                            <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
+                                 label="Open File"
+                                 onClick={()=>{this.upload.click()}}>
+                                Upload file
+                            </div></Row>
+
 
                     </CardOuter>
                 </Column>
 
-                <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
-                <Column offsetLg="10"  xs ="12"  lg="2">
-                    <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-                    <button className="green-button" onClick={evt => this.createSession(evt)}>
-                        Create
-                    </button>
-                </Column>
+                {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
             </div>
 
-
         )
+
+
+
+
+
     }
+
 }
 
 export default CreateSession;
