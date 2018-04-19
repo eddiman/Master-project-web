@@ -17,10 +17,10 @@ export const CardOuter = styled.div`
 	animation-timing-function: ease-in;
 	animation-duration: .2s;
     
-    ${CardOuter}:hover {
+   /* ${CardOuter}:hover {
         box-shadow: ${constants.boxShadowsValuesHover};
         transform: scale(1.001,1.001);
-    }
+    }*/
        
     @keyframes fadeInOpacity {
 	0% {

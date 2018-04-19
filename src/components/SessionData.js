@@ -33,7 +33,7 @@ class SessionData extends React.Component {
     render(){
         const session = this.props.session;
         //const {ID, Name, User, StartTime, EndTime, Locations} = session;
-        const sessionIndoorMap = map; //TODO: get image url from session
+        const sessionIndoorMap = "http://" + session.Map; //TODO: get image url from session
         const IndoorMap = styled.img`
             width: 560px;
             height: 560px;
@@ -46,7 +46,7 @@ class SessionData extends React.Component {
         }
 
         return(
-            <div className={"plotMap"}>
+            <div className={"plot-map"}>
                 <IndoorMap src={sessionIndoorMap}/>
                 <XYPlot
                     width={600}

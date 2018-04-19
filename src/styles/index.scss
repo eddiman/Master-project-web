@@ -27,10 +27,15 @@ hr {
 
 }
 input, button { border:none; }
-.plotMap {
-  position: relative;
-  margin-top: 16px;
 
+.plot-container{
+  min-height: 600px;
+}
+
+.plot-map {
+  position: absolute;
+  margin-top: 16px;
+  z-index: 10;
 }
 
 
@@ -98,4 +103,20 @@ input, button { border:none; }
 
 .padding8px{
   padding: 8px;
+}
+
+.fixed-create-session-menu {
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right:0;
+  padding: 8px;
+  background-color: white;
+  justify-content: flex-end;
+  z-index: 100;
+  * {
+    margin: 8px;
+
+  }
 }

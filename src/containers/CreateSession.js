@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import LinkButton from '../components/LinkButton'
 import AvailBeaconsList from '../components/AvailBeaconsList'
 import SelectedBeaconsList from '../components/SelectedBeaconsList'
+import * as $ from "jquery";
+import {ajax} from "jquery";
 
 const LoadingIcon = styled.img`
     animation: App-logo-spin infinite 10s linear;
@@ -90,7 +92,8 @@ class CreateSession extends React.Component {
             const session = {
                 'Name': this.state.sessionName,
                 'User': this.state.sessionUser,
-                'Beacons': beaconArray
+                'Beacons': beaconArray,
+                'Map' : this.state.mapImgUrl
                 ,
             };
 
@@ -106,6 +109,7 @@ class CreateSession extends React.Component {
             console.log(
                 fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
                     .catch(error => console.log('parsing failed', error)));
+            alert("Session probably created")
         }
     }
 
@@ -124,42 +128,29 @@ class CreateSession extends React.Component {
         let formData = new FormData();
         //const blobImg = new Blob(file, {type: "image/png"});
         formData.append('Map', file);
+        const fullUrl = "http://firetracker.freheims.xyz:8000/map";
 
+        $.ajax({
+            method: "POST",
+            url: fullUrl,
+            data: formData,
+            dataType: 'json',
+            cache: false,
+            processData: false,
+            contentType: false
+        }).done((data) => {
+            console.log(data);
+            this.setState({
+                mapImgUrl: data.Url,
+                isMapUploaded : true,
 
-        const initConfig = {
-            method: 'options',
-            headers: {
-                // 'Accept': 'application/json',
-                //'Content-Type': 'application/json',
-                //'Content-Type': 'application/x-www-form-urlencoded'
-                //'Content-Type': 'multipart/form-data;',
-                //'enctype' : 'multipart/form-data'
+            });
 
-            },
-            body: file
-        };
-        console.log(
-            fetch('http://firetracker.freheims.xyz:8000/map', initConfig)
-                .then(response => console.log(response))
-                .catch(error => console.log('parsing failed', error)));
-
-      /*  const xhr = new XMLHttpRequest();
-
-
-        xhr.open('OPTIONS', 'http://firetracker.freheims.xyz:8000/map', true);
-
-        xhr.send(formData);  // multipart/form-data
-
-        this.setState({
-            isMapUploaded: true
+            //resolve(data);
+        }).fail((err) => {
+            console.log("errorrr for file upload", err);
+            //reject(err);
         });
-
-        if (this.state.isMapUploaded) {
-        setTimeout(() => {
-            this.scrollToBottom();
-
-        }, 300);}*/
-
 
     }
 
@@ -180,22 +171,16 @@ class CreateSession extends React.Component {
         const selectMapBeaconsDiv = () => {
             return (
                 <div >
-                    <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} />
-
-                    <Column offsetLg="10"  xs ="12"  lg="2">
-                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-                        <button className="green-button" onClick={evt => this.createSession(evt)}>
-                            Create
-                        </button>
-                    </Column>
+                    <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} mapImgUrl = {this.state.mapImgUrl}/>
                 </div>
             )
         };
 
 
+
         return(
             <div >
-                <Column offsetLg="4"  xs ="12"  lg="4">
+                <Column offsetLg="3"  xs ="12"  lg="6">
 
 
                     <CardOuter>
@@ -207,7 +192,7 @@ class CreateSession extends React.Component {
                                 <h3>Session User</h3>
                                 <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
                             </Column>
-                            <Column offsetLg="0"  xs ="12"  lg="4">
+                            <Column offsetLg="0"  xs ="12"  lg="6">
                             </Column>
 
                         </Row>
@@ -238,6 +223,13 @@ class CreateSession extends React.Component {
                 </Column>
 
                 {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
+
+                <div className="fixed-create-session-menu">
+                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
+                        <button className="green-button" onClick={evt => this.createSession(evt)}>
+                            Create session
+                        </button>
+                </div>
             </div>
 
         )
