@@ -120,12 +120,7 @@ class AvailBeaconList extends React.Component {
 
     render(){
         const {isLoading, beacons} = this.state;
-        const Added = () => (
-            <div className = "green-button">added</div>
-        );
-        const NotAdded = () => (
-            <div className = "red-button">not added</div>
-        );
+
         return(
 
             <div>
@@ -133,12 +128,13 @@ class AvailBeaconList extends React.Component {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
-                            <Row>
+                            <Row className = {this.handleCheck(id) ? ("gray-marked") : ''}>
                                 <Column  xs="12" lg="12" key={id} onClick={() => this.toggleCheckbox(id)}>
-                                    <p>Name: {name},</p>
+                                    <p>Name: {name}</p>
                                     <p>UUID: {uuid} : Major: {major} : Minor: {minor}</p>
 
-                                    {this.handleCheck(id) ? <Added/> : <NotAdded/>}
+                                    {this.handleCheck(id) ? (<div className = "green-marked">Beacon added</div>)
+                                        : (<div className = "red-marked">Beacon not added</div>)}
 
                                     <hr/>
                                 </Column>

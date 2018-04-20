@@ -115,8 +115,54 @@ input, button { border:none; }
   background-color: white;
   justify-content: flex-end;
   z-index: 100;
-  * {
-    margin: 8px;
+    * {
+      margin: 8px;
 
-  }
+    }
+}
+
+
+.green-marked {
+  padding: 8px;
+  background-color: rgba(114, 192, 77, 0.5);
+  border-radius:2px;
+  text-align: center;
+  margin:8px;
+  color: white;
+
+}
+
+.red-marked {
+  padding: 8px;
+  background-color: rgba(255, 111, 94, 0.5);
+  border-radius:2px;
+  text-align: center;
+  margin:8px;
+  color: white;
+
+}
+
+.gray-marked {
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 1;
+
+}
+.yellow-marked {
+  background-color: rgba(255, 215, 92, 0.5);
+  padding: 8px;
+  border-radius:2px;
+  text-align: center;
+  margin:8px;
+  color: white;
+
+}
+.blue-marked {
+  background-color: rgba(46, 130, 255, 0.5);
+  padding: 8px;
+  border-radius:2px;
+  text-align: center;
+  margin:8px;
+  color: white;
+
+
 }

@@ -119,14 +119,11 @@ class CreateSession extends React.Component {
         event.preventDefault();
         let file = event.target.files[0];
         console.log(file);
-        //this.setState({mapImgFile : file}); /// if you want to upload latter
-
         this.uploadFile(file);
     }
 
     uploadFile(file){
         let formData = new FormData();
-        //const blobImg = new Blob(file, {type: "image/png"});
         formData.append('Map', file);
         const fullUrl = "http://firetracker.freheims.xyz:8000/map";
 
@@ -151,6 +148,13 @@ class CreateSession extends React.Component {
             console.log("errorrr for file upload", err);
             //reject(err);
         });
+
+            setTimeout( () => {
+                this.scrollToBottom();
+
+            }, 300);
+
+
 
     }
 
@@ -225,10 +229,10 @@ class CreateSession extends React.Component {
                 {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 
                 <div className="fixed-create-session-menu">
-                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-                        <button className="green-button" onClick={evt => this.createSession(evt)}>
-                            Create session
-                        </button>
+                    <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
+                    <button className="green-button" onClick={evt => this.createSession(evt)}>
+                        Create session
+                    </button>
                 </div>
             </div>
 
