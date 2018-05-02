@@ -3,6 +3,7 @@ import {CardOuter, TitleBar} from '../components/Card.js';
 import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
+import Card from "../components/Card";
 
 class Session extends React.Component {
 
@@ -48,21 +49,16 @@ class Session extends React.Component {
 
 
         return(
-            <div>
-                <Column offsetLg="2"  xs ="12"  lg="6">
-                    <CardOuter>
-                        <TitleBar><h2>{!isLoading ? "Session: " + Name : "Loading session..." }</h2> </TitleBar>
+            <div className="container">
+                <Card titleText="Events" />
+
+                    <Card titleText = {!isLoading ? "Session: " + Name : "Loading session..." } flexDirection ="column">
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading}/>
-                    </CardOuter>
-                </Column>
+                    </Card>
 
-                <Column offsetLg="0"  xs ="12"  lg="2">
-                    <CardOuter>
-                        <TitleBar><h2>{"Data" }</h2> </TitleBar>
+                    <Card titleText="Info" flexDirection ="column">
                         <SessionInfo sessionObj={!isLoading ? session : "bam" }  />
-                    </CardOuter>
-                </Column>
-
+                    </Card>
 
             </div>
 

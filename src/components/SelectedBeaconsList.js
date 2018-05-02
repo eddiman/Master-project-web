@@ -3,7 +3,7 @@ import {Column} from '../components/Column';
 import {XYPlot, XAxis, YAxis, LineMarkSeries, Hint, MarkSeries, LabelSeries} from 'react-vis';
 import styled from 'styled-components';
 import map from '../res/img/session-map.jpg';
-import {CardOuter, TitleBar} from './Card.js';
+import Card from "./Card";
 
 class SelectedBeaconsList extends React.Component {
 
@@ -59,7 +59,7 @@ class SelectedBeaconsList extends React.Component {
     render(){
         this.generateDataGrid();
         console.log(this.props.mapImgUrl);
-        const sessionIndoorMap = "http://" + this.props.mapImgUrl; //TODO: get image url from session
+        const sessionIndoorMap = "http://" + this.props.mapImgUrl;
         const IndoorMap = styled.img`
             width: 560px;
             height: 560px;
@@ -68,34 +68,25 @@ class SelectedBeaconsList extends React.Component {
             z-index: 0;
 `;
 
-        const addedCoordMarked = `
-        padding: 0 8px 0 8px;
-        background-color: rgba(114, 192, 77, 0.5)
-        `;
-        const notAddedCoordMarked = `
-        padding: 0 8px 0 8px;
-        background-color: rgba(114, 192, 77, 0.5);
-        `;
 
         const {currentHoverPoint, isHoveringPlotMap, clickedBeacon} = this.state;
         const tempArray = this.state.addedBeaconsToPlot;
 
         return(
             <div>
-                <Column offsetLg="1"  xs ="12"  lg="3">
 
-                    <CardOuter>
-                        <TitleBar><h2>How to place beacons</h2> </TitleBar>
+                    <Card flexDirection="column" >
                         <p className="padding8px">Info on what to do HERE</p>
 
-                    </CardOuter>
-                    <CardOuter>
-                        <TitleBar><h2>Selected beacons</h2> </TitleBar>
+                    </Card>
+
+                    <Card flexDirection="column">
                         {
                             this.props.selectedBeacons.length > 0 ? this.props.selectedBeacons.map(beacon => {
                                 const {id, name, uuid, major, minor, XCoordinate, YCoordinate} = beacon;
                                 const BeaconComp = () => (
-                                    <div className = {clickedBeacon.name ===  beacon.name ? ("padding8px gray-marked") : 'padding8px'} key={id+1} onClick={() => {this.clickSelectBeacon(beacon)}}>
+                                    <div className = {clickedBeacon.name ===  beacon.name ? ("padding8px gray-marked") : 'padding8px'} key={id+1}
+                                         onClick={() => {this.clickSelectBeacon(beacon)}}>
                                         <h2>Name: {name}</h2>
                                         <p>UUID: {uuid}</p>
                                         <p>Major: {major} | Minor: {minor}</p>
@@ -112,13 +103,10 @@ class SelectedBeaconsList extends React.Component {
                                 return <BeaconComp/>
                             }) : ''
                         }
-                    </CardOuter>
-                </Column>
+                    </Card>
 
-                <Column offsetLg=""  xs ="12"  lg="7">
 
-                    <CardOuter>
-                        <TitleBar><h2>Create a session - Configure map</h2> </TitleBar>
+                    <Card flexDirection="column">
 
                         <div className="plot-container">
                             <div className={"plot-map"}>
@@ -200,8 +188,7 @@ class SelectedBeaconsList extends React.Component {
                             <IndoorMap src={sessionIndoorMap}/>
 
                         </div>
-                    </CardOuter>
-                </Column>
+                    </Card>
 
             </div>
 

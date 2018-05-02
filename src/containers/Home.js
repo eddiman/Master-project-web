@@ -1,10 +1,8 @@
 import React from 'react'
-import {CardOuter} from '../components/Card.js';
-import {Column} from '../components/Column';
-import {Row} from "../components/Row";
 import { Link } from 'react-router-dom'
 import logo from "../res/img/logo_fire_tracker.png"
 import Styled from "styled-components";
+import Card from "../components/Card";
 
 
 class Home extends React.Component {
@@ -12,49 +10,30 @@ class Home extends React.Component {
     render(){
 
         const HeaderImg = Styled.img`
-        height: 150px;
-        margin-left:10%;
+        max-width: 300px;
+        justify-content: center;
+        align-self: center;
     `;
 
-        const CardTitle = Styled.h1`
-        margin: 0;
-        text-indent: 1em;
-    `;
+
         return(
-            <Row>
-                <Column offsetLg="2"  xs ="11"  lg="8">
-                    <CardOuter>
-                        <Row>
-                            <Column offsetLg="2"  xs ="12"  lg="8">
+            <div className="container flex-container-center">
+                <Card titleText=" Home" flexDirection="column" >
 
-                                <HeaderImg src ={logo}/>
+                    <HeaderImg src ={logo}/>
 
-                                <Row>
-                                    <Column  xs ="11"  lg="12">
-                                        <CardOuter>
-                                            <Link to='/session'>
-                                                <CardTitle>
-                                                    Open session...
-                                                </CardTitle>
-                                            </Link>
-                                        </CardOuter>
+                        <Link to='/session'>
+                            <h1> Open session</h1>
+                        </Link>
 
-                                        <CardOuter>
-                                            <Link to='/create-session'>
-                                                <CardTitle>
-                                                    Create a session...
-                                                </CardTitle>
-                                            </Link>
-                                        </CardOuter>
+                    <Link to='/create-session'>
+                        <h1> Create a session</h1>
 
-                                    </Column>
-                                </Row>
+                    </Link>
 
-                            </Column>
-                        </Row>
-                    </CardOuter>
-                </Column>
-            </Row>
+                </Card>
+
+            </div>
         )
     }
 }

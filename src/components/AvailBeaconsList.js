@@ -35,6 +35,7 @@ class AvailBeaconList extends React.Component {
     }
 
 
+
     fetchData(){
 
         this.setState({
@@ -63,9 +64,8 @@ class AvailBeaconList extends React.Component {
     }
 
 
-    toggleCheckbox(id) {
-        let div = document.getElementById("beaconComp");
-        if (this.handleCheck(id)) {
+    addBeaconToSelectedList(id) {
+        if (this.checkIfBeaconIsAlreadySelected(id)) {
             this.removeBeacon(id);
         } else {
             this.addBeacon(id);
@@ -113,8 +113,8 @@ class AvailBeaconList extends React.Component {
     }
 
 
-    handleCheck(val) {
-        return this.state.selectedBeacons.some(beacon => val === beacon.id);
+    checkIfBeaconIsAlreadySelected(beaconToCheck) {
+        return this.state.selectedBeacons.some(beacon => beaconToCheck === beacon.id);
     }
 
 
@@ -128,27 +128,26 @@ class AvailBeaconList extends React.Component {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
-                            <Row className = {this.handleCheck(id) ? ("gray-marked") : ''}>
-                                <Column  xs="12" lg="12" key={id} onClick={() => this.toggleCheckbox(id)}>
+                            <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("gray-marked") : ''}>
+                                <div key={id} onClick={() => this.addBeaconToSelectedList(id)}>
                                     <p>Name: {name}</p>
                                     <p>UUID: {uuid} : Major: {major} : Minor: {minor}</p>
+                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "green-marked">Beacon added</div>)
+                                        : (<div className = "red-marked">Beacon not added</div>)
 
-                                    {this.handleCheck(id) ? (<div className = "green-marked">Beacon added</div>)
-                                        : (<div className = "red-marked">Beacon not added</div>)}
+                                    }
 
                                     <hr/>
-                                </Column>
-                            </Row>
+                                </div>
+                            </div>
                         );
                         return <BeaconComp/>
                     }) :
-                        <Row>
-                            <Column offsetLg="5" xs="12" lg="6">
+                        <div>
 
                                 <LoadingIcon src={loadingIcon}/>
                                 <h3>Loading...</h3>
-                            </Column>
-                        </Row>
+                        </div>
                 }
             </div>
 

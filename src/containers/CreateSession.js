@@ -10,6 +10,7 @@ import AvailBeaconsList from '../components/AvailBeaconsList'
 import SelectedBeaconsList from '../components/SelectedBeaconsList'
 import * as $ from "jquery";
 import {ajax} from "jquery";
+import Card from "../components/Card";
 
 const LoadingIcon = styled.img`
     animation: App-logo-spin infinite 10s linear;
@@ -54,7 +55,7 @@ class CreateSession extends React.Component {
             sessionUser : '',
             availBeacons : [],
             selectedBeacons : [],
-            isMapUploaded : false,
+            isMapUploaded : true,
             mapImgUrl : ''
         }
 
@@ -179,52 +180,40 @@ class CreateSession extends React.Component {
                 </div>
             )
         };
-
+        console.log(this.state.selectedBeacons);
 
 
         return(
-            <div >
-                <Column offsetLg="3"  xs ="12"  lg="6">
+            <div className="container flex-container-center container-column-direction ">
+
+                <div className="card">
+                    <h3>Session Name</h3>
+                    <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
+                    <h3>Session User</h3>
+                    <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
+
+                </div>
+
+                <div className="card">
+
+                    <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
+
+                    <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
+                    <input id="myInput"
+                           type="file"
+                           ref={(ref) => this.upload = ref}
+                           style={{display: 'none'}}
+                           onChange={this.onChangeFile.bind(this)}
+                    />
+
+                    <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
+                         label="Open File"
+                         onClick={()=>{this.upload.click()}}>
+                        Upload file
+                    </div>
 
 
-                    <CardOuter>
-                        <TitleBar><h2>Create a session - Add name and user</h2> </TitleBar>
-                        <Row>
-                            <Column xs ="12"  lg="12">
-                                <h3>Session Name</h3>
-                                <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
-                                <h3>Session User</h3>
-                                <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
-                            </Column>
-                            <Column offsetLg="0"  xs ="12"  lg="6">
-                            </Column>
-
-                        </Row>
-
-                    </CardOuter>
-
-                    <CardOuter >
-                        <TitleBar><h2 >Create a session - Add beacons</h2> </TitleBar>
-
-                        <AvailBeaconsList ref={(el) => { this.messagesEnd = el; }} callback={this.selectedAvailBeaconsCallback}/>
-                        <Row>
-                            <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
-                            <input id="myInput"
-                                   type="file"
-                                   ref={(ref) => this.upload = ref}
-                                   style={{display: 'none'}}
-                                   onChange={this.onChangeFile.bind(this)}
-                            />
-
-                            <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
-                                 label="Open File"
-                                 onClick={()=>{this.upload.click()}}>
-                                Upload file
-                            </div></Row>
-
-
-                    </CardOuter>
-                </Column>
+                </div>
 
                 {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 

@@ -17,9 +17,7 @@ class App extends Component {
 
                 <div className="App">
                     <Header/>
-                    <Row className="row">
                         <Main/>
-                    </Row>
 
                 </div>
             </ThemeProvider>
