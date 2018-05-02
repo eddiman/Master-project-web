@@ -73,13 +73,17 @@ class SessionData extends React.Component {
                             height={600}
                             xDomain={[0, 100]}
                             yDomain={[0, 100]}
-                            fill={"#2e82ff"}   >
+                            fill={"#042637"}
+                            strokeWidth="1px"
+                            opacity ="0.5 "
+                        >
 
                             <LineMarkSeries
-                                stroke={"#414141"}
-                                size={"10px"}
-                                style={{strokeLinejoin: "round"}}
+                                stroke="#7f7f7f"
+                                size={"3px"}
+                                style={{ strokeLinejoin: "round"}}
                                 data={dataCoordArrayXY}/>
+
                             <YAxis/>
                             <XAxis/>
                         </XYPlot>
@@ -91,13 +95,14 @@ class SessionData extends React.Component {
                             height={600}
                             xDomain={[0, 100]}
                             yDomain={[0, 100]}
-                            fill={"#fbb033"}   >
+                            fill={"#2e82ff"}   >
 
                             <MarkSeries
-                                stroke={"#414141"}
-                                size={"8px"}
+                                size={"5px"}
                                 style={{strokeLinejoin: "round"}}
-                                data={dataBeaconsArrayXY}/>
+                                data={dataBeaconsArrayXY}
+
+                                />
                             <YAxis/>
                             <XAxis/>
                         </XYPlot>

@@ -149,10 +149,10 @@ class CreateSession extends React.Component {
             //reject(err);
         });
 
-            setTimeout( () => {
-                this.scrollToBottom();
+        setTimeout( () => {
+            this.scrollToBottom();
 
-            }, 300);
+        }, 300);
 
 
 
