@@ -24,7 +24,8 @@ class LocationEvents extends React.Component {
         super(props);
         this.state = {
             isLoading: true,
-            session: this.props.session
+            session: this.props.session,
+            currentLocationObject : 0
         }
     }
 
@@ -32,43 +33,59 @@ class LocationEvents extends React.Component {
     dateConverter(date) {
         return new Date(date);
     }
+    goToNextCoord(evt){
+        const {currentLocationObject} = this.state;
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
+            let counter = currentLocationObject;
+            const {callback} = this.props;
+            const locations = this.props.session.Locations;
+            callback([{x: locations[counter].XCoordinate, y: locations[counter].YCoordinate}]);
 
+            this.setState({
+                currentLocationObject: counter+1
+            })
+
+        }
+    }
 
     render(){
         const {session} = this.props;
         const locations = session.Locations;
-        console.log(locations);
-
         return(
+            <div>
 
+                <div className="max-height-600 overflow-scroll-y">
 
-            <div className="max-height-600 overflow-scroll-y">
+                    {
 
-                {
+                        locations !== undefined ? locations.map(location => {
+                            const {CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
+                            if(locations){
+                                const LocationComp = () => (
 
-                    locations !== undefined ? locations.map(location => {
-                        const {CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
-                        if(Duration !== 0){
-                        const SessionComp = () => (
-
-                            <div className="">
-                                {this.dateConverter(CreatedAt).toLocaleString() + " "}
-                                <p>{XCoordinate}</p>
-                                <p>{YCoordinate}</p>
-                                <p>{Duration}</p>
-                                <p>{Walking.toString()}</p>
-                                <p>{HeadMovement.toString()}</p>
+                                    <div key={locations.ID} className="">
+                                        {this.dateConverter(CreatedAt).toLocaleString() + " "}
+                                        <p>{XCoordinate}</p>
+                                        <p>{YCoordinate}</p>
+                                        <p>{Duration}</p>
+                                        <p>{Walking.toString()}</p>
+                                        <p>{HeadMovement.toString()}</p>
+                                    </div>
+                                );
+                                return <LocationComp/> }
+                        }) :
+                            <div>
+                                <LoadingIcon src={loadingIcon}/>
+                                <h3>Loading...</h3>
                             </div>
-                        );
-                        return <SessionComp/> }
-                    }) :
-                        <div>
-                            <LoadingIcon src={loadingIcon}/>
-                            <h3>Loading...</h3>
-                        </div>
-                }
-            </div>
+                    }
 
+
+                </div>
+                <button className="green-button" onClick={evt => this.goToNextCoord(evt)}>
+                    Next coordinate
+                </button>
+            </div>
         )
     }
 }

@@ -13,7 +13,8 @@ class Session extends React.Component {
         this.state = {
             sessionId: parseInt(props.match.params.Id, 10),
             isLoading: true,
-            session : []
+            session : [],
+            currentDataPoint : []
         }
     }
 
@@ -43,26 +44,37 @@ class Session extends React.Component {
             .catch(error => console.log('parsing failed', error))
     }
 
+    nextCoordinate = (dataFromChild) => {
+        this.setState({currentDataPoint : dataFromChild});
+    };
+
     render(){
-        const {isLoading, session} = this.state;
+        const {isLoading, session, currentDataPoint} = this.state;
         const {Name} = session;
         //const width = () => {document.getElementById('plot').offsetWidth};
 
-
+        /*if(session.Location !== undefined) {
+            this.setState({
+                currentDataPoint: {
+                    x: session.Location[0].XCoordinate,
+                    y: session.Location[0].YCoordinate
+                }
+            });
+        }*/
         return(
             <div className="container">
-                <Card titleText="Events" class="min-width-300 flex-1" flexDirection ="column" flex="1">
-                    <LocationEvents session={!isLoading ? session : "bam" }/>
+                <div className="card flex-1 min-width-300">
+                    <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
 
-                </Card>
+                </div>
 
-                    <Card titleText = {!isLoading ? "Session: " + Name : "Loading session..." } flex="2" flexDirection ="column">
-                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading}/>
-                    </Card>
+                    <div className="card flex-2">
+                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
+                    </div>
 
-                    <Card titleText="Info" flexDirection ="column" class="min-width-300" flex="1">
+                <div className="card flex-1 min-width-300">
                         <SessionInfo sessionObj={!isLoading ? session : "bam" }  />
-                    </Card>
+                    </div>
 
             </div>
 
