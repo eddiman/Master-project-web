@@ -4,6 +4,7 @@ import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
 import Card from "../components/Card";
+import LocationEvents from "../components/LocationEvents";
 
 class Session extends React.Component {
 
@@ -50,13 +51,16 @@ class Session extends React.Component {
 
         return(
             <div className="container">
-                <Card titleText="Events" />
+                <Card titleText="Events" class="min-width-300 flex-1" flexDirection ="column" flex="1">
+                    <LocationEvents session={!isLoading ? session : "bam" }/>
 
-                    <Card titleText = {!isLoading ? "Session: " + Name : "Loading session..." } flexDirection ="column">
+                </Card>
+
+                    <Card titleText = {!isLoading ? "Session: " + Name : "Loading session..." } flex="2" flexDirection ="column">
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading}/>
                     </Card>
 
-                    <Card titleText="Info" flexDirection ="column">
+                    <Card titleText="Info" flexDirection ="column" class="min-width-300" flex="1">
                         <SessionInfo sessionObj={!isLoading ? session : "bam" }  />
                     </Card>
 

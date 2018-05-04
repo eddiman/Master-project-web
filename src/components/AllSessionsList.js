@@ -74,7 +74,6 @@ class SessionList extends React.Component {
 
 
 
-        console.log(sessions);
         return(
 
 

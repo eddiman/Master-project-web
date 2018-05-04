@@ -35,7 +35,8 @@ class Card extends React.Component {
             flexDirection : '',
             titleText : '',
             flex: '',
-            children : this.props.children
+            children : this.props.children,
+            class : this.props.class
         };
     }
 
@@ -63,7 +64,7 @@ class Card extends React.Component {
 }
 `;
         return(
-            <CardOuter>
+            <CardOuter className ={this.state.class}>
                 <TitleBar>
                     <CardTitle>
                         {this.props.titleText}

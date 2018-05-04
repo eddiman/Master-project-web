@@ -123,7 +123,7 @@ class AvailBeaconList extends React.Component {
 
         return(
 
-            <div>
+            <div className="overflow-scroll-y">
                 {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;

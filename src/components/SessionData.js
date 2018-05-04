@@ -24,7 +24,6 @@ class SessionData extends React.Component {
                 x: locations[i].XCoordinate, y: locations[i].YCoordinate
             };
             dataXYArray.push(currentXY);
-            console.log(currentXY);
 
         }
         return dataXYArray;
@@ -39,7 +38,6 @@ class SessionData extends React.Component {
                 x: beacons[i].XCoordinate, y: beacons[i].YCoordinate
             };
             dataXYArray.push(currentXY);
-            console.log(currentXY);
 
         }
         return dataXYArray;

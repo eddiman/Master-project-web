@@ -34,15 +34,24 @@ hr {
 }
 input, button { border:none; }
 
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .plot-container{
   min-height: 600px;
   min-width: 600px;
+  justify-content: center;
+align-self: center;
 }
 
 .plot-map {
   position: absolute;
   margin-top: 16px;
   z-index: 10;
+
 }
 
 
@@ -108,9 +117,7 @@ input, button { border:none; }
   background-color: rgba(0,0,0,0.4);
 }
 
-.padding8px{
-  padding: 8px;
-}
+
 
 .fixed-create-session-menu {
   position: fixed;
@@ -173,23 +180,13 @@ input, button { border:none; }
 
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
-.container-column-direction {
-  flex-direction: column;
-}
-.flex-container-center {
-  align-items: center;
-  justify-content: center;
-}
+
 
 .card{
   background-color: $appWhite;
   border-radius: 6px;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
-  padding-bottom: 16px;
+  padding: 8px 8px 16px 8px;
   transition: box-shadow .2s, transform .2s;
   margin:16px;
 
@@ -201,8 +198,62 @@ input, button { border:none; }
   animation-duration: .2s;
   display:flex;
   flex-direction: column;
+
 }
 
+/*********************Modifiers*********************/
+
+.overflow-scroll-y{
+  overflow-y: scroll;
+}
+
+.max-height-600 {
+  max-height: 600px;
+}
+
+.max-height-300 {
+  max-height: 300px;
+}
+
+.min-width-300 {
+  min-width: 300px;
+}
+
+.max-width-300 {
+  max-width: 300px;
+}
+
+.container-column-direction {
+  flex-direction: column;
+}
+
+.flex-container-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.padding8px{
+   padding: 8px;
+}
+
+/**test**/
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+
+.fixing-the-fixed-footer-shit {
+  height: 64px;
+  width: 100%;
+}
+
+
+/**END*******************END Modifiers END*****************END**/
+
+
+/********************Keyframe animations********************/
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;
@@ -211,3 +262,5 @@ input, button { border:none; }
     opacity: 1;
   }
 }
+
+/**END******************Keyframe animations******************END**/

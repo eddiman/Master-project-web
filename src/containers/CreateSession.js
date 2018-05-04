@@ -55,7 +55,7 @@ class CreateSession extends React.Component {
             sessionUser : '',
             availBeacons : [],
             selectedBeacons : [],
-            isMapUploaded : true,
+            isMapUploaded : false,
             mapImgUrl : ''
         }
 
@@ -184,9 +184,9 @@ class CreateSession extends React.Component {
 
 
         return(
-            <div className="container flex-container-center container-column-direction ">
+            <div className="container">
 
-                <div className="card">
+                <div className="card flex-1 max-height-300 min-width-300 ">
                     <h3>Session Name</h3>
                     <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
                     <h3>Session User</h3>
@@ -194,7 +194,7 @@ class CreateSession extends React.Component {
 
                 </div>
 
-                <div className="card">
+                <div className="card max-height-600 min-width-300 flex-2">
 
                     <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
@@ -205,7 +205,7 @@ class CreateSession extends React.Component {
                            style={{display: 'none'}}
                            onChange={this.onChangeFile.bind(this)}
                     />
-
+<hr/>
                     <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
                          label="Open File"
                          onClick={()=>{this.upload.click()}}>
@@ -214,6 +214,7 @@ class CreateSession extends React.Component {
 
 
                 </div>
+                <div className="fixing-the-fixed-footer-shit"/>
 
                 {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 
@@ -223,6 +224,8 @@ class CreateSession extends React.Component {
                         Create session
                     </button>
                 </div>
+
+                <div className="fixing-the-fixed-footer-shit"/>
             </div>
 
         )
