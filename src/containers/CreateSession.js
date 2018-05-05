@@ -1,16 +1,11 @@
 import React from 'react'
 import {CardOuter, TitleBar} from '../components/Card.js';
-import {Column} from '../components/Column';
-import {Row} from '../components/Row';
 import styled from 'styled-components';
 import theme from '../theme/theme';
-import { Link } from 'react-router-dom'
 import LinkButton from '../components/LinkButton'
 import AvailBeaconsList from '../components/AvailBeaconsList'
 import SelectedBeaconsList from '../components/SelectedBeaconsList'
 import * as $ from "jquery";
-import {ajax} from "jquery";
-import Card from "../components/Card";
 
 const LoadingIcon = styled.img`
     animation: App-logo-spin infinite 10s linear;
@@ -186,7 +181,7 @@ class CreateSession extends React.Component {
         return(
             <div className="container">
 
-                <div className="card flex-1 max-height-300 min-width-300 ">
+                <div className="card fade-in flex-1 max-height-300 min-width-300 ">
                     <h3>Session Name</h3>
                     <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
                     <h3>Session User</h3>
@@ -194,7 +189,7 @@ class CreateSession extends React.Component {
 
                 </div>
 
-                <div className="card max-height-600 min-width-300 flex-2">
+                <div className="card fade-in max-height-600 min-width-300 flex-2">
 
                     <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 

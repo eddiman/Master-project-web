@@ -1,12 +1,9 @@
 import React from 'react'
-import {Column} from '../components/Column';
 import {
-    XYPlot, XAxis, YAxis, LineMarkSeries, Hint, MarkSeries, LabelSeries,
+    XYPlot, XAxis, YAxis, MarkSeries,
     HorizontalGridLines, VerticalGridLines
 } from 'react-vis';
 import styled from 'styled-components';
-import map from '../res/img/session-map.jpg';
-import Card from "./Card";
 
 class SelectedBeaconsList extends React.Component {
 
@@ -76,7 +73,7 @@ class SelectedBeaconsList extends React.Component {
         return(
             <div className="container">
 
-                <div className="card max-height-600 min-width-300  flex-1 overflow-scroll-y">
+                <div className="card fade-in max-height-600 min-width-300 flex-1 overflow-scroll-y">
                     {
                         this.props.selectedBeacons.length > 0 ? this.props.selectedBeacons.map(beacon => {
                             const {id, name, uuid, major, minor, XCoordinate, YCoordinate} = beacon;

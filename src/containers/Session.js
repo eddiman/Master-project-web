@@ -51,28 +51,18 @@ class Session extends React.Component {
     render(){
         const {isLoading, session, currentDataPoint} = this.state;
         const {Name} = session;
-        //const width = () => {document.getElementById('plot').offsetWidth};
-
-        /*if(session.Location !== undefined) {
-            this.setState({
-                currentDataPoint: {
-                    x: session.Location[0].XCoordinate,
-                    y: session.Location[0].YCoordinate
-                }
-            });
-        }*/
         return(
             <div className="container">
-                <div className="card flex-1 min-width-300">
+                <div className="card fade-in flex-1 min-width-300">
                     <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
 
                 </div>
 
-                    <div className="card flex-2">
+                    <div className="card fade-in flex-2">
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                     </div>
 
-                <div className="card flex-1 min-width-300">
+                <div className="card fade-in flex-1 min-width-300">
                         <SessionInfo sessionObj={!isLoading ? session : "bam" }  />
                     </div>
 

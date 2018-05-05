@@ -97,6 +97,8 @@ class SessionData extends React.Component {
                                     data={dataCoordArrayXY}
                                     curve={curveCatmullRom.alpha(0.2)}
                                     strokeWidth={"1px"}
+                                    sizeRange={[5, 15]}
+
                                 />
 
                                 <YAxis/>
@@ -115,7 +117,7 @@ class SessionData extends React.Component {
                                 <MarkSeries
                                     size={"5px"}
                                     style={{strokeLinejoin: "round"}}
-                                    //data={dataBeaconsArrayXY}
+                                    data={dataBeaconsArrayXY}
                                 />
                             </XYPlot>
                         </div>
@@ -127,13 +129,18 @@ class SessionData extends React.Component {
                             height={600}
                             xDomain={[0, 100]}
                             yDomain={[0, 100]}
-                            fill={"red"}   >
+                        >
 
-                            <MarkSeries
-                                size={"5px"}
+                            <LineMarkSeries
                                 style={{strokeLinejoin: "round"}}
                                 data={this.props.currentDataPoint}
-                                //data={[{x: 35, y: 55}]}
+                                colorType="literal"
+                                animation
+
+                                sizeRange={[3, 5]}
+                                stroke="#fbb033"
+                                strokeWidth="1"
+
                             />
                         </XYPlot>
                     </div>

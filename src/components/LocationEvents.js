@@ -25,7 +25,8 @@ class LocationEvents extends React.Component {
         this.state = {
             isLoading: true,
             session: this.props.session,
-            currentLocationObject : 0
+            currentLocationIndex : 0,
+            currentLocationObject : []
         }
     }
 
@@ -33,43 +34,105 @@ class LocationEvents extends React.Component {
     dateConverter(date) {
         return new Date(date);
     }
-    goToNextCoord(evt){
-        const {currentLocationObject} = this.state;
+
+    millisToMinutesAndSeconds(millis) {
+        const minutes = Math.floor(millis / 60000);
+        const seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    }
+
+    /*TODO: Refactor and generalize*/
+    goToNextLocationEvent(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
-            let counter = currentLocationObject;
-            const {callback} = this.props;
+            const {currentLocationIndex} = this.state;
             const locations = this.props.session.Locations;
-            callback([{x: locations[counter].XCoordinate, y: locations[counter].YCoordinate}]);
+            const {callback} = this.props;
+            let counter = currentLocationIndex;
+
+            if (currentLocationIndex === locations.length ) {
+                this.setState({
+                    currentLocationIndex: 0,
+                });
+                counter = 0
+            }
+            this.setState({
+                currentLocationObject: locations[counter],
+            });
+            this.refer.childNodes[counter].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+            if (counter === 0) {
+                callback([
+                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 1, color : "lightblue"},
+                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 2, color : "red"  }]);
+            } else {
+                callback([
+                    {x: locations[counter - 1].XCoordinate, y: locations[counter - 1].YCoordinate, size: 1, color : "lightblue"},
+                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 2, color : "red"  }
+                ]);
+            }
+
 
             this.setState({
-                currentLocationObject: counter+1
-            })
+                currentLocationIndex: counter+1,
+            });
 
+        }
+    }
+
+    goToLocationEvent(evt, count) {
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
+
+            const locations = this.props.session.Locations;
+            const {callback} = this.props;
+
+            if (count === 0) {
+                callback([
+                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 1, color : "lightblue"},
+                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }]);
+            } else {
+                callback([
+                    {x: locations[count - 1].XCoordinate, y: locations[count - 1].YCoordinate, size: 1, color : "lightblue"},
+                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }
+                ]);
+            }
+
+            this.setState({
+                currentLocationIndex: count,
+                currentLocationObject: locations[count],
+
+            });
         }
     }
 
     render(){
         const {session} = this.props;
+        const {currentLocationIndex, currentLocationObject} = this.state;
+
         const locations = session.Locations;
         return(
             <div>
 
-                <div className="max-height-600 overflow-scroll-y">
+                <div className="max-height-600 overflow-scroll-y" ref={(el) => { this.refer = el;}}>
 
                     {
 
-                        locations !== undefined ? locations.map(location => {
-                            const {CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
+                        locations !== undefined ? locations.map( (location, index) => {
+                            const {ID, CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
                             if(locations){
                                 const LocationComp = () => (
+                                    <div key={ID}
+                                         className = {currentLocationObject.ID === ID ? ('card gray-marked') : 'card'}
+                                         onClick={evt => this.goToLocationEvent(evt, index)}>
+                                        <h1>Event nr: {index+1}</h1>
+                                        <span>Time: </span>{this.dateConverter(CreatedAt).toLocaleString() + " "}
+                                        <span>X: {XCoordinate}, Y: {YCoordinate}</span>
+                                        <span>Duration: {this.millisToMinutesAndSeconds(Duration)}</span>
+                                        <hr/>
+                                        { Walking ? (<span className="green-marked">Was walking at this location.</span>)
+                                            : (<span className="red-marked">Was not walking at this location.</span>)}
+                                        { HeadMovement ? (<span className="green-marked">Was moving the head at this location.</span>)
+                                            : (<span className="red-marked">Was not moving the head at this location.</span>)}
 
-                                    <div key={locations.ID} className="">
-                                        {this.dateConverter(CreatedAt).toLocaleString() + " "}
-                                        <p>{XCoordinate}</p>
-                                        <p>{YCoordinate}</p>
-                                        <p>{Duration}</p>
-                                        <p>{Walking.toString()}</p>
-                                        <p>{HeadMovement.toString()}</p>
                                     </div>
                                 );
                                 return <LocationComp/> }
@@ -82,7 +145,7 @@ class LocationEvents extends React.Component {
 
 
                 </div>
-                <button className="green-button" onClick={evt => this.goToNextCoord(evt)}>
+                <button className="green-button" onClick={evt => this.goToNextLocationEvent(evt)}>
                     Next coordinate
                 </button>
             </div>

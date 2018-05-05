@@ -13,6 +13,10 @@ a {
   color: #2f2f2f; }
 
 hr {
+  margin: 10px 0 10px 0;
+  background-color: #000;
+  height: 1px;
+  border-style: none;
   opacity: 0.1; }
 
 input, button {
@@ -121,8 +125,8 @@ input, button {
   color: white; }
 
 .gray-marked {
-  background-color: rgba(0, 0, 0, 0.1);
-  opacity: 1; }
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  opacity: 1 !important; }
 
 .yellow-marked {
   background-color: rgba(255, 215, 92, 0.5);
@@ -149,7 +153,6 @@ input, button {
   margin: 16px;
   z-index: 0;
   opacity: 1;
-  animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: .2s;
@@ -188,6 +191,12 @@ input, button {
 
 .flex-2 {
   flex: 2; }
+
+.fade-in {
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: .3s; }
 
 .fixing-the-fixed-footer-shit {
   height: 64px;

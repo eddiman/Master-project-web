@@ -29,8 +29,11 @@ a {
 }
 
 hr {
-  opacity: 0.1;
-
+  margin: 10px 0 10px 0;
+  background-color: #000;
+  height: 1px;
+  border-style: none;
+  opacity: 0.1
 }
 input, button { border:none; }
 
@@ -44,7 +47,7 @@ input, button { border:none; }
   min-height: 600px;
   min-width: 600px;
   justify-content: center;
-align-self: center;
+  align-self: center;
 }
 
 .plot-map {
@@ -129,10 +132,10 @@ align-self: center;
   background-color: white;
   justify-content: flex-end;
   z-index: 100;
-    * {
-      margin: 8px;
+  * {
+    margin: 8px;
 
-    }
+  }
 }
 
 
@@ -157,8 +160,8 @@ align-self: center;
 }
 
 .gray-marked {
-  background-color: rgba(0, 0, 0, 0.1);
-  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  opacity: 1 !important;
 
 }
 .yellow-marked {
@@ -192,7 +195,7 @@ align-self: center;
 
   z-index: 0;
   opacity: 1;
-  animation-name: fadeInOpacity;
+
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: .2s;
@@ -233,7 +236,7 @@ align-self: center;
 }
 
 .padding8px{
-   padding: 8px;
+  padding: 8px;
 }
 
 /**test**/
@@ -243,6 +246,14 @@ align-self: center;
 .flex-2 {
   flex: 2;
 }
+
+.fade-in {
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: .3s;
+}
+
 
 .fixing-the-fixed-footer-shit {
   height: 64px;
