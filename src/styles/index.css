@@ -90,7 +90,12 @@ input, button {
   vertical-align: middle;
   line-height: 32px;
   font-weight: 400;
-  transition: box-shadow .2s, opacity .2s; }
+  transition: box-shadow .2s, opacity .2s;
+  cursor: pointer; }
+
+.yellow-button:hover {
+  box-shadow: 0 2px 31px 0 rgba(0, 0, 0, 0.15), 0 2px 19px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0.8; }
 
 .beacon-selected {
   background-color: rgba(0, 0, 0, 0.4); }
@@ -161,7 +166,8 @@ input, button {
 
 /*********************Modifiers*********************/
 .overflow-scroll-y {
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
 
 .max-height-600 {
   max-height: 600px; }
@@ -175,6 +181,19 @@ input, button {
 .max-width-300 {
   max-width: 300px; }
 
+.padding8px {
+  padding: 8px; }
+
+.margin8px {
+  margin: 8px; }
+
+/**flex-modifiers**/
+.flex-1 {
+  flex: 1; }
+
+.flex-2 {
+  flex: 2; }
+
 .container-column-direction {
   flex-direction: column; }
 
@@ -182,15 +201,8 @@ input, button {
   align-items: center;
   justify-content: center; }
 
-.padding8px {
-  padding: 8px; }
-
-/**test**/
-.flex-1 {
-  flex: 1; }
-
-.flex-2 {
-  flex: 2; }
+.space-between {
+  justify-content: space-between; }
 
 .fade-in {
   animation-name: fadeInOpacity;

@@ -25,8 +25,9 @@ class LocationEvents extends React.Component {
         this.state = {
             isLoading: true,
             session: this.props.session,
-            currentLocationIndex : 0,
-            currentLocationObject : []
+            currentLocationIndex : -1,
+            currentLocationObject : [],
+            eventSequenceIsPlaying : false
         }
     }
 
@@ -41,68 +42,93 @@ class LocationEvents extends React.Component {
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
 
-    /*TODO: Refactor and generalize*/
-    goToNextLocationEvent(evt){
+    goToLocationEventHandler(evt, count) {
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
-            const {currentLocationIndex} = this.state;
-            const locations = this.props.session.Locations;
-            const {callback} = this.props;
-            let counter = currentLocationIndex;
+            this.goToLocationEvent(count);
+        }
+    }
 
-            if (currentLocationIndex === locations.length ) {
-                this.setState({
-                    currentLocationIndex: 0,
-                });
-                counter = 0
-            }
+    goToLocationEvent(count) {
+        console.log(count);
+        const locations = this.props.session.Locations;
+        const {callback} = this.props;
+
+        if (count === 0) {
+            callback([
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 1, color : "lightblue"},
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }]);
+
+        } else if (count < 0){
+            count = locations.length-1;
+            callback([
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 1, color : "lightblue"},
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }]);
+        } else if (count > locations.length-1) {
+            count = 0;
+
+            callback([
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 1, color : "lightblue"},
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }]);
+        }
+        else {
+            callback([
+                {x: locations[count - 1].XCoordinate, y: locations[count - 1].YCoordinate, size: 1, color : "lightblue"},
+                {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }
+            ]);
+        }
+
+        this.setState({
+            currentLocationIndex: count,
+            currentLocationObject: locations[count],
+
+        });
+        this.refer.childNodes[count].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+    }
+
+
+
+
+    playAllLocationEvents(evt) {
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
+
             this.setState({
-                currentLocationObject: locations[counter],
+                eventSequenceIsPlaying : true
+
+            }, () => {
+
+                this.recursive(this.state.currentLocationIndex +1);
             });
-            this.refer.childNodes[counter].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 
-            if (counter === 0) {
-                callback([
-                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 1, color : "lightblue"},
-                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 2, color : "red"  }]);
-            } else {
-                callback([
-                    {x: locations[counter - 1].XCoordinate, y: locations[counter - 1].YCoordinate, size: 1, color : "lightblue"},
-                    {x: locations[counter].XCoordinate, y: locations[counter].YCoordinate, size: 2, color : "red"  }
-                ]);
-            }
-
-
-            this.setState({
-                currentLocationIndex: counter+1,
-            });
 
         }
     }
 
-    goToLocationEvent(evt, count) {
+    stopPlayAllLocationEvents(evt) {
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
 
-            const locations = this.props.session.Locations;
-            const {callback} = this.props;
-
-            if (count === 0) {
-                callback([
-                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 1, color : "lightblue"},
-                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }]);
-            } else {
-                callback([
-                    {x: locations[count - 1].XCoordinate, y: locations[count - 1].YCoordinate, size: 1, color : "lightblue"},
-                    {x: locations[count].XCoordinate, y: locations[count].YCoordinate, size: 2, color : "red"  }
-                ]);
-            }
-
             this.setState({
-                currentLocationIndex: count,
-                currentLocationObject: locations[count],
-
+                eventSequenceIsPlaying : false
             });
         }
     }
+
+
+
+    recursive(count) {
+        const locations = this.props.session.Locations;
+
+        if (count === locations.length || !this.state.eventSequenceIsPlaying){
+            return;
+        }
+        this.goToLocationEvent(count);
+
+        setTimeout(() => {
+            this.recursive(count + 1)
+        }, 1000);
+    }
+
+
 
     render(){
         const {session} = this.props;
@@ -122,7 +148,7 @@ class LocationEvents extends React.Component {
                                 const LocationComp = () => (
                                     <div key={ID}
                                          className = {currentLocationObject.ID === ID ? ('card gray-marked') : 'card'}
-                                         onClick={evt => this.goToLocationEvent(evt, index)}>
+                                         onClick={evt => this.goToLocationEventHandler(evt, index)}>
                                         <h1>Event nr: {index+1}</h1>
                                         <span>Time: </span>{this.dateConverter(CreatedAt).toLocaleString() + " "}
                                         <span>X: {XCoordinate}, Y: {YCoordinate}</span>
@@ -145,9 +171,27 @@ class LocationEvents extends React.Component {
 
 
                 </div>
-                <button className="green-button" onClick={evt => this.goToNextLocationEvent(evt)}>
-                    Next coordinate
-                </button>
+                <div className="container space-between">
+                    <p>Click on the buttons under to step through the session.</p>
+
+                    <button className="yellow-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex-1)}>
+                        ◀◀
+                    </button>
+
+                    {
+
+                        this.state.eventSequenceIsPlaying ? (
+                            <button className="red-button margin8px" onClick={evt => this.stopPlayAllLocationEvents(evt)}>⏹</button>
+                        ) :
+                            (
+                                <button className="green-button margin8px" onClick={evt => this.playAllLocationEvents(evt)}>▶</button>
+                            )
+                    }
+
+                    <button className="yellow-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex+1)}>
+                        ▶▶
+                    </button>
+                </div>
             </div>
         )
     }
