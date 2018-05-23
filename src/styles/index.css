@@ -8,6 +8,13 @@ h1, h2, h3, h4, h5, h6, p, a {
   font-family: 'Open Sans', sans-serif;
   font-weight: 200; }
 
+.font-header {
+  font-weight: 400 !important;
+  letter-spacing: 1px;
+  font-size: 2.5em;
+  margin: 0;
+  color: #636363; }
+
 a {
   text-decoration: none;
   color: #2f2f2f; }
@@ -194,7 +201,7 @@ input, button {
 .flex-2 {
   flex: 2; }
 
-.container-column-direction {
+.flex-container-column-direction {
   flex-direction: column; }
 
 .flex-container-center {
@@ -214,7 +221,41 @@ input, button {
   height: 64px;
   width: 100%; }
 
+.flex-align-self-end {
+  align-self: flex-end; }
+
+.flex-align-items-center {
+  align-items: center; }
+
 /**END*******************END Modifiers END*****************END**/
+/********************Legend********************/
+.current-mark {
+  border-radius: 50%;
+  background-color: red;
+  height: 12px;
+  width: 12px;
+  border: solid 1px #fbb033; }
+
+.last-pos-mark {
+  border-radius: 50%;
+  background-color: lightblue;
+  height: 10px;
+  width: 10px;
+  border: solid 1px #fbb033; }
+
+.pos-mark {
+  border-radius: 50%;
+  background-color: black;
+  height: 16px;
+  width: 16px; }
+
+.beacon-mark {
+  border-radius: 50%;
+  background-color: #2e82ff;
+  height: 12px;
+  width: 12px; }
+
+/**END*******************END Legend END*****************END**/
 /********************Keyframe animations********************/
 @keyframes fadeInOpacity {
   0% {
