@@ -168,9 +168,6 @@ class SelectedBeaconsList extends React.Component {
                 </div>
             </div>
 
-        <div className="card flex-1 min-width-300 " >
-            <p className="padding8px">Info on what to do HERE</p>
-        </div>
     </div>
 
 

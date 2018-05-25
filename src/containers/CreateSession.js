@@ -105,7 +105,7 @@ class CreateSession extends React.Component {
             console.log(
                 fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
                     .catch(error => console.log('parsing failed', error)));
-            alert("Session probably created")
+            alert("Session created")
         }
     }
 
@@ -190,11 +190,11 @@ class CreateSession extends React.Component {
                         <ol>
                             <li>Give the session a name and input the name of the person who will be performing the session.</li>
                             <li>Select the beacons you want to use in this session.</li>
-                            <li>Click "UPLOAD FILE" and select an image to be used as a map. MUST BE A .PNG FILE</li>
+                            <li>Click "UPLOAD FILE" and select an image to be used as a map.</li>
                             <li>Select a beacon from the left panel and click on the map where you want to place it.</li>
                             <li>When all desired beacons are placed, click the green "CREATE"-button in the left corner to create the session.</li>
                         </ol>
-                        <p>Session will then show up on the mobile application.</p>
+                        <p>Session will then show up in the mobile application.</p>
                     </div>
                 </div>
                 <div className="card fade-in flex-1 max-height-300 min-width-300 ">
