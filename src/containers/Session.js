@@ -30,7 +30,7 @@ class Session extends React.Component {
         });
 
 
-        fetch(`http://firetracker.freheims.xyz:8000/raw/session/${this.state.sessionId}`)
+        fetch(`http://firetracker.freheims.xyz:8000/session/${this.state.sessionId}`)
             .then(response => response.json())
             .then(parsedJSON => (this.setState(
                     {
