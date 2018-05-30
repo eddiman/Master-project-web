@@ -35,7 +35,7 @@
             });
 
 
-            fetch('http://firetracker.freheims.xyz:8000/raw/session/1')
+            fetch('http://firetracker.freheims.xyz:8000/session/1')
                 .then(response => response.json())
 
                 .then(parsedJSON => parsedJSON.map(session => (

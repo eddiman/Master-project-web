@@ -46,7 +46,7 @@ class SessionList extends React.Component {
         });
 
 
-        fetch('http://firetracker.freheims.xyz:8000/raw/sessions', initConfig)
+        fetch('http://firetracker.freheims.xyz:8000/sessions', initConfig)
             .then(response => response.json())
 
             .then(parsedJSON => parsedJSON.map(session => (
