@@ -52,6 +52,7 @@ class Session extends React.Component {
         const {isLoading, session, currentDataPoint} = this.state;
         const {Name} = session;
         return(
+            <div className="rounded-container">
             <div className="container">
                 <div className="card fade-in flex-1 min-width-300">
                     <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
@@ -67,7 +68,7 @@ class Session extends React.Component {
                     </div>
 
             </div>
-
+            </div>
 
 
 

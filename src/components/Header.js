@@ -12,8 +12,7 @@ const StatusBar = Styled.div`
 `;
 const ToolBar = Styled.div`
             background-color: ${theme.colorPrimary};
-            height: 42px;
-            box-shadow: ${constants.boxShadowsValues};
+            height: 67px;
             
     `;
 const TitleImg = Styled.img`

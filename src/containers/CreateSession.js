@@ -179,71 +179,72 @@ class CreateSession extends React.Component {
 
 
         return(
-            <div className="container">
+            <div className="rounded-container">
+                <div className="container">
 
-                <div className="card fade-in flex-1 min-width-300 ">
-                    <div>
-                        <h1 className="font-header">Create a session</h1>
+                    <div className="card fade-in flex-1 min-width-300 ">
+                        <div>
+                            <h1 className="font-header">Create a session</h1>
+                            <hr/>
+                            <h2>Instructions</h2>
+                            <p>To properly create a new session please follow these instructions:</p>
+                            <ol>
+                                <li>Give the session a name and input the name of the person who will be performing the session.</li>
+                                <li>Select the beacons you want to use in this session.</li>
+                                <li>Click "UPLOAD FILE" and select an image to be used as a map.</li>
+                                <li>Select a beacon from the left panel and click on the map where you want to place it.</li>
+                                <li>When all desired beacons are placed, click the green "CREATE"-button in the left corner to create the session.</li>
+                            </ol>
+                            <p>Session will then show up in the mobile application.</p>
+                        </div>
+                    </div>
+                    <div className="card fade-in flex-1 max-height-300 min-width-300 ">
+
+
+
+                        <div>
+                            <h3>Session Name</h3>
+                            <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
+                            <h3>Session User</h3>
+                            <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
+                        </div>
+                    </div>
+
+                    <div className="card fade-in max-height-600 min-width-300 flex-2">
+
+                        <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
+
+                        <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
+                        <input id="myInput"
+                               type="file"
+                               ref={(ref) => this.upload = ref}
+                               style={{display: 'none'}}
+                               onChange={this.onChangeFile.bind(this)}
+                        />
                         <hr/>
-                        <h2>Instructions</h2>
-                        <p>To properly create a new session please follow these instructions:</p>
-                        <ol>
-                            <li>Give the session a name and input the name of the person who will be performing the session.</li>
-                            <li>Select the beacons you want to use in this session.</li>
-                            <li>Click "UPLOAD FILE" and select an image to be used as a map.</li>
-                            <li>Select a beacon from the left panel and click on the map where you want to place it.</li>
-                            <li>When all desired beacons are placed, click the green "CREATE"-button in the left corner to create the session.</li>
-                        </ol>
-                        <p>Session will then show up in the mobile application.</p>
+                        <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
+                             label="Open File"
+                             onClick={()=>{this.upload.click()}}>
+                            Upload file
+                        </div>
+
+
                     </div>
-                </div>
-                <div className="card fade-in flex-1 max-height-300 min-width-300 ">
+                    <div className="fixing-the-fixed-footer-shit"/>
 
+                    {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 
+                    <div className="fixed-create-session-menu">
+                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
 
-                    <div>
-                        <h3>Session Name</h3>
-                        <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
-                        <h3>Session User</h3>
-                        <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
-                    </div>
-                </div>
-
-                <div className="card fade-in max-height-600 min-width-300 flex-2">
-
-                    <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
-
-                    <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
-                    <input id="myInput"
-                           type="file"
-                           ref={(ref) => this.upload = ref}
-                           style={{display: 'none'}}
-                           onChange={this.onChangeFile.bind(this)}
-                    />
-                    <hr/>
-                    <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
-                         label="Open File"
-                         onClick={()=>{this.upload.click()}}>
-                        Upload file
+                        <button className="green-button" onClick={evt => this.createSession(evt)}>
+                            Create session
+                        </button>
                     </div>
 
-
+                    <div className="fixing-the-fixed-footer-shit"/>
                 </div>
-                <div className="fixing-the-fixed-footer-shit"/>
-
-                {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
-
-                <div className="fixed-create-session-menu">
-                    <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
-
-                    <button className="green-button" onClick={evt => this.createSession(evt)}>
-                        Create session
-                    </button>
-                </div>
-
-                <div className="fixing-the-fixed-footer-shit"/>
             </div>
-
         )
 
 
