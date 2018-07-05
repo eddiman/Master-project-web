@@ -180,12 +180,13 @@ class CreateSession extends React.Component {
 
         return(
             <div className="rounded-container">
+                <div className="container ">
+                    <h1 className="margin24px fade-in roboto-black">Lage en session</h1>
+                </div>
                 <div className="container">
 
                     <div className="card fade-in flex-1 min-width-300 ">
                         <div>
-                            <h1 className="font-header">Create a session</h1>
-                            <hr/>
                             <h2>Instructions</h2>
                             <p>To properly create a new session please follow these instructions:</p>
                             <ol>
@@ -235,7 +236,7 @@ class CreateSession extends React.Component {
                     {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 
                     <div className="fixed-create-session-menu">
-                        <LinkButton color={theme.appRed} fontColor={theme.appWhite} text="Back" link="/"/>
+                        <LinkButton color={theme.appWhite} fontColor={theme.colorAccent} text="Back" link="/"/>
 
                         <button className="green-button" onClick={evt => this.createSession(evt)}>
                             Create session

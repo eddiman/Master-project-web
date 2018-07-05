@@ -21,7 +21,12 @@ main{
 h1, h2, h3, h4 ,h5 ,h6, p, a{
   font-family: 'Open Sans', sans-serif;
   font-weight:200;
+  color: #3f3f3f;
 
+}
+
+h1 {
+  font-size: 2.8em;
 }
 
 .font-header{
@@ -35,7 +40,6 @@ h1, h2, h3, h4 ,h5 ,h6, p, a{
 
 a {
   text-decoration: none;
-  color: #2f2f2f;
 }
 
 hr {
@@ -51,10 +55,10 @@ input, button { border:none; }
   position: relative;
   background-color: $bgWhite;
   bottom: 25px;
-  height: 100vh;
+
   width: 100%;
   border-radius: 25px 25px 0 0 ;
- box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.10);
 
 }
 
@@ -260,7 +264,7 @@ input, button { border:none; }
   border-radius: 0 15px 15px 0;
   max-width:100%;
   box-shadow: 0 2px 31px 0 rgba(0,0,0,0.15), 0 2px 19px 0 rgba(0,0,0,0.1);
-
+  object-fit: cover;
 
 }
 
@@ -273,6 +277,7 @@ input, button { border:none; }
   font-weight: 300;
   color: $appWhite;
   margin-left: 1em;
+  font-size: 2em;
 }
 
 .open-session-div{
@@ -284,6 +289,16 @@ input, button { border:none; }
 
 }
 
+.session-card {
+  width: 300px;
+
+}
+.session-card img{
+  height: 150px;
+  border-radius: 15px 15px 0 0;
+  object-fit: cover;
+
+}
 /*********************Special Elements END***************/
 
 /*********************Modifiers*********************/
@@ -308,7 +323,9 @@ input, button { border:none; }
 .max-height-600 {
   max-height: 600px;
 }
-
+.max-height-400 {
+  max-height: 400px;
+}
 .max-height-300 {
   max-height: 300px;
 }
@@ -334,6 +351,10 @@ input, button { border:none; }
 
 .margin8px {
   margin: 8px;
+}
+
+.margin24px {
+  margin: 24px;
 }
 
 /**flex-modifiers**/
@@ -375,6 +396,12 @@ input, button { border:none; }
 }
 .flex-align-items-center {
   align-items: center;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  text-align: start;
 }
 
 /**END*******************END Modifiers END*****************END**/
@@ -437,7 +464,7 @@ input, button { border:none; }
 
   .open-session-img {
     border-radius: 15px;
-    }
+  }
   .create-session-img {
     border-radius:15px;
   }

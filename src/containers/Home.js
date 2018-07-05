@@ -21,8 +21,8 @@ class Home extends React.Component {
         return(
             <div className="rounded-container">
 
-                <div className="container ">
-                    <h1 className="margin8px">Velg en av tingene</h1>
+                <div className="container fade-in">
+                    <h1 className="margin24px roboto-black ">Velg en av tingene</h1>
                 </div>
                 <div className="container flex-container-center fade-in padding0px border-radius15px">
                     <Link to='/session'>
