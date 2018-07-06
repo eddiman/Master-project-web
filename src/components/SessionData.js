@@ -153,7 +153,7 @@ class SessionData extends React.Component {
                         </XYPlot>
                     </PlotMap>
 
-                    <PlotMap>
+                    <div className={"plot-map"}>
 
                         <XYPlot
                             width={plotMapSize}
@@ -174,7 +174,7 @@ class SessionData extends React.Component {
 
                             />
                         </XYPlot>
-                    </PlotMap>
+                    </div>
 
 
                 </div>

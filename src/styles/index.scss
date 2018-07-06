@@ -374,6 +374,15 @@ input, button { border:none; }
   flex: 2;
 }
 
+.plot-map {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  margin-top: 16px;
+  z-index: 10;
+
+}
+
 .flex-container-column-direction {
   flex-direction: column;
 }
