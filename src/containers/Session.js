@@ -1,9 +1,6 @@
 import React from 'react'
-import {CardOuter, TitleBar} from '../components/Card.js';
-import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
-import Card from "../components/Card";
 import LocationEvents from "../components/LocationEvents";
 
 class Session extends React.Component {
@@ -62,7 +59,7 @@ class Session extends React.Component {
 
                 </div>
 
-                    <div className="card fade-in flex-2">
+                    <div className="card fade-in flex-2 plot-map-card">
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                     </div>
 

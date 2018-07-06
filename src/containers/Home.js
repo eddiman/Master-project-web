@@ -4,7 +4,6 @@ import logo from "../res/img/logo_fire_tracker.png"
 import openSessionImg from "../res/img/open-session-splash.jpg"
 import createSessionImg from "../res/img/create-session-splash.jpg"
 import Styled from "styled-components";
-import Card from "../components/Card";
 
 
 class Home extends React.Component {

@@ -1,5 +1,4 @@
 import React from 'react'
-import {CardOuter, TitleBar} from '../components/Card.js';
 import styled from 'styled-components';
 import theme from '../theme/theme';
 import LinkButton from '../components/LinkButton'

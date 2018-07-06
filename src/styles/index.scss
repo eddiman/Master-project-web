@@ -67,19 +67,21 @@ input, button { border:none; }
   flex-wrap: wrap;
 }
 
+.plot-map-card{
+ max-width: 640px;
+  padding-bottom: 32px;
+  min-height: 620px;
+  min-width: 640px;
+}
+
 .plot-container{
-  min-height: 600px;
-  min-width: 600px;
+  min-height: 300px;
+  min-width: 300px;
   justify-content: center;
   align-self: center;
 }
 
-.plot-map {
-  position: absolute;
-  margin-top: 16px;
-  z-index: 10;
 
-}
 
 
 .green-button {
@@ -295,8 +297,15 @@ input, button { border:none; }
 }
 .session-card img{
   height: 150px;
+  width:100%;
   border-radius: 15px 15px 0 0;
   object-fit: cover;
+  transition: filter 0.5s ease;
+
+}
+
+.session-card img:hover{
+  filter: invert(30%);
 
 }
 /*********************Special Elements END***************/
@@ -472,6 +481,15 @@ input, button { border:none; }
     border-radius: 0 0 15px 15px;
   }
 
+  .plot-map-card {
+    min-width: 80vw;
+  }
+}
+
+@media only screen and (min-width: 710px) and (max-width: 1120px) {
+  .plot-map-card {
+    min-width: 600px;
+  }
 }
 /**END******************Media Queries******************END**/
 

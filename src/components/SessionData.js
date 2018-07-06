@@ -12,7 +12,8 @@ class SessionData extends React.Component {
             sessionId: props.sessionId,
             session : props.session,
             isLoading : props.isLoading,
-            dataXY : []
+            dataXY : [],
+            screenWidth : 300
         };
     }
 
@@ -56,18 +57,47 @@ class SessionData extends React.Component {
         return dataXYArray;
     };
 
+    shouldComponentUpdate() {
 
+        return true;
+    }
+
+    calculatePlotMapSize(){
+        let plotMapWidth = 600;
+        const screenWidth = window.innerWidth;
+        if(screenWidth > 600){
+
+            return plotMapWidth;
+        } else {
+            return screenWidth - 96;
+        }
+
+    }
 
     render(){
         const session = this.props.session;
         //const {ID, Name, User, StartTime, EndTime, Locations} = session;
         const sessionIndoorMap = "http://" + session.Map; //TODO: get image url from session
+        const plotMapSize = this.calculatePlotMapSize();
         const IndoorMap = styled.img`
-            width: 560px;
-            height: 560px;
+            width: ${plotMapSize - 40}px;
+            height: ${plotMapSize - 40}px;
             position: absolute;
             margin-left:40px;
             z-index: 0;`;
+
+        const PlotMap = styled.div`
+        max-width: 600px;
+        min-width: ${plotMapSize}px;
+        min-height: ${plotMapSize}px;
+        position: absolute;
+        margin-top: 16px;
+        z-index: 10;
+        `;
+
+
+
+
         let dataCoordArrayXY = [];
         let dataBeaconsArrayXY = [];
 
@@ -77,56 +107,57 @@ class SessionData extends React.Component {
 
 
         }
+
         return(
             <div>
 
                 <div className="plot-container">
 
 
-                    <div className={"plot-map"}>
+                    <PlotMap>
                         <IndoorMap src={sessionIndoorMap}/>
 
                         <XYPlot
-                                width={600}
-                                height={600}
-                                xDomain={[0, 100]}
-                                yDomain={[0, 100]}
-                            >
+                            width={plotMapSize}
+                            height={plotMapSize}
+                            xDomain={[0, 100]}
+                            yDomain={[0, 100]}
+                        >
 
-                                <LineMarkSeries
-                                    data={dataCoordArrayXY}
-                                    curve={curveCatmullRom.alpha(0.2)}
-                                    strokeWidth={"1px"}
-                                    sizeRange={[5, 15]}
+                            <LineMarkSeries
+                                data={dataCoordArrayXY}
+                                curve={curveCatmullRom.alpha(0.2)}
+                                strokeWidth={"1px"}
+                                sizeRange={[5, 15]}
 
-                                />
+                            />
 
-                                <YAxis/>
-                                <XAxis/>
-                            </XYPlot>
-                        </div>
-                        <div className="plot-map">
-
-                            <XYPlot
-                                width={600}
-                                height={600}
-                                xDomain={[0, 100]}
-                                yDomain={[0, 100]}
-                                fill={"#2e82ff"}   >
-
-                                <MarkSeries
-                                    size={"5px"}
-                                    style={{strokeLinejoin: "round"}}
-                                    data={dataBeaconsArrayXY}
-                                />
-                            </XYPlot>
-                        </div>
-
-                    <div className="plot-map">
+                            <YAxis/>
+                            <XAxis/>
+                        </XYPlot>
+                    </PlotMap>
+                    <PlotMap>
 
                         <XYPlot
-                            width={600}
-                            height={600}
+                            width={plotMapSize}
+                            height={plotMapSize}
+                            xDomain={[0, 100]}
+                            yDomain={[0, 100]}
+                            fill={"#2e82ff"}   >
+
+                            <MarkSeries
+                                size={"5px"}
+                                style={{strokeLinejoin: "round"}}
+                                data={dataBeaconsArrayXY}
+                            />
+                        </XYPlot>
+                    </PlotMap>
+
+                    <PlotMap>
+
+                        <XYPlot
+                            width={plotMapSize}
+                            height={plotMapSize}
                             xDomain={[0, 100]}
                             yDomain={[0, 100]}
                         >
@@ -143,11 +174,11 @@ class SessionData extends React.Component {
 
                             />
                         </XYPlot>
-                    </div>
+                    </PlotMap>
 
 
-                    </div>
                 </div>
+            </div>
 
 
 

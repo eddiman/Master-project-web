@@ -100,7 +100,9 @@ class SessionList extends React.Component {
                             }
                             const SessionComp = () => (
                                 <div className="card session-card padding0px" >
+                                    <Link to={`/session/${id}`}>
                                     <img className="session-img" src={mapUrl2}/>
+                                    </Link>
                                     <div className="padding8px">
                                         <h2 className="roboto-black"> Session: {name}</h2>
                                         <h3>Bruker: {user}</h3>
