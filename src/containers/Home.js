@@ -41,6 +41,15 @@ class Home extends React.Component {
                             </div>
                         </div>
                     </Link>
+
+                    <Link to='/manual'>
+                        <div className="card">
+                            <h1>Hvordan bruke FireTracker</h1>
+
+                        </div>
+                    </Link>
+
+
                 </div>
             </div>
 
