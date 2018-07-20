@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import OpenSessionRoute from "./OpenSessionRoute";
 import Home from '../containers/Home';
 import CreateSessionRoute from "../routes/CreateSessionRoute";
-import UserManualCreateSession1 from "../components/UserManualCreateSession1";
+import UserManualCreateSession from "../containers/UserManualCreateSession";
 import UserManualRoute from "./UserManualRoute";
 
 // The Main component renders one of the three provided

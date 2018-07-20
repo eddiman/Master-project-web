@@ -378,8 +378,21 @@ input, button { border:none; }
 
 }
 
+/* this shit is wack
+          v
+          v
+          v
+*/
+
 .min-height-maxview{
+  min-height: 100vh;
+}
+.min-height-70vh{
   min-height: 70vh;
+}
+
+.min-height-50px{
+  min-height: 50px;
 }
 
 .max-height-600 {
@@ -436,6 +449,8 @@ input, button { border:none; }
 
 }
 
+
+
 .flex-container-column-direction {
   flex-direction: column;
 }
@@ -483,8 +498,10 @@ input, button { border:none; }
 }
 
 /** Buggy, extremely local CSS fixes  (never do this at home)**/
-.rounded-container-position-correction{
+.rounded-container-position-correction-50px{
   top:50px;
+}.rounded-container-position-correction-25px{
+  top:25px;
 }
 
 
@@ -521,6 +538,23 @@ input, button { border:none; }
   width: 12px;
 }
 
+
+.white-dot{
+  height:8px;
+  width:8px;
+  background-color:#FFF;
+  margin: 2px;
+  border-radius: 50%;
+
+}
+.gray-dot{
+  height:8px;
+  width:8px;
+  background-color:rgba(0,0,0, 0.4);
+  margin: 2px;
+  border-radius: 50%;
+
+}
 /**END*******************END Legend END*****************END**/
 
 
@@ -540,16 +574,15 @@ input, button { border:none; }
 /******************** Device frames ********************/
 
 .ipad-wrapper{
-  width: 700px;
-  height: 700px;
-  margin:24px;
+  width: 600px;
+  height: 500px;
 }
 
 .ipad-frame{
   box-shadow: 0 2px 31px 0 rgba(0,0,0,0.5), 0 2px 19px 0 rgba(0,0,0,0.1);
 
 
-  border-radius: 32px;
+  border-radius: 28px;
   background-color: #252525;
   border: 5px solid #3d3d3d;
   position:relative;
@@ -595,10 +628,16 @@ input, button { border:none; }
   .plot-map-card {
     min-width: 80vw;
   }
+
+
 }
 @media only screen and (max-width: 512px) {
   .list-icon{
     display: none;
+  }
+  .ipad-wrapper{
+    width: 300px;
+    height: 200px;
   }
 }
 
@@ -607,5 +646,15 @@ input, button { border:none; }
     min-width: 600px;
   }
 }
+
+@media only screen and (min-width: 512px) and (max-width: 1120px) {
+  .ipad-wrapper{
+    /*width: 400px;
+    height: 300px;*/
+  }
+}
+
+
+
 /**END******************Media Queries******************END**/
 

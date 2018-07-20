@@ -10,6 +10,10 @@ class UserManualSelect extends React.Component {
         }
     }
 
+    componentDidMount(){
+        window.scrollTo(0,0);
+    }
+
 
     render(){
 
@@ -20,7 +24,7 @@ class UserManualSelect extends React.Component {
                     <h1 className="margin24px roboto-black ">Hvordan bruke FireTracker</h1>
                 </div>
 
-                <div className="container fade-in min-height-maxview flex-container-vertical-center flex-container-column-direction">
+                <div className="container fade-in min-height-70vh flex-container-vertical-center flex-container-column-direction">
                     <div className="container margin24px flex-container-column-direction">
                         <Link to='manual/web/create/1'>
                             <div className="container flex-container-vertical-center">
@@ -63,7 +67,7 @@ class UserManualSelect extends React.Component {
 
                 <i id="manual-select-arrow-down" className="material-icons md-60 manual-icon">keyboard_arrow_down</i>
                 </div>
-                <div className="rounded-container bg-color-accent-dark rounded-container-position-correction">
+                <div className="rounded-container bg-color-accent-dark rounded-container-position-correction-25px">
                     <div className="container fade-in">
                         <h1 className="margin24px roboto-black ">Om FireTracker</h1>
                         <p className="margin24px">FireTracker er et prosjekt …
