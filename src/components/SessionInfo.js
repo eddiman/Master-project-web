@@ -64,7 +64,7 @@ class SessionInfo extends React.Component {
                 </div>
 
                 <div className="flex-align-self-end">
-                    <button className="red-button margin8px" onClick={evt => this.stopPlayAllLocationEvents(evt)}>
+                    <button className="red-button margin8px">
                         <Link to={`/session`}>Back</Link>
                     </button>
 

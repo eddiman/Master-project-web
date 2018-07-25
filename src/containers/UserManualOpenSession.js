@@ -1,23 +1,22 @@
 import React from 'react'
 import IpadDeviceFrame from "../components/IpadDeviceFrame";
 import {Link} from "react-router-dom";
-import ManualCreateSession from "../components/ManualCreateSession";
+import ManualMobile from "../components/ManualMobile";
+import ManualOpenSession from "../components/ManualOpenSession";
 
-class UserManualCreateSession extends React.Component {
+class UserManualOpenSession extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            maxPages : 3,
-            urlStub : "create/",
+            maxPages : 2,
+            urlStub : "open/",
             fromUrl : "",
             redirectExists : false
         };
     }
 
     componentDidMount(){
-        console.log(this.props.match.params.Redirect)
-        console.log(this.props.match.params.SubRedirect)
         this.checkIfRedirectExists();
 
     }
@@ -93,7 +92,7 @@ class UserManualCreateSession extends React.Component {
 
             }
         }
-               return dots;
+        return dots;
     }
 
     render(){
@@ -121,17 +120,16 @@ class UserManualCreateSession extends React.Component {
 
             </div>
         );
-
-
+        console.log(this.state.fromUrl);
         return(
 
 
             <div className="container min-height-maxview flex-container-column-direction">
                 <div className="container fade-in">
-                    <h1 className="margin24px roboto-black ">Opprettelse av en session</h1>
+                    <h1 className="margin24px roboto-black ">Visning av session</h1>
                 </div>
                 <div className= "manual-element">
-                    <ManualCreateSession id ={parseInt(this.props.match.params.Id, 10)}/>
+                    <ManualOpenSession id ={parseInt(this.props.match.params.Id, 10)}/>
                 </div>
 
 
@@ -155,4 +153,4 @@ class UserManualCreateSession extends React.Component {
 }
 
 
-export default UserManualCreateSession;
+export default UserManualOpenSession;

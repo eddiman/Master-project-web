@@ -4,6 +4,7 @@ import logo from "../res/img/logo_fire_tracker.png"
 import openSessionImg from "../res/img/open-session-splash.jpg"
 import createSessionImg from "../res/img/create-session-splash.jpg"
 import Styled from "styled-components";
+import HelpButton from "../components/HelpButton";
 
 
 class Home extends React.Component {
@@ -42,15 +43,9 @@ class Home extends React.Component {
                         </div>
                     </Link>
 
-                    <Link to='/manual'>
-                        <div className="card">
-                            <h1>Hvordan bruke FireTracker</h1>
-
-                        </div>
-                    </Link>
-
-
                 </div>
+
+                <HelpButton toUrl={'manual'} fromUrl={this.props.location.pathname}/>
             </div>
 
         )

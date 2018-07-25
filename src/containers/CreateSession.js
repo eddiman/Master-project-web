@@ -5,6 +5,8 @@ import LinkButton from '../components/LinkButton'
 import AvailBeaconsList from '../components/AvailBeaconsList'
 import SelectedBeaconsList from '../components/SelectedBeaconsList'
 import * as $ from "jquery";
+import HelpButton from "../components/HelpButton";
+import Link from "react-router-dom/es/Link";
 
 const LoadingIcon = styled.img`
         animation: App-logo-spin infinite 10s linear;
@@ -234,16 +236,20 @@ class CreateSession extends React.Component {
 
                     {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
 
-                    <div className="fixed-create-session-menu">
-                        <LinkButton color={theme.appWhite} fontColor={theme.colorAccent} text="Back" link="/"/>
+                    <div className="fixed-footer-menu  ">
 
-                        <button className="green-button" onClick={evt => this.createSession(evt)}>
-                            Create session
-                        </button>
+                        <Link to={"/"}>
+                            <div className="arrow-back-btn">
+                            <i className="material-icons md-36">keyboard_arrow_left</i>
+                            </div>
+                        </Link>
+
+                        <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div>
                     </div>
 
                     <div className="fixing-the-fixed-footer-shit"/>
                 </div>
+                <HelpButton toUrl={'/manual/create/1'} fromUrl={this.props.location.pathname}/>
             </div>
         )
 

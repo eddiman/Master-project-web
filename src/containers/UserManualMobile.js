@@ -1,56 +1,25 @@
 import React from 'react'
 import IpadDeviceFrame from "../components/IpadDeviceFrame";
 import {Link} from "react-router-dom";
-import ManualCreateSession from "../components/ManualCreateSession";
+import ManualMobile from "../components/ManualMobile";
 
 class UserManualCreateSession extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            maxPages : 3,
-            urlStub : "create/",
-            fromUrl : "",
-            redirectExists : false
-        };
-    }
-
-    componentDidMount(){
-        console.log(this.props.match.params.Redirect)
-        console.log(this.props.match.params.SubRedirect)
-        this.checkIfRedirectExists();
-
-    }
-
-    checkIfRedirectExists() {
-        const redirect = this.props.match.params.Redirect;
-        const subRedirect = this.props.match.params.SubRedirect;
-        let fromUrl = "";
-
-        if(String(redirect) !== 'undefined') {
-            fromUrl = "/" + fromUrl + redirect;
-            if(String(subRedirect) !== 'undefined') {
-                fromUrl = fromUrl + "/" + subRedirect;
-            }
-            this.setState({
-                fromUrl : fromUrl,
-                redirectExists : true
-            })
-
+            maxPages : 4,
+            urlStub : "mobile/"
         }
-
     }
+
+
 
     generateForwardLink(){
         let currentPage = parseInt(this.props.match.params.Id, 10);
-        if(currentPage === this.state.maxPages && this.state.redirectExists) {
-            return (this.state.fromUrl);
-        } else if(currentPage === this.state.maxPages && !this.state.redirectExists) {
-            return ("/manual");
-
-        }
-
-        else {
+        if(currentPage === this.state.maxPages) {
+            return ("/manual")
+        } else {
             return ('/manual/' + this.state.urlStub + (currentPage +1))
 
         }
@@ -93,7 +62,7 @@ class UserManualCreateSession extends React.Component {
 
             }
         }
-               return dots;
+        return dots;
     }
 
     render(){
@@ -128,10 +97,10 @@ class UserManualCreateSession extends React.Component {
 
             <div className="container min-height-maxview flex-container-column-direction">
                 <div className="container fade-in">
-                    <h1 className="margin24px roboto-black ">Opprettelse av en session</h1>
+                    <h1 className="margin24px roboto-black ">Bruk av mobilappen</h1>
                 </div>
                 <div className= "manual-element">
-                    <ManualCreateSession id ={parseInt(this.props.match.params.Id, 10)}/>
+                    <ManualMobile id ={parseInt(this.props.match.params.Id, 10)}/>
                 </div>
 
 

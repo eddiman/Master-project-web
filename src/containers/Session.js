@@ -2,6 +2,8 @@ import React from 'react'
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
 import LocationEvents from "../components/LocationEvents";
+import HelpButton from "../components/HelpButton";
+import Link from "react-router-dom/es/Link";
 
 class Session extends React.Component {
 
@@ -68,6 +70,18 @@ class Session extends React.Component {
                     </div>
 
             </div>
+
+                <div className="fixed-footer-menu flex-container-align-start">
+
+                    <Link to={"/session"}>
+                        <div className="arrow-back-btn ">
+                            <i className="material-icons md-36">keyboard_arrow_left</i>
+                        </div>
+                    </Link>
+
+                </div>
+                <HelpButton toUrl={'/manual/open/2'} fromUrl={this.props.location.pathname}/>
+
             </div>
 
 

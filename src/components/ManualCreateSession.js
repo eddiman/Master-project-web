@@ -1,8 +1,8 @@
 import React from 'react'
 import IpadDeviceFrame from "./IpadDeviceFrame";
-import CreateSessionImg1 from "../res/img/manual-create-session-1.png"
-import CreateSessionImg2 from "../res/img/manual-create-session-2.png"
-import CreateSessionImg3 from "../res/img/manual-create-session-3.png"
+import Img1 from "../res/img/manual-create-session-1.png"
+import Img2 from "../res/img/manual-create-session-2.png"
+import Img3 from "../res/img/manual-create-session-3.png"
 
 
 class ManualCreateSession extends React.Component {
@@ -21,7 +21,7 @@ class ManualCreateSession extends React.Component {
                     <div className="container flex-container-center fade-in">
 
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
-                            <IpadDeviceFrame img={CreateSessionImg1}/>
+                            <IpadDeviceFrame img={Img1}/>
                             <h1>Navngivning av session</h1>
                             <p className="max-width-600">
                                 For å opprette en session må man først skrive inn et navn for sessionet, dette burde inneholdet noe
@@ -38,7 +38,7 @@ class ManualCreateSession extends React.Component {
                     <div className="container flex-container-center fade-in">
 
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
-                            <IpadDeviceFrame img={CreateSessionImg2}/>
+                            <IpadDeviceFrame img={Img2}/>
                             <h1>Valg av beacons</h1>
                             <p className="max-width-600">
                                 Velg beacons som skal brukes i sessionen ved å trykke på det røde feltet. Når valgt vil den bli grønn.
@@ -53,7 +53,7 @@ class ManualCreateSession extends React.Component {
                     <div className="container flex-container-center fade-in">
 
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
-                            <IpadDeviceFrame img={CreateSessionImg3}/>
+                            <IpadDeviceFrame img={Img3}/>
                             <h1>Plassering av beacons</h1>
                             <p className="max-width-600">
                                 På denne skjermen er det to elementer: En liste med de valgte beacons til venstre, og kartet som beaconsene skal plasseres på til venstre.
