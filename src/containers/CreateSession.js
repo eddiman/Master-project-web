@@ -186,20 +186,7 @@ class CreateSession extends React.Component {
                 </div>
                 <div className="container">
 
-                    <div className="card fade-in flex-1 min-width-300 ">
-                        <div>
-                            <h2>Instructions</h2>
-                            <p>To properly create a new session please follow these instructions:</p>
-                            <ol>
-                                <li>Give the session a name and input the name of the person who will be performing the session.</li>
-                                <li>Select the beacons you want to use in this session.</li>
-                                <li>Click "UPLOAD FILE" and select an image to be used as a map.</li>
-                                <li>Select a beacon from the left panel and click on the map where you want to place it.</li>
-                                <li>When all desired beacons are placed, click the green "CREATE"-button in the left corner to create the session.</li>
-                            </ol>
-                            <p>Session will then show up in the mobile application.</p>
-                        </div>
-                    </div>
+                  
                     <div className="card fade-in flex-1 max-height-300 min-width-300 ">
 
 

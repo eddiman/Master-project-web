@@ -81,6 +81,9 @@ class SessionList extends React.Component {
         const {isLoading, sessions} = this.state;
         sessions.reverse();
 
+        //See comment about this in SessionData.js
+        const determineIfiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
 
         return(
 
@@ -103,7 +106,7 @@ class SessionList extends React.Component {
                                 <div className="card session-card padding0px" >
                                     <Link to={`/session/${id}`}>
                                         <div className="session-img-wrapper">
-                                    <ExifOrientationImg className="session-img" src={mapUrl2}/>
+                                            {determineIfiOS ?  (<img className="session-img" src={mapUrl2}/>) : (<ExifOrientationImg className="session-img" src={mapUrl2}/>)}
                                         </div>
                                     </Link>
                                     <div className="padding8px">
