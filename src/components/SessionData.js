@@ -2,6 +2,7 @@ import React from 'react'
 import {XYPlot, XAxis, YAxis, LineMarkSeries, MarkSeries} from 'react-vis';
 import styled from 'styled-components';
 import {curveCatmullRom} from 'd3-shape';
+import ExifOrientationImg from 'react-exif-orientation-img'
 
 
 class SessionData extends React.Component {
@@ -79,12 +80,25 @@ class SessionData extends React.Component {
         //const {ID, Name, User, StartTime, EndTime, Locations} = session;
         const sessionIndoorMap = "http://" + session.Map; //TODO: get image url from session
         const plotMapSize = this.calculatePlotMapSize();
+
+        //Iss necessary because iOS automagically flips images based on EXIF, while every other shit does not.
+        const determineIfiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
         const IndoorMap = styled.img`
             width: ${plotMapSize - 40}px;
             height: ${plotMapSize - 40}px;
             position: absolute;
             margin-left:40px;
             z-index: 0;`;
+
+        const IndoorMapStyle = {
+            width: (plotMapSize - 40) + 'px',
+            height: (plotMapSize - 40) + 'px',
+            position: 'absolute',
+            marginLeft:'40px',
+            zIndex: '0',
+
+        };
 
         const PlotMap = styled.div`
         max-width: 600px;
@@ -108,6 +122,7 @@ class SessionData extends React.Component {
 
         }
 
+
         return(
             <div>
 
@@ -115,7 +130,10 @@ class SessionData extends React.Component {
 
 
                     <PlotMap>
-                        <IndoorMap src={sessionIndoorMap}/>
+
+
+                        {determineIfiOS ?  (<IndoorMap src ={sessionIndoorMap}/>) : (<ExifOrientationImg style={IndoorMapStyle} src={sessionIndoorMap}/>)}
+
 
                         <XYPlot
                             width={plotMapSize}
