@@ -7,6 +7,7 @@ import loadingIcon from '../res/img/gear-loading.png'
 import fireTrackerLogo from '../res/img/logo_fire_tracker.png'
 import theme from "../theme/theme";
 import LinkButton from "./LinkButton";
+import ExifOrientationImg from 'react-exif-orientation-img'
 
 
 const LoadingIcon = styled.img`
@@ -101,7 +102,9 @@ class SessionList extends React.Component {
                             const SessionComp = () => (
                                 <div className="card session-card padding0px" >
                                     <Link to={`/session/${id}`}>
-                                    <img className="session-img" src={mapUrl2}/>
+                                        <div className="session-img-wrapper">
+                                    <ExifOrientationImg className="session-img" src={mapUrl2}/>
+                                        </div>
                                     </Link>
                                     <div className="padding8px">
                                         <h2 className="roboto-black"> Session: {name}</h2>

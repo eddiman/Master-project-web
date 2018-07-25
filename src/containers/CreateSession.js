@@ -232,6 +232,9 @@ class CreateSession extends React.Component {
 
 
                     </div>
+
+
+
                     <div className="fixing-the-fixed-footer-shit"/>
 
                     {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
