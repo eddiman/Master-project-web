@@ -130,10 +130,10 @@ class AvailBeaconList extends React.Component {
                         const BeaconComp = () => (
                             <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("gray-marked") : ''}>
                                 <div key={id} onClick={() => this.addBeaconToSelectedList(id)}>
-                                    <p>Name: {name}</p>
+                                    <p>Navn: {name}</p>
                                     <p>UUID: {uuid} : Major: {major} : Minor: {minor}</p>
-                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "green-marked">Beacon added</div>)
-                                        : (<div className = "red-marked">Beacon not added</div>)
+                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "green-marked">Beacon er lagt til</div>)
+                                        : (<div className = "red-marked">Beacon er ikke lagt til</div>)
 
                                     }
 
@@ -146,7 +146,7 @@ class AvailBeaconList extends React.Component {
                         <div>
 
                                 <LoadingIcon src={loadingIcon}/>
-                                <h3>Loading...</h3>
+                                <h3>Laster inn...</h3>
                         </div>
                 }
             </div>

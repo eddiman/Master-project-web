@@ -51,10 +51,9 @@ class CreateSession extends React.Component {
             sessionUser : '',
             availBeacons : [],
             selectedBeacons : [],
-            isMapUploaded : false,
-            mapImgUrl : ''
+            isMapUploaded : true,
+            mapImgUrl : '',
         }
-
     }
 
     updateSessionName(evt)  {
@@ -78,38 +77,54 @@ class CreateSession extends React.Component {
     createSession(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
 
-            const beaconArray = this.state.selectedBeacons;
+            if(this.checkIfDataIsFilledOut()) {
+                const beaconArray = this.state.selectedBeacons;
 
-            for(let i = 0; i < beaconArray.length; i++) {
-                delete beaconArray[i].id;
-                console.log(beaconArray[i]);
+                for(let i = 0; i < beaconArray.length; i++) {
+                    delete beaconArray[i].id;
+                    console.log(beaconArray[i]);
+                }
+
+
+                const session = {
+                    'Name': this.state.sessionName,
+                    'User': this.state.sessionUser,
+                    'Beacons': beaconArray,
+                    'Map' : this.state.mapImgUrl
+                    ,
+                };
+
+                const initConfig = {
+                    method: 'options',
+                    headers: {
+                        // 'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        //'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: JSON.stringify(session)
+                };
+                console.log(
+                    fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
+                        .catch(error => console.log('parsing failed', error)));
+                alert("Session'en ble opprettet");
+            } else {
+                alert("Ikke alle felter er fylt ut: Sjekk navn og bruker, valgte beacons, opplasting av kartbilde, og alle beacons må være plassert på kart.");
+
             }
 
-
-            const session = {
-                'Name': this.state.sessionName,
-                'User': this.state.sessionUser,
-                'Beacons': beaconArray,
-                'Map' : this.state.mapImgUrl
-                ,
-            };
-
-            const initConfig = {
-                method: 'options',
-                headers: {
-                    // 'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    //'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: JSON.stringify(session)
-            };
-            console.log(
-                fetch('http://firetracker.freheims.xyz:8000/session', initConfig)
-                    .catch(error => console.log('parsing failed', error)));
-            alert("Session created")
         }
     }
 
+    checkIfSelectedBeaconsHasCoords(){
+
+        let count = 0;
+        for (let i = 0; i < this.state.selectedBeacons.length; i++) {
+            if (this.state.selectedBeacons[i].XCoordinate > 0) {
+                count++;
+            }
+        }
+        return count === this.state.selectedBeacons.length;
+    }
 
     onChangeFile(event) {
         event.stopPropagation();
@@ -155,6 +170,17 @@ class CreateSession extends React.Component {
 
     }
 
+    checkIfDataIsFilledOut() {
+        const {sessionName, sessionUser, selectedBeacons, isMapUploaded} = this.state;
+
+
+        if (sessionName.length === 0 || sessionUser.length === 0 || selectedBeacons.length === 0 || isMapUploaded === false || !this.checkIfSelectedBeaconsHasCoords()){
+            return false;
+        } else {
+            return true
+        }
+    }
+
 
     selectedAvailBeaconsCallback = (dataFromChild) => {
         this.setState({selectedBeacons : dataFromChild});
@@ -168,7 +194,6 @@ class CreateSession extends React.Component {
 
     render(){
 
-
         const selectMapBeaconsDiv = () => {
             return (
                 <div >
@@ -178,24 +203,26 @@ class CreateSession extends React.Component {
         };
         console.log(this.state.selectedBeacons);
 
+        console.log("all data: " +this.checkIfDataIsFilledOut());
+        console.log("all beacons: "+ this.checkIfSelectedBeaconsHasCoords());
 
         return(
             <div className="rounded-container">
                 <div className="container ">
-                    <h1 className="margin24px fade-in roboto-black">Lage en session</h1>
+                    <h1 className="margin24px fade-in roboto-black">Lag en session</h1>
                 </div>
                 <div className="container">
 
-                  
+
                     <div className="card fade-in flex-1 max-height-300 min-width-300 ">
 
 
 
                         <div>
-                            <h3>Session Name</h3>
-                            <InputField color={theme.colorAccent} placeholder="Name of the session" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
-                            <h3>Session User</h3>
-                            <InputField color={theme.colorAccent} placeholder="The session user" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
+                            <h3>Session Navn</h3>
+                            <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til session'en" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
+                            <h3>Session Bruker</h3>
+                            <InputField color={theme.colorAccent} placeholder="Skriv inn navnet på den som skal trackes" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
                         </div>
                     </div>
 
@@ -203,7 +230,7 @@ class CreateSession extends React.Component {
 
                         <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
-                        <h4> You need to upload a map image to continue. (It has to be 1:1 ratio)</h4>
+                        <h4> Du må laste opp et bilde av et kart for å fortsette.</h4>
                         <input id="myInput"
                                type="file"
                                ref={(ref) => this.upload = ref}
@@ -214,7 +241,7 @@ class CreateSession extends React.Component {
                         <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
                              label="Open File"
                              onClick={()=>{this.upload.click()}}>
-                            Upload file
+                            Last opp fil
                         </div>
 
 
@@ -230,11 +257,14 @@ class CreateSession extends React.Component {
 
                         <Link to={"/"}>
                             <div className="arrow-back-btn">
-                            <i className="material-icons md-36">keyboard_arrow_left</i>
+                                <i className="material-icons md-36">keyboard_arrow_left</i>
                             </div>
                         </Link>
+                        {
+                            //this.checkIfDataIsFilledOut() ?  <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div> : <div className="create-session-btn flex-2">  </div>
+                            <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div>
+                        }
 
-                        <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div>
                     </div>
 
                     <div className="fixing-the-fixed-footer-shit"/>

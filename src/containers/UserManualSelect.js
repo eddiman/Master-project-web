@@ -31,7 +31,7 @@ class UserManualSelect extends React.Component {
                                 <i className="material-icons md-48 manual-icon list-icon margin24px">add_to_queue</i>
 
                                 <h3 className="margin24px flex-2"> Opprettelse av en session</h3>
-                                <div className="manual-button margin24px">
+                                <div className="manual-fab-button margin24px">
                                     <i className="material-icons">keyboard_arrow_right</i>
 
                                 </div>
@@ -44,7 +44,7 @@ class UserManualSelect extends React.Component {
                                 <i className="material-icons md-48 list-icon manual-icon margin24px">speaker_phone</i>
 
                                 <h3 className="margin24px flex-2">Bruk av mobilappen</h3>
-                                <div className="manual-button margin24px">
+                                <div className="manual-fab-button margin24px">
                                     <i className="material-icons">keyboard_arrow_right</i>
 
                                 </div>
@@ -57,7 +57,7 @@ class UserManualSelect extends React.Component {
                                 <i className="material-icons md-48 list-icon manua-icon margin24px">web</i>
 
                                 <h3 className="margin24px flex-2">Visning av en session</h3>
-                                <div className="manual-button margin24px">
+                                <div className="manual-fab-button margin24px">
                                     <i className="material-icons">keyboard_arrow_right</i>
 
                                 </div>
@@ -78,7 +78,7 @@ class UserManualSelect extends React.Component {
                 <div className="rounded-container bg-color-accent-dark bottom-fixed min-height-50px">
                     <div className="container flex-container-align-start " >
                         <Link to={'/'}>
-                            <div className="manual-button margin24px">
+                            <div className="manual-fab-button margin24px">
                                 <i className="material-icons">keyboard_arrow_left</i>
                             </div>
                         </Link>

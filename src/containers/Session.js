@@ -56,7 +56,7 @@ class Session extends React.Component {
                     <h1 className="margin24px fade-in roboto-black ">{Name}</h1>
                 </div>
             <div className="container">
-                <div className="card fade-in flex-1 min-width-300">
+                <div className="card fade-in flex-1 min-width-300 height-100percent">
                     <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
 
                 </div>

@@ -6,6 +6,7 @@ $colorDarkerGray : #AAAAAA;
 $appGreen :  #72c04d;
 $appRed : #ff6f5e;
 $appWhite : #FFF;
+$appYellow: #ffd75c;
 $bgWhite : #f4f4f4;
 
 body {
@@ -83,12 +84,29 @@ input, button { border:none; }
 }
 
 
+.prev-button {
+  border-radius: 2px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
+  background-color: $appYellow;
+  width: 100px;
+  height: 32px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  padding: 0 1rem;
+  vertical-align: middle;
+  line-height: 32px;
+  font-weight: 400;
+  transition: box-shadow .2s, opacity .2s;
+  cursor: pointer;
+}
+
 
 
 .green-button {
   border-radius: 2px;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
-  background-color: #72c04d;
+  background-color: $appGreen;
   max-width: 100px;
   height: 32px;
   text-align: center;
@@ -109,7 +127,7 @@ input, button { border:none; }
 .red-button {
   border-radius: 2px;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
-  background-color: #ff6f5e;
+  background-color: $appRed;
   max-width: 100px;
   height: 32px;
   text-align: center;
@@ -130,7 +148,7 @@ input, button { border:none; }
 .yellow-button {
   border-radius: 2px;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
-  background-color: #ffd75c;
+  background-color: $appYellow;
   max-width: 100px;
   height: 32px;
   text-align: center;
@@ -221,7 +239,32 @@ input, button { border:none; }
   margin-top: auto;
 }
 
-.manual-button {
+.play-start-fab-button {
+  border-radius: 50%;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
+  height: 64px;
+  width: 64px;
+  color: white;
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 32px;
+  font-weight: 400;
+  transition: box-shadow .2s, opacity .2s;
+  cursor: pointer;
+  i {
+    margin-left: 8px;
+    margin-top: 8px;
+  }
+}
+
+
+.play-start-fab-button:hover{
+  box-shadow: 0 2px 31px 0 rgba(0,0,0,0.15), 0 2px 19px 0 rgba(0,0,0,0.1);
+  opacity: 0.9;
+}
+
+
+.manual-fab-button {
   border-radius: 50%;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15), 0 2px 10px 0 rgba(0,0,0,0.1);
   background-color: $colorPrimary;
@@ -234,14 +277,14 @@ input, button { border:none; }
   font-weight: 400;
   transition: box-shadow .2s, opacity .2s;
   cursor: pointer;
+  i {
+    margin-left: 12px;
+    margin-top: 12px;
+  }
 }
 
 
-.manual-button i {
-  margin-left: 12px;
-  margin-top: 12px;
-}
-.manual-button:hover{
+.manual-fab-button:hover{
   box-shadow: 0 2px 31px 0 rgba(0,0,0,0.15), 0 2px 19px 0 rgba(0,0,0,0.1);
   opacity: 0.9;
 }
@@ -427,6 +470,12 @@ input, button { border:none; }
   filter: invert(30%);
 
 }
+
+.play-locations {
+  position: relative;
+  top: 48px;
+  height: 0;
+}
 /*********************Special Elements END***************/
 
 /*********************Modifiers*********************/
@@ -447,6 +496,7 @@ input, button { border:none; }
 
 .width-max-content{
   width: max-content;
+  width: intrinsic;           /* Safari/WebKit uses a non-standard name */
   width: intrinsic;           /* Safari/WebKit uses a non-standard name */
   width: -moz-max-content;    /* Firefox/Gecko */
   width: -webkit-max-content; /* Chrome */
@@ -469,12 +519,18 @@ input, button { border:none; }
           v
 */
 
+.height-100percent {
+  height: 100%;
+}
+
 .min-height-maxview{
   min-height: 100vh;
 }
 .min-height-70vh{
   min-height: 70vh;
 }
+
+
 
 .min-height-50px{
   min-height: 50px;
@@ -582,6 +638,10 @@ input, button { border:none; }
 }
 .flex-align-items-center {
   align-items: center;
+}
+
+.flex-align-items-end {
+  align-items: flex-end;
 }
 
 .roboto-black {

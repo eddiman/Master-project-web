@@ -69,7 +69,7 @@ class UserManualCreateSession extends React.Component {
 
         const LinkBtnForward = () => (
             <Link to={this.generateForwardLink()}>
-                <div className="manual-button flex-align-self-end margin24px">
+                <div className="manual-fab-button flex-align-self-end margin24px">
                     <i className="material-icons">{this.defineIcon()}</i>
                 </div>
             </Link>
@@ -77,7 +77,7 @@ class UserManualCreateSession extends React.Component {
 
         const LinkBtnBack = () => (
             <Link to={this.generateLastLink()}>
-                <div className="manual-button flex-align-self-end margin24px">
+                <div className="manual-fab-button flex-align-self-end margin24px">
                     <i className="material-icons">keyboard_arrow_left</i>
                 </div>
             </Link>

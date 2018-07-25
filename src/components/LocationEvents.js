@@ -27,7 +27,7 @@ class LocationEvents extends React.Component {
             session: this.props.session,
             currentLocationIndex : -1,
             currentLocationObject : [],
-            eventSequenceIsPlaying : false
+            eventSequenceIsPlaying : false,
         }
     }
 
@@ -82,8 +82,10 @@ class LocationEvents extends React.Component {
             currentLocationObject: locations[count],
 
         });
-        this.refer.childNodes[count].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        if(this.refer !== null) {
 
+            this.refer.childNodes[count].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        }
     }
 
 
@@ -107,9 +109,9 @@ class LocationEvents extends React.Component {
     stopPlayAllLocationEvents(evt) {
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0 && this.props.session.Locations !== undefined) {
 
-            this.setState({
-                eventSequenceIsPlaying : false
-            });
+                this.setState({
+                    eventSequenceIsPlaying : false
+                });
         }
     }
 
@@ -143,54 +145,58 @@ class LocationEvents extends React.Component {
                     {
 
                         locations !== undefined ? locations.map( (location, index) => {
-                            const {ID, CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
-                            if(locations){
-                                const LocationComp = () => (
-                                    <div key={ID}
-                                         className = {currentLocationObject.ID === ID ? ('card gray-marked') : 'card'}
-                                         onClick={evt => this.goToLocationEventHandler(evt, index)}>
-                                        <h1>Event nr: {index+1}</h1>
-                                        <span>Time: </span>{this.dateConverter(CreatedAt).toLocaleString() + " "}
-                                        <span>X: {XCoordinate}, Y: {YCoordinate}</span>
-                                        <span>Duration: {this.millisToMinutesAndSeconds(Duration)}</span>
-                                        <hr/>
-                                        { Walking ? (<span className="green-marked">Was walking at this location.</span>)
-                                            : (<span className="red-marked">Was not walking at this location.</span>)}
-                                        { HeadMovement ? (<span className="green-marked">Was moving the head at this location.</span>)
-                                            : (<span className="red-marked">Was not moving the head at this location.</span>)}
+                                const {ID, CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
+                                if(locations){
+                                    const LocationComp = () => (
+                                        <div key={ID}
+                                             className = {currentLocationObject.ID === ID ? ('card gray-marked') : 'card'}
+                                             onClick={evt => this.goToLocationEventHandler(evt, index)}>
+                                            <h1>Event nr: {index+1}</h1>
+                                            <span>Tidspunkt: </span>{this.dateConverter(CreatedAt).toLocaleString() + " "}
+                                            <span>X: {XCoordinate}, Y: {YCoordinate}</span>
+                                            <span>Varighet: {this.millisToMinutesAndSeconds(Duration)}</span>
+                                            <hr/>
+                                            { Walking ? (<span className="green-marked">Bevegde seg på dette stedet.</span>)
+                                                : (<span className="red-marked">Bevegde seg ikke på dette stedet.</span>)}
+                                            { HeadMovement ? (<span className="green-marked">Bevegde hodet på dette stedet.</span>)
+                                                : (<span className="red-marked">Bevegde ikke hodet på dette stedet.</span>)}
 
-                                    </div>
-                                );
-                                return <LocationComp/> }
-                        }) :
+                                        </div>
+                                    );
+                                    return <LocationComp/> }
+                            }) :
                             <div>
                                 <LoadingIcon src={loadingIcon}/>
-                                <h3>Loading...</h3>
+                                <h3>Laster inn...</h3>
                             </div>
                     }
 
 
                 </div>
-                <div className="container space-between">
-                    <p>Click on the buttons under to step through the session.</p>
+                <div className="container space-between flex-align-items-end play-locations">
 
-                    <button className="yellow-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex-1)}>
-                        ◀◀
-                    </button>
+                    <div className="manual-fab-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex-1)}>
+                        <i className="material-icons">fast_rewind</i>
+                    </div>
 
                     {
 
                         this.state.eventSequenceIsPlaying ? (
-                            <button className="red-button margin8px" onClick={evt => this.stopPlayAllLocationEvents(evt)}>⏹</button>
-                        ) :
+                                <div className="play-start-fab-button bg-color-accent-dark margin8px"  onClick={evt => this.stopPlayAllLocationEvents(evt)}>
+                                    <i className="material-icons md-48">pause_circle_outline</i>
+
+                                </div>
+                            ) :
                             (
-                                <button className="green-button margin8px" onClick={evt => this.playAllLocationEvents(evt)}>▶</button>
+                                <div className="play-start-fab-button bg-color-accent margin8px" onClick={evt => this.playAllLocationEvents(evt)}>
+                                    <i className="material-icons md-48">play_circle_outline</i>
+                                </div>
                             )
                     }
 
-                    <button className="yellow-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex+1)}>
-                        ▶▶
-                    </button>
+                    <div className="manual-fab-button margin8px" onClick={evt => this.goToLocationEventHandler(evt, currentLocationIndex+1)}>
+                        <i className="material-icons">fast_forward</i>
+                    </div>
                 </div>
             </div>
         )

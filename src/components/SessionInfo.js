@@ -25,52 +25,42 @@ class SessionInfo extends React.Component {
             <div className="container flex-container-column-direction margin8px">
 
                 <div className="">
-                    <h1 className="font-header">Information</h1>
+                    <h1 className="font-header">Informasjon</h1>
                     <hr/>
-                    <h2>Name: {Name}</h2>
-                    <p>User: {User} </p>
-                    <p> Start time of session: {this.dateConverter(StartTime).toLocaleString() + " "} </p>
-                    <p> End time of session: {this.dateConverter(EndTime).toLocaleString() + " "} </p>
+                    <h2>Navn: {Name}</h2>
+                    <p>Bruker: {User} </p>
+                    <p> Starttid: {this.dateConverter(StartTime).toLocaleString() + " "} </p>
+                    <p> Sluttid: {this.dateConverter(EndTime).toLocaleString() + " "} </p>
 
 
 
                 </div>
 
                 <div>
-                    <h1 className="font-header">Legend</h1>
+                    <h1 className="font-header">Innholdsfortegnelse</h1>
                     <hr/>
                     <div className="container flex-align-items-center margin8px">
                         <div className="current-mark margin8px"/>
-                        <span>Current position</span>
+                        <span>Nåværende posisjon</span>
                     </div>
 
                     <div className="container flex-align-items-center margin8px">
                         <div className="last-pos-mark margin8px"/>
-                        <span>Last position</span>
+                        <span>Forrige posisjon</span>
                     </div>
 
                     <div className="container flex-align-items-center margin8px">
                         <div className="pos-mark margin8px"/>
-                        <span>A recorded position</span>
-                        <span>the larger it is, the longer the user has been there.</span>
+                        <span>En registrert posisjon, jo større den er, jo lenger har brukeren oppholdt seg på stedet.</span>
                     </div>
 
                     <div className="container flex-align-items-center margin8px">
                         <div className="beacon-mark margin8px"/>
-                        <span>Position of a beacon</span>
+                        <span>Posisjon til beacon</span>
                     </div>
 
 
                 </div>
-
-                <div className="flex-align-self-end">
-                    <button className="red-button margin8px">
-                        <Link to={`/session`}>Back</Link>
-                    </button>
-
-                </div>
-
-
 
 
             </div>

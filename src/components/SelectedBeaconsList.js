@@ -80,7 +80,7 @@ class SelectedBeaconsList extends React.Component {
                             const BeaconComp = () => (
                                 <div className = {clickedBeacon.name ===  beacon.name ? ("padding8px gray-marked") : 'padding8px'} key={id+1}
                                      onClick={() => {this.clickSelectBeacon(beacon)}}>
-                                    <h2>Name: {name}</h2>
+                                    <h2>Navn: {name}</h2>
                                     <p>UUID: {uuid}</p>
                                     <p>Major: {major} | Minor: {minor}</p>
                                     <div className = {XCoordinate ? "green-marked" : "red-marked"} >
@@ -88,13 +88,13 @@ class SelectedBeaconsList extends React.Component {
                                     </div>
 
                                     {clickedBeacon.name ===  beacon.name ?
-                                        (<div className = "yellow-marked" >Selected</div>)
-                                        : (<div className = "blue-marked" onClick={() => {this.clickSelectBeacon(beacon)}}>Select this beacon</div>) }
+                                        (<div className = "yellow-marked" >Valgt</div>)
+                                        : (<div className = "blue-marked" onClick={() => {this.clickSelectBeacon(beacon)}}>Velg denne beacon'en</div>) }
                                     <hr/>
                                 </div>
                             );
                             return <BeaconComp/>
-                        }) : <p>Select a beacon</p>
+                        }) : <p>Velg en beacon</p>
                     }
                 </div>
 
