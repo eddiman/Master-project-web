@@ -138,7 +138,7 @@ class LocationEvents extends React.Component {
         return(
             <div>
 
-                <div className="max-height-600 overflow-scroll-y" ref={(el) => { this.refer = el;}}>
+                <div className="max-height-400 overflow-scroll-y" ref={(el) => { this.refer = el;}}>
 
                     {
 

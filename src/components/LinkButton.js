@@ -12,18 +12,23 @@ const ButtonStyle = styled.button`
     max-width: 100px;
     height: 32px;
     text-align: center;
-    color: ${props => props.fontColor};
     letter-spacing: .5;
+    color: ${props => props.fontColor} ;
     text-transform: uppercase;
     padding: 0 1rem;
+    font-weight: 600;
+
     vertical-align: middle;
     line-height: 32px;
-    font-weight: 400;
+    
     transition: box-shadow .2s, opacity .2s;
     cursor: pointer;
         ${ButtonStyle}:hover {
         box-shadow: ${constants.boxShadowsValuesHover};
         opacity: 0.8;
+         }
+         
+        a {
          }
     
 `;
@@ -47,12 +52,12 @@ class LinkButton extends React.Component {
     render() {
         const {color, darkerColor, fontColor, link, text} = this.state;
         return(
+            <Link to={link}>
+                <ButtonStyle color={color} darkerColor={darkerColor} fontColor={fontColor}>
 
-            <ButtonStyle color={color} darkerColor={darkerColor} fontColor={fontColor}>
-                <Link to={link}>
-                {text}
-                </Link>
-            </ButtonStyle>
+                    {text}
+                </ButtonStyle>
+            </Link>
 
         )
     }

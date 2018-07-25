@@ -4,6 +4,9 @@ import {Column} from '../components/Column';
 import {Row} from '../components/Row';
 import styled from 'styled-components';
 import loadingIcon from '../res/img/gear-loading.png'
+import fireTrackerLogo from '../res/img/logo_fire_tracker.png'
+import theme from "../theme/theme";
+import LinkButton from "./LinkButton";
 
 
 const LoadingIcon = styled.img`
@@ -57,7 +60,9 @@ class SessionList extends React.Component {
                     name: `${session.Name}`,
                     user: `${session.User}`,
                     startTime: `${session.StartTime}`,
-                    endTime: `${session.EndTime}`
+                    endTime: `${session.EndTime}`,
+                    mapUrl: `${session.Map}`
+
                 }
             )))
             .then(sessions => this.setState({
@@ -67,35 +72,48 @@ class SessionList extends React.Component {
             .catch(error => console.log('parsing failed', error))
     }
 
-
+    dateConverter(date) {
+        return new Date(date);
+    }
 
     render(){
         const {isLoading, sessions} = this.state;
-
+        sessions.reverse();
 
 
         return(
 
 
-            <div>
+            <div className="container flex-container-center">
+
 
                 {
-
-
                     !isLoading && sessions.length > 0 ? sessions.map(session => {
-                        const {id, createdAt, updatedAt, name, user, startTime, endTime} = session;
-                        const SessionComp = () => (
-                            <Link to={`/session/${id}`}>
-                                <Row>
-                                    <Column xs="12" lg="12" key={id}>
-                                        Session: {name}, User: {user} Date: {createdAt}
-                                        <hr/>
-                                    </Column>
-                                </Row>
-                            </Link>
-                        );
-                        return <SessionComp/>
-                    }) :
+                            const {id, createdAt, updatedAt, name, user, startTime, endTime, mapUrl} = session;
+
+                            let mapUrl2 = mapUrl;
+
+                            if(mapUrl2 === "") {
+                                mapUrl2 =  fireTrackerLogo;
+                            } else {
+                                mapUrl2 = "http://" + mapUrl;
+                            }
+                            const SessionComp = () => (
+                                <div className="card session-card padding0px" >
+                                    <Link to={`/session/${id}`}>
+                                    <img className="session-img" src={mapUrl2}/>
+                                    </Link>
+                                    <div className="padding8px">
+                                        <h2 className="roboto-black"> Session: {name}</h2>
+                                        <h3>Bruker: {user}</h3>
+                                        <h3>Startet: {this.dateConverter(Number(endTime)).toLocaleString()}</h3>
+                                    <hr/>
+                                        <LinkButton className="flex-align-self-end" color={theme.appWhite} fontColor={theme.colorAccent} text="Åpne" link={`/session/${id}`}/>
+                                    </div>
+                                </div>
+                            );
+                            return <SessionComp/>
+                        }) :
                         <Row>
                             <Column offsetLg="5" xs="12" lg="6">
 

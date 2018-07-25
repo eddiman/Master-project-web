@@ -1,10 +1,9 @@
 import React from 'react'
-import {CardOuter, TitleBar} from '../components/Card.js';
-import {Column} from '../components/Column';
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
-import Card from "../components/Card";
 import LocationEvents from "../components/LocationEvents";
+import HelpButton from "../components/HelpButton";
+import Link from "react-router-dom/es/Link";
 
 class Session extends React.Component {
 
@@ -52,13 +51,17 @@ class Session extends React.Component {
         const {isLoading, session, currentDataPoint} = this.state;
         const {Name} = session;
         return(
+            <div className="rounded-container">
+                <div className="container ">
+                    <h1 className="margin24px fade-in roboto-black ">{Name}</h1>
+                </div>
             <div className="container">
                 <div className="card fade-in flex-1 min-width-300">
                     <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
 
                 </div>
 
-                    <div className="card fade-in flex-2">
+                    <div className="card fade-in flex-2 plot-map-card">
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                     </div>
 
@@ -68,6 +71,18 @@ class Session extends React.Component {
 
             </div>
 
+                <div className="fixed-footer-menu flex-container-align-start">
+
+                    <Link to={"/session"}>
+                        <div className="arrow-back-btn ">
+                            <i className="material-icons md-36">keyboard_arrow_left</i>
+                        </div>
+                    </Link>
+
+                </div>
+                <HelpButton toUrl={'/manual/open/2'} fromUrl={this.props.location.pathname}/>
+
+            </div>
 
 
 
