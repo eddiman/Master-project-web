@@ -51,7 +51,7 @@ class CreateSession extends React.Component {
             sessionUser : '',
             availBeacons : [],
             selectedBeacons : [],
-            isMapUploaded : true,
+            isMapUploaded : false,
             mapImgUrl : '',
         }
     }
