@@ -123,24 +123,38 @@ class AvailBeaconList extends React.Component {
 
         return(
 
-            <div className="overflow-scroll-y">
+            <div className="overflow-scroll-y flex-container-row-direction">
                 {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
 
-                            <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("gray-marked") : ''}>
+                            <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("avail-beacon-element beacon-element-marked") : 'avail-beacon-element'}>
 
-                                <div key={id} onClick={() => this.addBeaconToSelectedList(id)}>
-                                    <p>Navn: {name}</p>
-                                    <p>UUID: {uuid} : Major: {major} : Minor: {minor}</p>
+                                <div className="container flex-container-row-direction"  key={id} onClick={() => this.addBeaconToSelectedList(id)}>
 
-                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "green-marked">Beacon er lagt til</div>)
-                                        : (<div className = "red-marked">Beacon er ikke lagt til</div>)
+                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className="bt-symbol ">
+                                            <i className="material-icons">bluetooth</i>
+                                        </div>)
+                                        : (<div className="bt-symbol bt-symbol-non-marked">
+                                            <i className="material-icons">bluetooth</i>
+                                        </div>)
 
                                     }
 
-                                    <hr/>
+
+
+                                    <h3>Navn: {name}</h3>
+
+                                    <div>
+                                    <div className = "btn-rounded">Tek. Info.</div>
+
+                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "btn-red-color">Fjern</div>)
+                                        : (<div className = "btn-rounded">Legg til</div>)
+
+                                    }
+                                    </div>
+
                                 </div>
                             </div>
                         );

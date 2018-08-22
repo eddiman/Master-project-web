@@ -42,10 +42,10 @@ class CreateSession extends React.Component {
             selectedBeacons : [],
             mapImgUrl : '',
 
-            isSessionNameLongEnough : false,
-            isSessionUserLongEnough : false,
+            isSessionNameLongEnough : true,
+            isSessionUserLongEnough : true,
 
-            isNameInputted : false,
+            isNameInputted : true,
             isBeaconsSelected : false,
             isMapUploaded : false,
             isBeaconsPlaced : false,
@@ -245,7 +245,7 @@ class CreateSession extends React.Component {
 
                     {/************************* Name and user input*****************************/}
 
-                    <div className="card fade-in flex-1 max-width-600 min-width-300 " >
+                    <div className="card fade-in flex-1 max-width-600 min-width-600-m " >
 
 
 
@@ -278,7 +278,7 @@ class CreateSession extends React.Component {
                     {/************************* ^Name and user input^^ *****************************/}
 
 
-                    {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-300 flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
+                    {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-600-m flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
                         <h2>Legg til beacons for "{this.state.sessionName}"-økten</h2>
                         <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
@@ -289,12 +289,12 @@ class CreateSession extends React.Component {
                         {this.state.selectedBeacons.length > 2
                             ?
 
-                            <div className="create-session-btn flex-2" onClick={evt => this.showUploadMap(evt)}> Neste </div> : ''}
+                            <div className="create-session-btn flex-2 " onClick={evt => this.showUploadMap(evt)}> Neste </div> : ''}
 
                     </div> : ''}
 
 
-                    {this.state.isBeaconsSelected ?  <div className="card fade-in max-height-600 min-width-300 flex-2">
+                    {this.state.isBeaconsSelected ?  <div className="card fade-in max-height-600 max-width-600 min-width-300 flex-2">
                         <h4> Du må laste opp et bilde av et kart for å fortsette.</h4>
                         <input id="myInput"
                                type="file"
