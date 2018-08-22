@@ -128,10 +128,13 @@ class AvailBeaconList extends React.Component {
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
+
                             <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("gray-marked") : ''}>
+
                                 <div key={id} onClick={() => this.addBeaconToSelectedList(id)}>
                                     <p>Navn: {name}</p>
                                     <p>UUID: {uuid} : Major: {major} : Minor: {minor}</p>
+
                                     {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "green-marked">Beacon er lagt til</div>)
                                         : (<div className = "red-marked">Beacon er ikke lagt til</div>)
 

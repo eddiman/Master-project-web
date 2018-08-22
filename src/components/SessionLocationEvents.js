@@ -18,7 +18,7 @@ const LoadingIcon = styled.img`
 
 `;
 
-class LocationEvents extends React.Component {
+class SessionLocationEvents extends React.Component {
 
     constructor(props){
         super(props);
@@ -203,4 +203,4 @@ class LocationEvents extends React.Component {
     }
 }
 
-export default LocationEvents;
+export default SessionLocationEvents;

@@ -69,9 +69,9 @@ class SelectedBeaconsList extends React.Component {
 
         const {clickedBeacon} = this.state;
         const tempArray = this.state.addedBeaconsToPlot;
-
+        const tempStyle = {width : "100%"};
         return(
-            <div className="container">
+            <div className="card container flex-container-row-direction " style = {tempStyle}>
 
                 <div className="card fade-in max-height-600 min-width-300 flex-1 overflow-scroll-y">
                     {
@@ -128,7 +128,7 @@ class SelectedBeaconsList extends React.Component {
                                 yDomain={[0, 100]}
                                 fill={"rgba(1, 1, 1, 0.0)"}
 
-                                >
+                            >
                                 <VerticalGridLines
                                     tickTotal="20"
                                     style={{stroke: "#c3c3c3"} }
@@ -140,38 +140,38 @@ class SelectedBeaconsList extends React.Component {
                                     style={{stroke: "#c3c3c3"} }
 
                                 />
-                            <MarkSeries
-                                size={"16px"}
-                                data =  {this.generateDataGrid()}
-                                style={{strokeWidth: 0} }
+                                <MarkSeries
+                                    size={"16px"}
+                                    data =  {this.generateDataGrid()}
+                                    style={{strokeWidth: 0} }
 
-                                onValueClick ={(datapoint, event)=>{
-                                    if(clickedBeacon !== '') {
-                                        clickedBeacon.XCoordinate =  datapoint.x;
-                                        clickedBeacon.YCoordinate = datapoint.y;
-                                        tempArray.push({"x" : clickedBeacon.XCoordinate, "y" : clickedBeacon.YCoordinate});
-                                        this.setState({
-                                            addedBeaconsToPlot: tempArray});
-                                        this.forceUpdate();
-                                    }
-                                }}
+                                    onValueClick ={(datapoint, event)=>{
+                                        if(clickedBeacon !== '') {
+                                            clickedBeacon.XCoordinate =  datapoint.x;
+                                            clickedBeacon.YCoordinate = datapoint.y;
+                                            tempArray.push({"x" : clickedBeacon.XCoordinate, "y" : clickedBeacon.YCoordinate});
+                                            this.setState({
+                                                addedBeaconsToPlot: tempArray});
+                                            this.forceUpdate();
+                                        }
+                                    }}
 
-                            />
+                                />
 
-                            <YAxis/>
-                            <XAxis/>
-                        </XYPlot>
+                                <YAxis/>
+                                <XAxis/>
+                            </XYPlot>
+
+                        </div>
+                        <IndoorMap src={sessionIndoorMap}/>
 
                     </div>
-                    <IndoorMap src={sessionIndoorMap}/>
-
                 </div>
+
             </div>
 
-    </div>
 
-
-    )
+        )
     }
 }
 

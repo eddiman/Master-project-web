@@ -1,7 +1,7 @@
 import React from 'react'
 import SessionInfo from '../components/SessionInfo'
 import SessionData from "../components/SessionData";
-import LocationEvents from "../components/LocationEvents";
+import SessionLocationEvents from "../components/SessionLocationEvents";
 import HelpButton from "../components/HelpButton";
 import Link from "react-router-dom/es/Link";
 
@@ -57,11 +57,12 @@ class Session extends React.Component {
                 </div>
             <div className="container">
                 <div className="card fade-in flex-1 min-width-300 height-100percent">
-                    <LocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
+                    <SessionLocationEvents session={!isLoading ? session : "bam" } callback={this.nextCoordinate}/>
 
                 </div>
 
                     <div className="card fade-in flex-2 plot-map-card">
+                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                         <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                     </div>
 

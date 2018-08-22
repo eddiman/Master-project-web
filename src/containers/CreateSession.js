@@ -8,18 +8,6 @@ import * as $ from "jquery";
 import HelpButton from "../components/HelpButton";
 import Link from "react-router-dom/es/Link";
 
-const LoadingIcon = styled.img`
-        animation: App-logo-spin infinite 10s linear;
-        margin: 32px;
-        height: 60px;
-        opacity: 0.3;
-        @keyframes App-logo-spin {
-              from { transform: rotate(0deg); }
-              to { transform: rotate(360deg); }
-        }
-    
-    `;
-
 const InputField = styled.input`
         border-bottom: 1px solid;
         border-bottom-color: #fbb033;
@@ -28,6 +16,7 @@ const InputField = styled.input`
         border-right: none;
         margin: 16px;
         color: #2f2f2f;
+        border-radius: 3px;
         height: 32px;
         font-size: 1.1em;
         font-family: 'Open Sans', sans-serif;
@@ -49,10 +38,20 @@ class CreateSession extends React.Component {
             createdSession: [],
             sessionName : '',
             sessionUser : '',
-            availBeacons : [],
+            placedBeacons : [],
             selectedBeacons : [],
-            isMapUploaded : false,
             mapImgUrl : '',
+
+            isSessionNameLongEnough : false,
+            isSessionUserLongEnough : false,
+
+            isNameInputted : false,
+            isBeaconsSelected : false,
+            isMapUploaded : false,
+            isBeaconsPlaced : false,
+
+            minLengthOfStringInput : 5
+
         }
     }
 
@@ -60,17 +59,61 @@ class CreateSession extends React.Component {
         this.setState({
             sessionName: evt.target.value
         });
+        if (evt.target.value.length >= this.state.minLengthOfStringInput) {
+            this.setState({
+                isSessionUserLongEnough: true
+            });
+        } else {
+            this.setState({
+                isSessionUserLongEnough: false
+            });
+        }
+
     }
 
     updateSessionUser(evt) {
         this.setState({
             sessionUser: evt.target.value
-
         });
+        if (evt.target.value.length >= this.state.minLengthOfStringInput) {
+            this.setState({
+                isSessionNameLongEnough: true
+            });
+        } else {
+            this.setState({
+                isSessionNameLongEnough: false
+            });
+        }
 
     }
 
-    //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10005&Minor=48406&Name=Ebeoo-gul' http://firetracker.freheims.xyz:8000/beacon
+    showAvailBeacons(evt){
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            this.setState({
+                isNameInputted: true
+            });
+
+            setTimeout( () => {
+                this.AvailBeaconsRef.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+            }, 300);
+
+
+
+        }
+    }
+
+    showUploadMap(evt){
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            this.setState({
+                isBeaconsSelected: true
+            });
+        }
+    }
+
+
+
+            //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10005&Minor=48406&Name=Ebeoo-gul' http://firetracker.freheims.xyz:8000/beacon
     //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10010&Minor=48406&Name=Ebeoo-blaa' http://firetracker.freheims.xyz:8000/beacon
     //curl --data 'UUID=fda50693-a4e2-4fb1-afcf-c6eb07647825&&Major=10006&Minor=48406&Name=Ebeoo-raud' http://firetracker.freheims.xyz:8000/beacon
 
@@ -108,7 +151,7 @@ class CreateSession extends React.Component {
                         .catch(error => console.log('parsing failed', error)));
                 alert("Session'en ble opprettet");
             } else {
-                alert("Ikke alle felter er fylt ut: Sjekk navn og bruker, valgte beacons, opplasting av kartbilde, og alle beacons må være plassert på kart.");
+                alert("Du må sette alle valgte beacons ut på kartet.");
 
             }
 
@@ -171,14 +214,8 @@ class CreateSession extends React.Component {
     }
 
     checkIfDataIsFilledOut() {
-        const {sessionName, sessionUser, selectedBeacons, isMapUploaded} = this.state;
 
-
-        if (sessionName.length === 0 || sessionUser.length === 0 || selectedBeacons.length === 0 || isMapUploaded === false || !this.checkIfSelectedBeaconsHasCoords()){
-            return false;
-        } else {
-            return true
-        }
+        return this.checkIfSelectedBeaconsHasCoords();
     }
 
 
@@ -194,13 +231,6 @@ class CreateSession extends React.Component {
 
     render(){
 
-        const selectMapBeaconsDiv = () => {
-            return (
-                <div >
-                    <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} mapImgUrl = {this.state.mapImgUrl}/>
-                </div>
-            )
-        };
         console.log(this.state.selectedBeacons);
 
         console.log("all data: " +this.checkIfDataIsFilledOut());
@@ -209,27 +239,62 @@ class CreateSession extends React.Component {
         return(
             <div className="rounded-container">
                 <div className="container ">
-                    <h1 className="margin24px fade-in roboto-black">Lag en session</h1>
+                    <h1 className="margin24px fade-in roboto-black">Lag en økt</h1>
                 </div>
-                <div className="container">
+                <div className="container flex-align-items-center flex-container-column-direction">
 
+                    {/************************* Name and user input*****************************/}
 
-                    <div className="card fade-in flex-1 max-height-300 min-width-300 ">
+                    <div className="card fade-in flex-1 max-width-600 min-width-300 " >
 
 
 
                         <div>
-                            <h3>Session Navn</h3>
-                            <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til session'en" value={this.state.sessionName} onChange={evt => this.updateSessionName(evt)} />
-                            <h3>Session Bruker</h3>
-                            <InputField color={theme.colorAccent} placeholder="Skriv inn navnet på den som skal trackes" value={this.state.sessionUser} onChange={evt => this.updateSessionUser(evt)} />
+                            <h2>Navn på økten</h2>
+                            {this.state.sessionName.length < this.state.minLengthOfStringInput ?
+                                (<p className="red-marked min-width-300">Navnet til økten må inneholde minst <b>
+                                    {(this.state.minLengthOfStringInput - this.state.sessionName.length)}</b> tegn til.</p>) :
+                                <p className="green-marked min-width-300">Navnet er godkjent</p>}
+
+                            <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til session'en" value={this.state.sessionName}
+                                        onChange={evt => this.updateSessionName(evt)} />
+                            <h2>Navn på den som skal utføre økten</h2>
+                            {this.state.sessionUser.length < this.state.minLengthOfStringInput ?
+                                (<p className="red-marked min-width-300">Navnet til økten må inneholde minst <b>
+                                    {(this.state.minLengthOfStringInput - this.state.sessionUser.length)}</b> tegn til.</p>) :
+                                <p className="green-marked min-width-300">Navnet er godkjent</p>}
+
+
+                            <InputField color={theme.colorAccent} placeholder="Skriv inn navnet på den som skal trackes" value={this.state.sessionUser}
+                                        onChange={evt => this.updateSessionUser(evt)} />
                         </div>
+                        {this.state.isSessionNameLongEnough &&  this.state.isSessionUserLongEnough && !this.state.isNameInputted
+                            ?
+
+                            <div className="create-session-btn flex-2" onClick={evt => this.showAvailBeacons(evt)}> Neste </div> : ''}
+
                     </div>
 
-                    <div className="card fade-in max-height-600 min-width-300 flex-2">
+                    {/************************* ^Name and user input^^ *****************************/}
 
+
+                    {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-300 flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
+                        <h2>Legg til beacons for "{this.state.sessionName}"-økten</h2>
                         <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
+
+                        <hr/>
+
+
+                        {this.state.selectedBeacons.length > 2
+                            ?
+
+                            <div className="create-session-btn flex-2" onClick={evt => this.showUploadMap(evt)}> Neste </div> : ''}
+
+                    </div> : ''}
+
+
+                    {this.state.isBeaconsSelected ?  <div className="card fade-in max-height-600 min-width-300 flex-2">
                         <h4> Du må laste opp et bilde av et kart for å fortsette.</h4>
                         <input id="myInput"
                                type="file"
@@ -237,21 +302,20 @@ class CreateSession extends React.Component {
                                style={{display: 'none'}}
                                onChange={this.onChangeFile.bind(this)}
                         />
-                        <hr/>
-                        <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'green-button' : 'red-button'}
-                             label="Open File"
-                             onClick={()=>{this.upload.click()}}>
-                            Last opp fil
-                        </div>
-
-
-                    </div>
+                            <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'create-session-btn' : 'red-button'}
+                                 label="Open File"
+                                 onClick={()=>{this.upload.click()}}>
+                                Last opp fil
+                            </div>
+                        </div> : '' }
 
 
 
                     <div className="fixing-the-fixed-footer-shit"/>
 
-                    {this.state.isMapUploaded ? selectMapBeaconsDiv() : ''}
+                    {this.state.isMapUploaded ?
+                        <SelectedBeaconsList selectedBeacons = {this.state.selectedBeacons} mapImgUrl = {this.state.mapImgUrl}/>
+                    : ''}
 
                     <div className="fixed-footer-menu  ">
 
@@ -260,10 +324,9 @@ class CreateSession extends React.Component {
                                 <i className="material-icons md-36">keyboard_arrow_left</i>
                             </div>
                         </Link>
-                        {
-                            //this.checkIfDataIsFilledOut() ?  <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div> : <div className="create-session-btn flex-2">  </div>
-                            <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div>
-                        }
+
+                            {this.state.isNameInputted && this.state.isBeaconsSelected && this.state.isMapUploaded?
+                                <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div> : '' }
 
                     </div>
 
