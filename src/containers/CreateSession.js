@@ -42,15 +42,16 @@ class CreateSession extends React.Component {
             selectedBeacons : [],
             mapImgUrl : '',
 
-            isSessionNameLongEnough : true,
-            isSessionUserLongEnough : true,
+            isSessionNameLongEnough : false,
+            isSessionUserLongEnough : false,
 
-            isNameInputted : true,
+            isNameInputted : false,
             isBeaconsSelected : false,
             isMapUploaded : false,
             isBeaconsPlaced : false,
 
-            minLengthOfStringInput : 5
+            minLengthOfStringInput : 5,
+            minNoOfAvailBeacon : 3
 
         }
     }
@@ -108,6 +109,11 @@ class CreateSession extends React.Component {
             this.setState({
                 isBeaconsSelected: true
             });
+
+            setTimeout( () => {
+                this.mapUpload.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+            }, 300);
         }
     }
 
@@ -252,17 +258,17 @@ class CreateSession extends React.Component {
                         <div>
                             <h2>Navn på økten</h2>
                             {this.state.sessionName.length < this.state.minLengthOfStringInput ?
-                                (<p className="red-marked min-width-300">Navnet til økten må inneholde minst <b>
+                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300">Øktnavnet må ha <b>
                                     {(this.state.minLengthOfStringInput - this.state.sessionName.length)}</b> tegn til.</p>) :
-                                <p className="green-marked min-width-300">Navnet er godkjent</p>}
+                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet  er godkjent</p>}
 
                             <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til session'en" value={this.state.sessionName}
                                         onChange={evt => this.updateSessionName(evt)} />
                             <h2>Navn på den som skal utføre økten</h2>
                             {this.state.sessionUser.length < this.state.minLengthOfStringInput ?
-                                (<p className="red-marked min-width-300">Navnet til økten må inneholde minst <b>
+                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet på brukeren må ha <b>
                                     {(this.state.minLengthOfStringInput - this.state.sessionUser.length)}</b> tegn til.</p>) :
-                                <p className="green-marked min-width-300">Navnet er godkjent</p>}
+                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet er godkjent</p>}
 
 
                             <InputField color={theme.colorAccent} placeholder="Skriv inn navnet på den som skal trackes" value={this.state.sessionUser}
@@ -280,6 +286,12 @@ class CreateSession extends React.Component {
 
                     {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-600-m flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
                         <h2>Legg til beacons for "{this.state.sessionName}"-økten</h2>
+                        {this.state.selectedBeacons.length < this.state.minNoOfAvailBeacon ?
+                            (<p>Økten må ha minst <b>
+                                {(this.state.minNoOfAvailBeacon - this.state.selectedBeacons.length)}</b> beacons til</p>) :
+                            <p>Du har lagt til {this.state.selectedBeacons.length} beacons</p>}
+
+
                         <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>
 
 
@@ -294,18 +306,18 @@ class CreateSession extends React.Component {
                     </div> : ''}
 
 
-                    {this.state.isBeaconsSelected ?  <div className="card fade-in max-height-600 max-width-600 min-width-300 flex-2">
-                        <h4> Du må laste opp et bilde av et kart for å fortsette.</h4>
+                    {this.state.isBeaconsSelected ?  <div ref={(el) => { this.mapUpload = el; }} className="card fade-in max-height-600 max-width-600 min-width-600-m flex-2">
+                        <h2>{this.state.isMapUploaded ? 'Last opp et annet kartbilde' : 'Last opp et kartbilde'}</h2>
                         <input id="myInput"
                                type="file"
                                ref={(ref) => this.upload = ref}
                                style={{display: 'none'}}
                                onChange={this.onChangeFile.bind(this)}
                         />
-                            <div ref={(el) => { this.messagesEnd = el; }} className = {this.state.isMapUploaded ? 'create-session-btn' : 'red-button'}
+                            <div ref={(el) => { this.messagesEnd = el; }} className = 'create-session-btn'
                                  label="Open File"
                                  onClick={()=>{this.upload.click()}}>
-                                Last opp fil
+                                {this.state.isMapUploaded ? 'Last opp ny fil' : 'Last opp fil'}
                             </div>
                         </div> : '' }
 
@@ -325,8 +337,9 @@ class CreateSession extends React.Component {
                             </div>
                         </Link>
 
-                            {this.state.isNameInputted && this.state.isBeaconsSelected && this.state.isMapUploaded?
-                                <div className="create-session-btn flex-2" onClick={evt => this.createSession(evt)}> Opprett </div> : '' }
+
+                                <div className={this.state.isNameInputted && this.state.isBeaconsSelected && this.state.isMapUploaded?
+                                    "create-session-btn flex-2" : 'no-visibility create-session-btn flex-2' } onClick={evt => this.createSession(evt)}> Opprett </div>
 
                     </div>
 

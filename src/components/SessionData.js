@@ -126,7 +126,7 @@ class SessionData extends React.Component {
         return(
             <div>
 
-                <div className="plot-container">
+                <div className="plot-container flex-container-center">
 
 
                     <PlotMap>

@@ -129,30 +129,26 @@ class AvailBeaconList extends React.Component {
                         const {id, name, uuid, major, minor} = beacon;
                         const BeaconComp = () => (
 
-                            <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("avail-beacon-element beacon-element-marked") : 'avail-beacon-element'}>
+                            <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("avail-beacon-element beacon-element-marked padding8px") : 'avail-beacon-element padding8px'}>
 
                                 <div className="container flex-container-row-direction"  key={id} onClick={() => this.addBeaconToSelectedList(id)}>
-
-                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className="bt-symbol ">
-                                            <i className="material-icons">bluetooth</i>
-                                        </div>)
-                                        : (<div className="bt-symbol bt-symbol-non-marked">
-                                            <i className="material-icons">bluetooth</i>
-                                        </div>)
-
-                                    }
-
-
-
-                                    <h3>Navn: {name}</h3>
-
                                     <div>
-                                    <div className = "btn-rounded">Tek. Info.</div>
+                                        {this.checkIfBeaconIsAlreadySelected(id) ? (<div className="bt-symbol ">
+                                            <i className="material-icons">bluetooth</i>
+                                        </div>)
+                                            : (<div className="bt-symbol bt-symbol-non-marked">
+                                                <i className="material-icons">bluetooth</i>
+                                            </div>)
+                                        }
+                                        <h3>Navn: {name}</h3>
+                                    </div>
+                                    <div>
+                                        <div className = "btn-rounded">Tek. Info.</div>
 
-                                    {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "btn-red-color">Fjern</div>)
-                                        : (<div className = "btn-rounded">Legg til</div>)
+                                        {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "btn-red-color">Fjern</div>)
+                                            : (<div className = "btn-rounded">Legg til</div>)
 
-                                    }
+                                        }
                                     </div>
 
                                 </div>
@@ -162,8 +158,8 @@ class AvailBeaconList extends React.Component {
                     }) :
                         <div>
 
-                                <LoadingIcon src={loadingIcon}/>
-                                <h3>Laster inn...</h3>
+                            <LoadingIcon src={loadingIcon}/>
+                            <h3>Laster inn...</h3>
                         </div>
                 }
             </div>

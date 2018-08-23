@@ -69,28 +69,38 @@ class SelectedBeaconsList extends React.Component {
 
         const {clickedBeacon} = this.state;
         const tempArray = this.state.addedBeaconsToPlot;
-        const tempStyle = {width : "100%"};
+        const tempStyle = {width : "84%"};
         return(
             <div className="card container flex-container-row-direction " style = {tempStyle}>
 
-                <div className="card fade-in max-height-600 min-width-300 flex-1 overflow-scroll-y">
+                <div className="rounded-box-border  fade-in max-height-600 min-width-300 flex-1 overflow-scroll-y">
                     {
                         this.props.selectedBeacons.length > 0 ? this.props.selectedBeacons.map(beacon => {
-                            const {id, name, uuid, major, minor, XCoordinate, YCoordinate} = beacon;
+                            const {id, name, XCoordinate, YCoordinate} = beacon;
                             const BeaconComp = () => (
-                                <div className = {clickedBeacon.name ===  beacon.name ? ("padding8px gray-marked") : 'padding8px'} key={id+1}
-                                     onClick={() => {this.clickSelectBeacon(beacon)}}>
-                                    <h2>Navn: {name}</h2>
-                                    <p>UUID: {uuid}</p>
-                                    <p>Major: {major} | Minor: {minor}</p>
-                                    <div className = {XCoordinate ? "green-marked" : "red-marked"} >
-                                        <h3> <b>X: {XCoordinate} Y: {YCoordinate} </b></h3>
-                                    </div>
+                                <div className = {XCoordinate ? ('beacon-element-marked avail-beacon-element margin-top32px') : 'avail-beacon-element margin-top32px'}>
+                                    <div className = {clickedBeacon.name ===  beacon.name ? ('gray-marked padding8px') : 'padding8px'} key={id+1}
+                                         onClick={() => {this.clickSelectBeacon(beacon)}}>
 
-                                    {clickedBeacon.name ===  beacon.name ?
-                                        (<div className = "yellow-marked" >Valgt</div>)
-                                        : (<div className = "blue-marked" onClick={() => {this.clickSelectBeacon(beacon)}}>Velg denne beacon'en</div>) }
-                                    <hr/>
+                                        <div className="container flex-container-column-direction flex-align-items-center">
+                                            {XCoordinate ? (<div className="bt-symbol large bt-symbol-center-top ">
+                                                <i className="material-icons md-48">bluetooth</i>
+                                            </div>)
+                                                : (<div className="bt-symbol large bt-symbol-non-marked bt-symbol-center-top ">
+                                                    <i className="material-icons md-48">bluetooth</i>
+                                                </div>)
+                                            }
+                                            <h2 className="no-margin">{name}</h2>
+
+                                            <p>{XCoordinate ? ("Denne beaconen er plassert på X: " + XCoordinate + "," + "Y: " + YCoordinate)
+                                                : 'Denne beaconen har ikke blitt plassert enda'}</p>
+
+
+                                            {clickedBeacon.name ===  beacon.name ?
+                                                (<div className = "create-session-btn" >Valgt</div>)
+                                                : (<div className = "create-session-btn" onClick={() => {this.clickSelectBeacon(beacon)}}>Velg</div>) }
+                                        </div>
+                                    </div>
                                 </div>
                             );
                             return <BeaconComp/>
@@ -99,7 +109,7 @@ class SelectedBeaconsList extends React.Component {
                 </div>
 
 
-                <div className="card flex-2">
+                <div className="rounded-box-border  min-height-70vh flex-2">
 
                     <div className="plot-container">
                         <div className={"plot-map"}>

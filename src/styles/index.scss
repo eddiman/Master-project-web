@@ -3,7 +3,7 @@ $colorPrimaryDark :  #c88116;
 $colorAccent : #2e82ff;
 $colorAccentDark : #2567C9;
 $colorDarkerGray : #AAAAAA;
-$appGreen : #84e35e;
+$appGreen : #d6ffc5;
 $appGreen2 : #f2ffed;
 $appRed : #ff6f5e;
 $appWhite : #FFF;
@@ -80,8 +80,6 @@ input, button { border:none; }
 .plot-container{
   min-height: 300px;
   min-width: 300px;
-  justify-content: center;
-  align-self: center;
 }
 
 
@@ -392,8 +390,9 @@ input, button { border:none; }
 }
 
 .gray-marked {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.07) !important;
   opacity: 1 !important;
+  border-radius: 15px;
 
 }
 .yellow-marked {
@@ -436,6 +435,13 @@ input, button { border:none; }
 
 }
 
+.rounded-box-border {
+  border-radius: 18px;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  margin: 8px;
+}
+
 
 /*********************Special Elements***************/
 
@@ -458,9 +464,23 @@ input, button { border:none; }
   }
 }
 
+.bt-symbol.large {
+  height:64px;
+  width: 64px;
+  i{
+    margin-left: 9px;
+    margin-top: 8px;
+  }
+}
+
 .bt-symbol-non-marked {
   background-color: #c8c8c8 !important;
 
+}
+
+.bt-symbol-center-top {
+  position: relative;
+  top: -32px;
 }
 
 .home-session-btn {
@@ -550,9 +570,8 @@ input, button { border:none; }
 
 .avail-beacon-element {
   border-radius: 15px;
-  padding: 8px;
-  margin:  8px 0 8px 0;
   border: 1px solid #e0e0e0;
+  margin: 8px 4px 8px 4px;
 }
 
 .beacon-element-marked{
@@ -581,7 +600,9 @@ justify-content: space-between;
 }
 
 
-
+.no-visibility {
+  visibility: hidden;
+}
 
 .width-max-content{
   width: max-content;
@@ -659,12 +680,29 @@ justify-content: space-between;
   padding: 8px;
 }
 
+.no-margin {
+  margin: 0;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
 .margin8px {
   margin: 8px;
 }
 
 .margin24px {
   margin: 24px;
+}
+
+.margin-top32px {
+  margin-top: 32px;
+}
+
+
+.center-align-text {
+  text-align: center;
 }
 
 /**flex-modifiers**/
