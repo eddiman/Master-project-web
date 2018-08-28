@@ -62,8 +62,7 @@ class Session extends React.Component {
                 </div>
 
                     <div className="card fade-in flex-2 plot-map-card">
-                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
-                        <SessionData session={!isLoading ? session : "bam" } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
+                        <SessionData session={!isLoading ? session : "Loading..." } isLoading={isLoading} currentDataPoint={currentDataPoint}/>
                     </div>
 
                 <div className="card fade-in flex-1 min-width-300">
