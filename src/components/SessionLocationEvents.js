@@ -137,6 +137,8 @@ class SessionLocationEvents extends React.Component {
         const {currentLocationIndex, currentLocationObject} = this.state;
 
         const locations = session.Locations;
+
+        const LocationCompClass= "avail-beacon-element container flex-container-center flex-container-column-direction margin-top32px padding8px ";
         return(
             <div>
 
@@ -148,18 +150,26 @@ class SessionLocationEvents extends React.Component {
                                 const {ID, CreatedAt, XCoordinate, YCoordinate, Duration, Walking, HeadMovement} = location;
                                 if(locations){
                                     const LocationComp = () => (
-                                        <div key={ID}
-                                             className = {currentLocationObject.ID === ID ? ('card gray-marked') : 'card'}
+
+
+                                        <div key={ID} className =  {currentLocationObject.ID === ID ? (LocationCompClass + 'gray-marked')
+                                            : LocationCompClass}
                                              onClick={evt => this.goToLocationEventHandler(evt, index)}>
-                                            <h1>Event nr: {index+1}</h1>
-                                            <span>Tidspunkt: </span>{this.dateConverter(CreatedAt).toLocaleString() + " "}
-                                            <span>X: {XCoordinate}, Y: {YCoordinate}</span>
-                                            <span>Varighet: {this.millisToMinutesAndSeconds(Duration)}</span>
+                                            <div className="bt-symbol large ">
+                                                <i className="material-icons md-48">location_on</i>
+                                            </div>
+
+                                            <h3 className="margin8px">{index+1}. punkt</h3>
+                                            <h3 className="margin8px">Tidspunkt: {this.dateConverter(CreatedAt).toLocaleString() + " "}    </h3>
+                                            <h3 className="margin8px">Varighet: {this.millisToMinutesAndSeconds(Duration)}</h3>
+                                           
+                                            <div>X: {XCoordinate}, Y: {YCoordinate}</div>
                                             <hr/>
-                                            { Walking ? (<span className="green-marked">Bevegde seg på dette stedet.</span>)
-                                                : (<span className="red-marked">Bevegde seg ikke på dette stedet.</span>)}
-                                            { HeadMovement ? (<span className="green-marked">Bevegde hodet på dette stedet.</span>)
-                                                : (<span className="red-marked">Bevegde ikke hodet på dette stedet.</span>)}
+                                            { Walking ? (<div className="green-marked">Bevegde seg på dette stedet.</div>)
+                                                : (<div className="red-marked">Bevegde seg ikke på dette stedet.</div>)}
+
+                                            { HeadMovement ? (<div className="green-marked">Bevegde hodet på dette stedet.</div>)
+                                                : (<div className="red-marked">Bevegde ikke hodet på dette stedet.</div>)}
 
                                         </div>
                                     );
