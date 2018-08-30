@@ -23,7 +23,7 @@ class ManualCreateSession extends React.Component {
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
                             <IpadDeviceFrame img={Img1}/>
                             <h1>Navngivning av session</h1>
-                            <p className="max-width-600">
+                            <p className="max-width-600px">
                                 For å opprette en session må man først skrive inn et navn for sessionet, dette burde inneholdet noe
                                 som man kjenne den igjen lett med.
 
@@ -40,7 +40,7 @@ class ManualCreateSession extends React.Component {
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
                             <IpadDeviceFrame img={Img2}/>
                             <h1>Valg av beacons</h1>
-                            <p className="max-width-600">
+                            <p className="max-width-600px">
                                 Velg beacons som skal brukes i sessionen ved å trykke på det røde feltet. Når valgt vil den bli grønn.
 
                                 Når ønskede beacons er valgt, trykk deretter på «Last opp kartbilde». Du vil da få mulighet til å laste opp en bildefil for å bruke som kart.
@@ -55,7 +55,7 @@ class ManualCreateSession extends React.Component {
                         <div className="container flex-container-center flex-container-column-direction  padding8px">
                             <IpadDeviceFrame img={Img3}/>
                             <h1>Plassering av beacons</h1>
-                            <p className="max-width-600">
+                            <p className="max-width-600px">
                                 På denne skjermen er det to elementer: En liste med de valgte beacons til venstre, og kartet som beaconsene skal plasseres på til venstre.
 
                                 For å plassere beacon trykker man først på ønsket beacon i listen, og trykker deretter på ønsket sted på kartet. Når beacons er plassert vil men se et rundt punkt på kart og koordinatene lyse grønt i beacons, dette kan sees i bilde.

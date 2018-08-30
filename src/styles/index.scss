@@ -586,6 +586,15 @@ input, button { border:none; }
 justify-content: space-between;
 }
 
+.dark-dialog-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.5);
+}
 /*********************Special Elements END***************/
 
 /*********************Modifiers*********************/
@@ -660,17 +669,17 @@ justify-content: space-between;
 
 
 
-.min-width-300 {
+.min-width-300px {
   min-width: 300px;
 }
-.min-width-600-m {
+.min-width-600px-m {
    min-width: 600px;
  }
 
-.max-width-300 {
+.max-width-300px {
   max-width: 300px;
 }
-.max-width-600 {
+.max-width-600px {
   max-width: 600px;
 }
 
@@ -973,7 +982,7 @@ justify-content: space-between;
     height: 400px;
   }
 
-  .min-width-600-m {
+  .min-width-600px-m {
     min-width: 300px;
   }
 }

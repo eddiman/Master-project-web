@@ -23,7 +23,9 @@ class AvailBeaconList extends React.Component {
         this.state = {
             isLoading: true,
             beacons: [],
-            selectedBeacons : []
+            selectedBeacons : [],
+            beaconTechInfoShowing : false,
+            beaconTechInfo : []
         };
 
 
@@ -32,6 +34,8 @@ class AvailBeaconList extends React.Component {
 
     componentDidMount(){
         this.fetchData();
+
+
     }
 
 
@@ -118,15 +122,49 @@ class AvailBeaconList extends React.Component {
     }
 
 
+    closeDialog = (evt) => {
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            this.setState({beaconTechInfoShowing : false});
+
+        }
+    };
+
+    openDialog = (evt, beacon) => {
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            this.setState({beaconTechInfo : beacon});
+            this.setState({beaconTechInfoShowing : true});
+
+
+        }
+    };
+
     render(){
         const {isLoading, beacons} = this.state;
+        const DialogMessage = ({title, uuid, major, minor}) =>
+            <div className="dark-dialog-bg container flex-align-items-center flex-container-horizontal-center" onClick={evt => this.closeDialog(evt)}>
+                <div className="card max-width-600px min-width-300px">
+                    <h2 className="roboto-black">{title}</h2>
+                    <p><b>UUID: </b>{uuid}</p>
+                    <p><b>Major: </b>{major}</p>
+                    <p><b>Minor: </b>{minor}</p>
+                    <div className= "create-session-btn flex-2 flex-2" onClick={evt => this.closeDialog(evt)}> Lukk </div>
+                </div>
 
+            </div>;
+
+        const {TechInfoName, TechInfoUuid, TechInfoMajor, TechInfoMinor} = this.state.beaconTechInfo;
         return(
 
             <div className="overflow-scroll-y flex-container-row-direction">
+
+                {this.state.beaconTechInfoShowing ? <DialogMessage title={this.state.beaconTechInfo.name} uuid={this.state.beaconTechInfo.uuid}
+                                                                   major={this.state.beaconTechInfo.major} minor={this.state.beaconTechInfo.minor}/> : ''}
+
                 {
+
                     !isLoading && beacons.length > 0 ? beacons.map(beacon => {
                         const {id, name, uuid, major, minor} = beacon;
+
                         const BeaconComp = () => (
 
                             <div className = {this.checkIfBeaconIsAlreadySelected(id) ? ("avail-beacon-element beacon-element-marked padding8px") : 'avail-beacon-element padding8px'}>
@@ -143,7 +181,7 @@ class AvailBeaconList extends React.Component {
                                         <h3>Navn: {name}</h3>
                                     </div>
                                     <div>
-                                        <div className = "btn-rounded">Tek. Info.</div>
+                                        <div className = "btn-rounded" onClick={evt => this.openDialog(evt, beacon)}>Tek. Info.</div>
 
                                         {this.checkIfBeaconIsAlreadySelected(id) ? (<div className = "btn-red-color">Fjern</div>)
                                             : (<div className = "btn-rounded">Legg til</div>)

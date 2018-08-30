@@ -73,7 +73,7 @@ class SelectedBeaconsList extends React.Component {
         return(
             <div className="card container flex-container-row-direction " style = {tempStyle}>
 
-                <div className="rounded-box-border  fade-in max-height-600 min-width-300 flex-1 overflow-scroll-y">
+                <div className="rounded-box-border  fade-in max-height-600 min-width-300px flex-1 overflow-scroll-y">
                     {
                         this.props.selectedBeacons.length > 0 ? this.props.selectedBeacons.map(beacon => {
                             const {id, name, XCoordinate, YCoordinate} = beacon;

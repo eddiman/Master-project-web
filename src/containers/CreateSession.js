@@ -251,24 +251,24 @@ class CreateSession extends React.Component {
 
                     {/************************* Name and user input*****************************/}
 
-                    <div className="card fade-in flex-1 max-width-600 min-width-600-m " >
+                    <div className="card fade-in flex-1 max-width-600px min-width-600px-m " >
 
 
 
                         <div>
                             <h2>Navn på økten</h2>
                             {this.state.sessionName.length < this.state.minLengthOfStringInput ?
-                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300">Øktnavnet må ha <b>
+                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Øktnavnet må ha <b>
                                     {(this.state.minLengthOfStringInput - this.state.sessionName.length)}</b> tegn til.</p>) :
-                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet  er godkjent</p>}
+                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Navnet  er godkjent</p>}
 
                             <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til session'en" value={this.state.sessionName}
                                         onChange={evt => this.updateSessionName(evt)} />
                             <h2>Navn på den som skal utføre økten</h2>
                             {this.state.sessionUser.length < this.state.minLengthOfStringInput ?
-                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet på brukeren må ha <b>
+                                (<p className="avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Navnet på brukeren må ha <b>
                                     {(this.state.minLengthOfStringInput - this.state.sessionUser.length)}</b> tegn til.</p>) :
-                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300">Navnet er godkjent</p>}
+                                <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Navnet er godkjent</p>}
 
 
                             <InputField color={theme.colorAccent} placeholder="Skriv inn navnet på den som skal trackes" value={this.state.sessionUser}
@@ -284,7 +284,7 @@ class CreateSession extends React.Component {
                     {/************************* ^Name and user input^^ *****************************/}
 
 
-                    {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-600-m flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
+                    {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-600px-m flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
                         <h2>Legg til beacons for "{this.state.sessionName}"-økten</h2>
                         {this.state.selectedBeacons.length < this.state.minNoOfAvailBeacon ?
                             (<p>Økten må ha minst <b>
@@ -306,7 +306,7 @@ class CreateSession extends React.Component {
                     </div> : ''}
 
 
-                    {this.state.isBeaconsSelected ?  <div ref={(el) => { this.mapUpload = el; }} className="card fade-in max-height-600 max-width-600 min-width-600-m flex-2">
+                    {this.state.isBeaconsSelected ?  <div ref={(el) => { this.mapUpload = el; }} className="card fade-in max-height-600 max-width-600px min-width-600px-m flex-2">
                         <h2>{this.state.isMapUploaded ? 'Last opp et annet kartbilde' : 'Last opp et kartbilde'}</h2>
                         <input id="myInput"
                                type="file"
