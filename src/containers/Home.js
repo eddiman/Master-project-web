@@ -29,7 +29,7 @@ class Home extends React.Component {
                         <div className="home-session-btn">
                             <img className="open-session-img" src={openSessionImg}/>
                             <div className="open-session-div">
-                                <h1>Åpne session</h1>
+                                <h1>Åpne økt</h1>
                             </div>
                         </div>
                     </Link>
@@ -38,7 +38,7 @@ class Home extends React.Component {
                         <div className="home-session-btn">
                             <img className="create-session-img" src={createSessionImg}/>
                             <div className="create-session-div">
-                                <h1>Lag en ny session</h1>
+                                <h1>Lag en ny økt</h1>
                             </div>
                         </div>
                     </Link>

@@ -11,7 +11,7 @@ class AllSessions extends React.Component {
         return(
             <div className="rounded-container">
                 <div className="container fade-in">
-                    <h1 className="margin24px roboto-black ">Velg en session</h1>
+                    <h1 className="margin24px roboto-black ">Velg en økt</h1>
                 </div>
                 <SessionList/>
                 <div className="fixed-footer-menu flex-container-align-start">

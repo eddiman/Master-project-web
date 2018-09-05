@@ -53,10 +53,9 @@ class LinkButton extends React.Component {
         const {color, darkerColor, fontColor, link, text} = this.state;
         return(
             <Link to={link}>
-                <ButtonStyle color={color} darkerColor={darkerColor} fontColor={fontColor}>
-
+                <div className="create-session-btn">
                     {text}
-                </ButtonStyle>
+                </div>
             </Link>
 
         )
