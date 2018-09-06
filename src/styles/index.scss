@@ -631,6 +631,21 @@ input, button { border:none; }
   max-width: 330px;
   max-height: 700px;
 }
+
+.local-manual-create-session {
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  z-index: 9999;
+}
+.local-manual-create-session::-webkit-scrollbar {
+  display: none;
+}
+
+
 /*********************Special Elements END***************/
 
 /*********************Modifiers*********************/

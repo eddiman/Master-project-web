@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import loadingIcon from '../res/img/gear-loading.png'
 
 const LoadingIcon = styled.img`
-    animation: App-logo-sspin infinite 10s linear;
+    animation: App-logo-spin infinite 10s linear;
     margin: 32px; 
     height: 60px;
     opacity: 0.3;
@@ -141,7 +141,7 @@ class AvailBeaconList extends React.Component {
     render(){
         const {isLoading, beacons} = this.state;
         const DialogMessage = ({title, uuid, major, minor}) =>
-            <div className="dark-dialog-bg container flex-align-items-center flex-container-horizontal-center" onClick={evt => this.closeDialog(evt)}>
+            <div className="dark-dialog-bg container fade-in flex-align-items-center flex-container-horizontal-center" onClick={evt => this.closeDialog(evt)}>
                 <div className="card max-width-600px min-width-300px">
                     <h2 className="roboto-black">{title}</h2>
                     <p><b>UUID: </b>{uuid}</p>

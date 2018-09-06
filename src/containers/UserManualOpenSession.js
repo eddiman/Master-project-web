@@ -58,8 +58,11 @@ class UserManualOpenSession extends React.Component {
     generateLastLink(){
         let currentPage = parseInt(this.props.match.params.Id, 10);
 
-        if(currentPage === 1) {
-            return ("/manual")
+        if(currentPage === 1 && this.state.redirectExists) {
+            return (this.state.fromUrl);
+        } else if(currentPage === 1 && !this.state.redirectExists) {
+            return ("/manual");
+
         } else {
             return ('/manual/' + this.state.urlStub + (currentPage - 1))
 

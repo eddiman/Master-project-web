@@ -8,6 +8,7 @@ import HelpButton from "../components/HelpButton";
 import Link from "react-router-dom/es/Link";
 import desktopToMobile from "../res/img/desktop-to-mobile-color.gif"
 import fireTrackerAppLogo from "../res/img/logo_fire_tracker_app.png"
+import UserManualCreateSessionComponent from "../components/UserManualCreateSessionComponent";
 
 const InputField = styled.input`
         border-bottom: 1px solid;
@@ -58,7 +59,8 @@ class CreateSession extends React.Component {
             SessionCreatedDialogShowing : false,
             connectionStatus: false,
             errorMessage : '',
-            url : 'http://firetracker.freheims.xyz:8000/session'
+            url : 'http://firetracker.freheims.xyz:8000/session',
+            isManualShowing: false
 
         }
     }
@@ -166,7 +168,7 @@ class CreateSession extends React.Component {
                     .catch(error => this.setState({
                             connectionStatus: false,
                             errorMessage: error.toString()
-                    })
+                        })
                     )
             );
 
@@ -244,13 +246,18 @@ class CreateSession extends React.Component {
         this.setState({selectedBeacons : dataFromChild});
     };
 
+    userManualCallback = () => {
+        this.setState({isManualShowing : false});
+
+    };
+
 
     clearBeaconsCallback = () => {
         let tempArray = this.state.selectedBeacons;
 
         tempArray.forEach((beacon) => {
-            beacon.XCoordinate = null;
-           }
+                beacon.XCoordinate = null;
+            }
         );
         this.setState({selectedBeacons : tempArray});
 
@@ -273,9 +280,9 @@ class CreateSession extends React.Component {
                     this.props.history.push('/');
                     break;
 
-                    case "newSameSession":
+                case "newSameSession":
                     this.setState({SessionCreatedDialogShowing : false});
-                        this.TopCreateSessionRef.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+                    this.TopCreateSessionRef.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 
                     break;
 
@@ -308,10 +315,23 @@ class CreateSession extends React.Component {
         }
     };
 
+    openLocalManual = (evt) => {
+        if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
+            this.setState({isManualShowing : true});
+
+        }
+    };
+
 
 
 
     render(){
+        const noScrollStyle = {overflow : "hidden"};
+
+        const LocalHelpButton = () =>
+            <div className="manual-blue-fixed-button flex-align-self-end margin24px" onClick={evt => {this.openLocalManual(evt)}}>
+                <i className="material-icons md-36">help_outline</i>
+            </div>;
 
         const SummaryDialogMessage = () =>
             <div className="dark-dialog-bg fade-in container flex-align-items-center flex-container-horizontal-center" onClick={evt => this.closeDialog(evt, "summary")}>
@@ -342,34 +362,37 @@ class CreateSession extends React.Component {
                 <div className="card max-width-600px min-width-300px ">
                     {this.state.connectionStatus ? <div className="container flex-container-center flex-container-column-direction padding8px">
 
-                    <h2 className="roboto-black flex-align-self-start">Økten ble opprettet</h2>
-                    <img className="go-to-mobile" src={desktopToMobile} alt="go-to-mobile"/>
-                    <p>Åpne "{this.state.sessionName}"-økten på FireTracker-appen for Android</p>
+                        <h2 className="roboto-black flex-align-self-start">Økten ble opprettet</h2>
+                        <img className="go-to-mobile" src={desktopToMobile} alt="go-to-mobile"/>
+                        <p>Åpne "{this.state.sessionName}"-økten på FireTracker-appen for Android</p>
 
-                            <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "newSameSession")}> Lag lik økt </div>
-                    <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "sessionCreated")}> Gå til hovedsiden</div>
-                        </div>
+                        <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "newSameSession")}> Lag lik økt </div>
+                        <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "sessionCreated")}> Gå til hovedsiden</div>
+                    </div>
                         :
                         <div className="container flex-container-center flex-container-column-direction padding8px">
 
-                        <h2 className="roboto-black flex-align-self-start">Økten ble IKKE opprettet</h2>
+                            <h2 className="roboto-black flex-align-self-start">Økten ble IKKE opprettet</h2>
                             <i className="material-icons md-72 lighter">cancel_presentation</i>
-                        <p>Noe gikk galt...</p>
-                        <p>Feilmelding: {this.state.errorMessage}</p>
-                        <p>Sjekk tilkoblingen eller kontakt systemadministrator</p>
+                            <p>Noe gikk galt...</p>
+                            <p>Feilmelding: {this.state.errorMessage}</p>
+                            <p>Sjekk tilkoblingen eller kontakt systemadministrator</p>
 
-                        <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "tryAgain")}> Prøv igjen </div>
-                        <div className= "btn-red-color flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "newSameSession")}> Lukk</div>
-                    </div>}
-                        </div>
+                            <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "tryAgain")}> Prøv igjen </div>
+                            <div className= "btn-red-color flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "newSameSession")}> Lukk</div>
+                        </div>}
+                </div>
 
             </div>;
 
 
         return(
-            <div className="rounded-container">
+            <div className="rounded-container" style = {this.state.isManualShowing ? noScrollStyle: noScrollStyle}>
                 {this.state.SummaryDialogShowing ? <SummaryDialogMessage/> : ''}
                 {this.state.SessionCreatedDialogShowing ? <SessionCreatedDialogMessage/> : ''}
+                {this.state.isManualShowing ? <UserManualCreateSessionComponent callback={this.userManualCallback}/> : ''}
+
+
                 <div className="container " ref={(el) => { this.TopCreateSessionRef = el;}}>
                     <h1 className="margin24px fade-in roboto-black">Lag en økt</h1>
                 </div>
@@ -470,7 +493,8 @@ class CreateSession extends React.Component {
 
                     <div className="fixing-the-fixed-footer-shit"/>
                 </div>
-                <HelpButton toUrl={'/manual/create/1'} fromUrl={this.props.location.pathname}/>
+                <LocalHelpButton/>
+
             </div>
         )
 
