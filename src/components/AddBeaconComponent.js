@@ -46,16 +46,16 @@ class AddBeaconComponent extends React.Component {
             isBeaconMajorLongEnough : false,
             isBeaconMinorLongEnough : false,
 
-            minLengthOfStringInput : 1,
-            minLengthOfBeaconUuidInput : 1,
-            minLengthOfBeaconMajorInput : 1,
-            minLengthOfBeaconMinorInput : 1,
+            minLengthOfStringInput : 5,
+            minLengthOfBeaconUuidInput : 36,
+            minLengthOfBeaconMajorInput : 5,
+            minLengthOfBeaconMinorInput : 5,
 
             SummaryDialogShowing : false,
 
             connectionStatus: false,
             errorMessage : '',
-            url : 'http://firetracker.freheims.xyz:8000/TBA',
+            url : 'http://firetracker.freheims.xyz:8000/beacon',
 
 
 
@@ -346,6 +346,18 @@ class AddBeaconComponent extends React.Component {
 
                     </div>
                 </div>
+                <div className="fixing-the-fixed-footer-shit" />
+
+                <div className="fixed-footer-menu flex-container-align-start">
+
+                    <Link to={"/beacons"}>
+                        <div className="arrow-back-btn ">
+                            <i className="material-icons md-36">keyboard_arrow_left</i>
+                        </div>
+                    </Link>
+
+                </div>
+                <HelpButton toUrl={'/manual/open/1'} fromUrl={this.props.location.pathname}/>
             </div>
 
         )
