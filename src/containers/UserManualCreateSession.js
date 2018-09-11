@@ -8,7 +8,7 @@ class UserManualCreateSession extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            maxPages : 3,
+            maxPages : 6,
             urlStub : "create/",
             fromUrl : "",
             redirectExists : false

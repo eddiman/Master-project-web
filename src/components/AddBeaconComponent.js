@@ -357,7 +357,6 @@ class AddBeaconComponent extends React.Component {
                     </Link>
 
                 </div>
-                <HelpButton toUrl={'/manual/open/1'} fromUrl={this.props.location.pathname}/>
             </div>
 
         )

@@ -5,6 +5,7 @@ import openSessionImg from "../res/img/open-session-splash.jpg"
 import createSessionImg from "../res/img/create-session-splash.jpg"
 import Styled from "styled-components";
 import HelpButton from "../components/HelpButton";
+import BeaconManagerButton from "../components/BeaconManagerButton";
 
 
 class Home extends React.Component {
@@ -46,6 +47,7 @@ class Home extends React.Component {
                 </div>
 
                 <HelpButton toUrl={'manual'} fromUrl={this.props.location.pathname}/>
+                <BeaconManagerButton toUrl={'/beacons'} fromUrl={this.props.location.pathname}/>
             </div>
 
         )

@@ -81,20 +81,26 @@ class AllBeaconsListComponent extends React.Component {
     deleteBeacon(evt){
         if (evt.type === 'click' && evt.clientX !== 0 && evt.clientY !== 0) {
 
+            const id = this.state.selectedBeacon.id;
+            let formData = new FormData;
+            console.log(id);
+            formData.append("Id", id);
+            console.log(formData);
+
             const initConfig = {
-                method: 'delete',
-                headers: {
-                    // 'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    //'Content-Type': 'application/x-www-form-urlencoded'
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "*"
-                }
+                method: 'POST',
+                body: formData,
             };
-            console.log(
-                fetch(this.state.url + "beacon/" + this.state.selectedBeacon.id, initConfig)
-                    .then(response => this.setState({
+
+            /**
+             *  .then(response => this.setState({
                             connectionStatus: true
+                        })**/
+            console.log(
+                fetch(this.state.url + "beacon/delete", initConfig)
+                    .then(this.setState({
+                            connectionStatus: true
+
                         })
 
                     )
@@ -103,21 +109,21 @@ class AllBeaconsListComponent extends React.Component {
                             errorMessage: error.toString()
                         })
                     ));
-            if (this.state.connectionStatus) {
-                this.removeBeacon(this.state.selectedBeacon.id);
-            }
+
+
             this.setState({
                 SummaryDialogShowing : false,
                 BeaconDeletedDialogShowing : true
 
             });
+
         }
     }
 
     removeBeacon(id) {
-        const {callback} = this.props;
 
         let newSelectedBeacons = this.state.beacons;
+        console.log("remove2222");
 
         for (let i = 0; i < newSelectedBeacons.length; i++) {
             if(newSelectedBeacons[i].id === id) {
@@ -168,7 +174,8 @@ class AllBeaconsListComponent extends React.Component {
                 case "cancel":
                     this.setState({
                         SummaryDialogShowing : false,
-                        BeaconDeletedDialogShowing : false
+                        BeaconDeletedDialogShowing : false,
+                        connectionStatus : false
                     });
                     break;
 
@@ -183,7 +190,11 @@ class AllBeaconsListComponent extends React.Component {
 
     render(){
 // fda50693-a4e2-4fb1-afcf-c6eb07647825
+        if (this.state.connectionStatus) {
+            console.log("remove");
+            this.removeBeacon(this.state.selectedBeacon.id);
 
+        }
         const {isLoading, beacons} = this.state;
 
         const SummaryDialogMessage = () =>
@@ -212,7 +223,7 @@ class AllBeaconsListComponent extends React.Component {
 
                             <h2 className="roboto-black flex-align-self-start">Beaconet ble slettet</h2>
                             <i className="material-icons md-72 lighter">bluetooth</i>
-                            <p>Beaconet "{this.state.beaconName}" ble slettet til</p>
+                            <p>Beaconet "{this.state.selectedBeacon.name}" ble slettet til</p>
 
                             <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "cancel")}> Lukk</div>
                         </div>
@@ -302,7 +313,6 @@ class AllBeaconsListComponent extends React.Component {
                     </Link>
 
                 </div>
-                <HelpButton toUrl={'/manual/open/1'} fromUrl={this.props.location.pathname}/>
             </div>
 
         )
