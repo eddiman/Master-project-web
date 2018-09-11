@@ -341,10 +341,10 @@ class CreateSession extends React.Component {
                     <h2 className="roboto-black flex-align-self-start">Oppsummering</h2>
                     <p><b>Øktnavn: </b>{this.state.sessionName}</p>
                     <p><b>Øktbruker: </b>{this.state.sessionUser}</p>
-                    <p><b>Antall valgte beacons: </b>{this.state.selectedBeacons.length}</p>
+                    <p><b>Antall valgte beaconer: </b>{this.state.selectedBeacons.length}</p>
 
                     {this.checkIfDataIsFilledOut() ? ''
-                        : <p>Ikke alle valgte beacons er plassert på kartet</p>}
+                        : <p>Ikke alle valgte beaconer er plassert på kartet</p>}
 
                     <div className="container flex-container-row-direction flex-container-center">
                         {this.checkIfDataIsFilledOut() ? <div className= "create-session-btn flex-2 flex-2 margin8px" onClick={evt => this.createSession(evt)}> Opprett</div>
@@ -433,11 +433,11 @@ class CreateSession extends React.Component {
 
 
                     {this.state.isNameInputted ?  <div className="card fade-in max-height-600 min-width-600px-m flex-2" ref={(el) => { this.AvailBeaconsRef = el;}}>
-                        <h2>Legg til beacons for "{this.state.sessionName}"-økten</h2>
+                        <h2>Legg til beaconer for "{this.state.sessionName}"-økten</h2>
                         {this.state.selectedBeacons.length < this.state.minNoOfAvailBeacon ?
                             (<p>Økten må ha minst <b>
-                                {(this.state.minNoOfAvailBeacon - this.state.selectedBeacons.length)}</b> beacons til</p>) :
-                            <p>Du har lagt til {this.state.selectedBeacons.length} beacons</p>}
+                                {(this.state.minNoOfAvailBeacon - this.state.selectedBeacons.length)}</b> beaconer til</p>) :
+                            <p>Du har lagt til {this.state.selectedBeacons.length} beaconer</p>}
 
 
                         <AvailBeaconsList callback={this.selectedAvailBeaconsCallback}/>

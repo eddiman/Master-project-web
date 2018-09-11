@@ -123,7 +123,7 @@ class SelectedBeaconsList extends React.Component {
                             }) : <p>Velg en beacon</p>
                         }
                     </div>
-                    <div className= "btn-red-color-smaller-font flex-2 flex-2 margin8px" onClick={evt => this.clearAllPlacedBeacons(evt)}> Fjern alle plasserte beacons </div>
+                    <div className= "btn-red-color-smaller-font flex-2 flex-2 margin8px" onClick={evt => this.clearAllPlacedBeacons(evt)}> Fjern alle plasserte beaconer </div>
 
                 </div>
 
