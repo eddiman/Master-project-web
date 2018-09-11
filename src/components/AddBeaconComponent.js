@@ -255,7 +255,7 @@ class AddBeaconComponent extends React.Component {
 
                             <h2 className="roboto-black flex-align-self-start">Økten ble opprettet</h2>
                             <i className="material-icons md-72 lighter">bluetooth</i>
-                            <p>Beaconet "{this.state.beaconName}" ble lagt til</p>
+                            <p>Beaconen "{this.state.beaconName}" ble lagt til</p>
 
                             <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "newBeacon")}> Lag ny beacon </div>
                             <div className= "btn-rounded flex-2 flex-2 margin8px" onClick={evt => this.closeDialog(evt, "cancel")}> Lukk</div>
@@ -263,7 +263,7 @@ class AddBeaconComponent extends React.Component {
                         :
                         <div className="container flex-container-center flex-container-column-direction padding8px">
 
-                            <h2 className="roboto-black flex-align-self-start">Beaconet ble IKKE opprettet</h2>
+                            <h2 className="roboto-black flex-align-self-start">Beaconen ble IKKE opprettet</h2>
                             <i className="material-icons md-72 lighter">cancel_presentation</i>
                             <p>Noe gikk galt...</p>
                             <p>Feilmelding: {this.state.errorMessage}</p>
@@ -303,7 +303,7 @@ class AddBeaconComponent extends React.Component {
                                         {(this.state.minLengthOfStringInput - this.state.beaconName.length)}</b> tegn til.</p>) :
                                     <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Navnet  er godkjent</p>}
 
-                                <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til beaconet" value={this.state.beaconName}
+                                <InputField color={theme.colorAccent} placeholder="Skriv et gjenkjennelig navn til beaconen" value={this.state.beaconName}
                                             onChange={evt => this.updateBeaconName(evt)} />
 
 
@@ -314,7 +314,7 @@ class AddBeaconComponent extends React.Component {
                                     <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">UUIDen er godkjent</p>}
 
 
-                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconet sin UUID" value={this.state.beaconUuid}
+                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconen sin UUID" value={this.state.beaconUuid}
                                             onChange={evt => this.updateBeaconUuid(evt)} />
 
                                 <h2>Skriv inn Major</h2>
@@ -324,7 +324,7 @@ class AddBeaconComponent extends React.Component {
                                     <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Major-verdien er godkjent</p>}
 
 
-                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconet sin Major" value={this.state.beaconMajor}
+                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconen sin Major" value={this.state.beaconMajor}
                                             onChange={evt => this.updateBeaconMajor(evt)} />
 
                                 <h2>Skriv inn Minor</h2>
@@ -334,7 +334,7 @@ class AddBeaconComponent extends React.Component {
                                     <p className="beacon-element-marked avail-beacon-element padding8px center-align-text margin-auto max-width-300px">Minor-verdien er godkjent</p>}
 
 
-                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconet sin Major" value={this.state.beaconMinor}
+                                <InputField color={theme.colorAccent} placeholder="Skriv inn beaconen sin Major" value={this.state.beaconMinor}
                                             onChange={evt => this.updateBeaconMinor(evt)} />
 
                                 <div className={this.state.isBeaconNameLongEnough && this.state.isBeaconUuidLongEnough && this.state.isBeaconMajorLongEnough && this.state.isBeaconMinorLongEnough?

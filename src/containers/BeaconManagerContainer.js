@@ -20,12 +20,12 @@ class BeaconManagerContainer extends React.Component {
         return(
             <div className="rounded-container">
                 <div className="container fade-in">
-                    <h1 className="margin24px roboto-black ">Administrering av beacons</h1>
+                    <h1 className="margin24px roboto-black ">Administrering av beaconer</h1>
                 </div>
                 <div className="container flex-container-center flex-container-column-direction">
                     <h2><Link to={"/beacons/add"}><div className="card flex-container-center min-width-600px-m min-height-50px fade-in">Legg til beacon</div></Link> </h2>
 
-                    <h2><Link to={"/beacons/all"}><div className="card flex-container-center min-width-600px-m min-height-50px fade-in">Liste over alle beacon</div></Link></h2>
+                    <h2><Link to={"/beacons/all"}><div className="card flex-container-center min-width-600px-m min-height-50px fade-in">Liste over alle beaconer</div></Link></h2>
                 </div>
                 <div className="fixed-footer-menu flex-container-align-start">
 

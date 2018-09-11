@@ -252,7 +252,7 @@ class AllBeaconsListComponent extends React.Component {
                 {this.state.BeaconDeletedDialogShowing ? <BeaconDeletedDialogMessage/> : ''}
 
                 <div className="container fade-in">
-                    <h1 className="margin24px roboto-black ">Liste over beacons</h1>
+                    <h1 className="margin24px roboto-black ">Liste over beaconer</h1>
                 </div>
 
                 <div className="container flex-align-items-center flex-container-column-direction">
